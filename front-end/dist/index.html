@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./output.css" rel="stylesheet" />
+    <style>
+      nav {
+        position: fixed;
+        width: 100%;
+        color: var(--bg-color);
+        background-color: #313c59;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid black;
+      }
+
+      .links ul {
+        padding-top: 0.5em;
+        display: flex;
+        width: 20em;
+        justify-content: space-between;
+        margin-right: 5em;
+        font-size: 1.5em;
+        list-style: none;
+      }
+
+      .links ul a {
+        text-decoration: none;
+        color: white;
+        font-size: 1em;
+        font-weight: 500;
+      }
+
+      .links {
+        display: flex;
+      }
+
+      #theme-switch {
+        padding-top: 0;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        display: flex;
+        margin-right: 2em;
+        font-size: 2em;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #theme-switch i:last-child {
+        display: none;
+      }
+
+      .darkmode #theme-switch i:first-child {
+        display: none;
+      }
+      .darkmode #theme-switch i:last-child {
+        display: block;
+      }
+      .logo img {
+        border-radius: 50%;
+        width: 3em;
+        height: 3em;
+        margin-left: 1em;
+      }
+
+      #tut {
+        position: relative;
+        display: inline-block;
+      }
+
+      nav ul .dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: white; /* Background color of the dropdown */
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Shadow for the dropdown */
+        z-index: 1;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        border: 1px solid #313c59; /* Border color of the dropdown */
+        border-radius: 5px; /* Rounded corners */
+      }
+
+      nav ul .dropdown h6 a {
+        padding: 10px 15px;
+        display: block;
+        text-decoration: none;
+        color: #313c59; /* Font color of the dropdown items */
+        font-weight: 500;
+      }
+
+      nav ul .dropdown h6 a:hover {
+        background-color: #f0f0f0; /* Background color on hover */
+        color: #007bff; /* Font color on hover */
+      }
+
+      #tut:hover .dropdown {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <nav
+      class="flex justify-between px-10 bg-black text-white p-4 text-xl items-center sm:px-2"
+    >
+      <div class="logo">
+        <h3>logo</h3>
+      </div>
+      <div class="links flex max-md:hidden sm:gap-3 gap-[4vw]">
+        <a href="#">
+          <h3
+            class="pt-2 hover:scale-110 transition-transform duration-300 ease-in-out sm:text-[.9em]"
+          >
+            Home
+          </h3>
+        </a>
+        <a href="#"
+          ><h3
+            class="pt-2 hover:scale-110 transition-transform duration-300 sm:text-[.9em] ease-in"
+          >
+            About
+          </h3></a
+        >
+        <a href="#"
+          ><h3
+            class="pt-2 hover:scale-110 transition-transform duration-300 sm:text-[.9em] ease-in"
+          >
+            Workout
+          </h3></a
+        >
+        <a href="#"
+          ><h3
+            class="pt-2 hover:scale-.910 transition-transform duration-300 ease-in sm:text-[.9em]"
+          >
+            Nutrition
+          </h3></a
+        >
+        <a href="#"
+          ><h3
+            class="pt-2 hover:scale-110 transition-transform duration-300 ease-in sm:text-[.9em]"
+          >
+            Yoga
+          </h3></a
+        >
+        <a href="#"
+          ><h3
+            class="pt-2 hover:scale-110 transition-transform duration-300 ease-in sm:text-[.9em]"
+          >
+            Shop
+          </h3></a
+        >
+      </div>
+      <div class="gap-4 flex">
+        <button
+          class="border-[2px] max-md:text-[.8em] max-md:px-3 border-white p-2 pl-5 pr-5 rounded-2xl hover:scale-110 transition-transform ease-linear duration-200 sm:text-[.8em] sm:px-4"
+        >
+          login
+        </button>
+        <button
+          class="border-[2px] max-md:text-[.8em] max-md:px-3 border-white p-2 pl-5 pr-5 rounded-2xl transition-transform hover:scale-110 ease-linear sm:text-[.8em] sm:px-4"
+        >
+          signup
+        </button>
+      </div>
+    </nav> -->
+
+    <nav class="w-100% px-2">
+      <div class="logo">
+        <img src="media/logo.png" alt="Logo" />
+      </div>
+      <div class="links">
+        <ul class="bg-emerald-500 ">
+          <li><a href="index.html">Home</a></li>
+          <li id="tut">
+            <a href="#" class="hidden">Tutorial</a>
+            <div class="dropdown">
+              <h6><a href="html/index.html">HTML</a></h6>
+              <h6><a href="css/index.html">CSS</a></h6>
+              <h6><a href="#">Tailwind CSS</a></h6>
+              <h6><a href="#">JavaScript</a></h6>
+            </div>
+          </li>
+          <li><a href="quize/index.html">Quizzes</a></li>
+          <li><a href="challenges/index.html">Challenges</a></li>
+        </ul>
+        <span id="theme-switch">
+          <i class="ri-sun-fill"></i>
+          <i class="ri-moon-fill"></i>
+        </span>
+      </div>
+    </nav>
+  </body>
+</html>

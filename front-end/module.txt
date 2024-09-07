@@ -1,0 +1,52 @@
+Collection
+user:
+id
+username
+email
+password
+
+WORKOUT:
+_id : for each workout
+name
+type
+level
+duration ( opt )
+exercise :
+   exerciseName
+reps
+sets
+instructions
+
+NUTRITION:
+
+_id
+title
+type
+meals:
+mealName
+ingredients
+instructions
+calories
+
+YOGA:
+
+_id
+name
+type
+duration
+poses :
+poseName
+instructions
+benefits
+meditation
+
+SHOP:
+
+_id
+procutName
+catogery
+price
+description
+image
+stock
+
