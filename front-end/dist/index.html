@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="./output.css" rel="stylesheet" />
-    <style>
+    <link rel="stylesheet" href="style.css" />
+    <!-- <style>
       nav {
         position: fixed;
         width: 100%;
@@ -103,97 +104,107 @@
       #tut:hover .dropdown {
         display: block;
       }
-    </style>
+    </style> -->
   </head>
   <body>
-    <!-- <nav
-      class="flex justify-between px-10 bg-black text-white p-4 text-xl items-center sm:px-2"
-    >
-      <div class="logo">
-        <h3>logo</h3>
-      </div>
-      <div class="links flex max-md:hidden sm:gap-3 gap-[4vw]">
-        <a href="#">
-          <h3
-            class="pt-2 hover:scale-110 transition-transform duration-300 ease-in-out sm:text-[.9em]"
-          >
-            Home
-          </h3>
-        </a>
-        <a href="#"
-          ><h3
-            class="pt-2 hover:scale-110 transition-transform duration-300 sm:text-[.9em] ease-in"
-          >
-            About
-          </h3></a
-        >
-        <a href="#"
-          ><h3
-            class="pt-2 hover:scale-110 transition-transform duration-300 sm:text-[.9em] ease-in"
-          >
-            Workout
-          </h3></a
-        >
-        <a href="#"
-          ><h3
-            class="pt-2 hover:scale-.910 transition-transform duration-300 ease-in sm:text-[.9em]"
-          >
-            Nutrition
-          </h3></a
-        >
-        <a href="#"
-          ><h3
-            class="pt-2 hover:scale-110 transition-transform duration-300 ease-in sm:text-[.9em]"
-          >
-            Yoga
-          </h3></a
-        >
-        <a href="#"
-          ><h3
-            class="pt-2 hover:scale-110 transition-transform duration-300 ease-in sm:text-[.9em]"
-          >
-            Shop
-          </h3></a
-        >
-      </div>
-      <div class="gap-4 flex">
-        <button
-          class="border-[2px] max-md:text-[.8em] max-md:px-3 border-white p-2 pl-5 pr-5 rounded-2xl hover:scale-110 transition-transform ease-linear duration-200 sm:text-[.8em] sm:px-4"
-        >
-          login
-        </button>
-        <button
-          class="border-[2px] max-md:text-[.8em] max-md:px-3 border-white p-2 pl-5 pr-5 rounded-2xl transition-transform hover:scale-110 ease-linear sm:text-[.8em] sm:px-4"
-        >
-          signup
-        </button>
+    <!-- <nav class="flex justify-between items-center p-5">
+      <span id="portfolio_head" class="text-3xl">VitaFit</span>
+      <ul class="links flex justify-between gap-5 text-xl">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">Workout</a></li>
+        <li><a href="services.html">Nutrition</a></li>
+        <li><a href="projects.html">Shop</a></li>
+      </ul>
+      <div class="cont text-xl gap-5 flex">
+        <a href="contact.html" class="contact"><button>Log In</button></a>
+        <a href="contact.html" class="contact"><button>Sign Up</button></a>
       </div>
     </nav> -->
+    <div class="pic">
+      <header>
+        <h2 class="logo">VitaFit</h2>
+        <nav class="navigation">
+          <a href="#">Home</a>
+          <a href="#">About</a>
+          <a href="#">Workout</a>
+          <a href="#">Nutrition</a>
+          <a href="#">Shop</a>
+          <button class="btnlogin-popup">Sign In</button>
+        </nav>
+      </header>
+      <section class="journey">
+        <!-- class="mt-[12rem] text-[5em] ml-[2em] w-[40rem] h-[30rem]" -->
+        <h1 class="text-white">Your Journey to Greatness Starts Here.</h1>
+      </section>
+    </div>
+    <section id="about-us">
+      <div class="container">
+        <div class="about">
+          <div class="about-left">
+            <strong><h2>About Us</h2></strong>
+            <p>
+              Welcome to <strong>VitaFit</strong>, where we believe
+              in empowering every individual to reach their full fitness
+              potential. Our platform is designed to provide you with everything
+              you need to lead a healthier, stronger, and more balanced life.
+            </p>
+            <p>
+              Whether you’re just beginning your fitness journey or looking to
+              take your performance to the next level, we offer:
+            </p>
+          </div>
+          <div class="about-pic">
+            <img src="./media/about-pic.avif" alt="">
+          </div>
+        </div>
 
-    <nav class="w-100% px-2">
-      <div class="logo">
-        <img src="media/logo.png" alt="Logo" />
-      </div>
-      <div class="links">
-        <ul class="bg-emerald-500 ">
-          <li><a href="index.html">Home</a></li>
-          <li id="tut">
-            <a href="#" class="hidden">Tutorial</a>
-            <div class="dropdown">
-              <h6><a href="html/index.html">HTML</a></h6>
-              <h6><a href="css/index.html">CSS</a></h6>
-              <h6><a href="#">Tailwind CSS</a></h6>
-              <h6><a href="#">JavaScript</a></h6>
+        
+          <div class="tailored">
+            <div class="t-pic">
+              <img src="./media/tailored.jpg" alt="">
             </div>
-          </li>
-          <li><a href="quize/index.html">Quizzes</a></li>
-          <li><a href="challenges/index.html">Challenges</a></li>
-        </ul>
-        <span id="theme-switch">
-          <i class="ri-sun-fill"></i>
-          <i class="ri-moon-fill"></i>
-        </span>
+            <div class="w-r">
+            <strong><h2>Tailored Workout Plans</h2></strong>
+            <p>Our expertly designed workout plans cater to all fitness levels—from complete beginners to seasoned athletes. With a wide range of programs targeting different goals like strength, endurance, or weight loss, you can choose a plan that fits your specific needs and schedule.</p>
+
+            <p>Beyond just exercises, we focus on progression. Whether you're doing bodyweight workouts at home or using gym equipment, our plans evolve with your performance, helping you continuously push past your limits and achieve real, lasting results.</p>
+            </div>
+          </div>
+
+          <div class="nutri">
+            <div class="n-l">
+            <strong><h2>Nutritional Guidance</h2></strong>
+    <p>Nutrition is a key part of any fitness journey, and at <strong>[Fitness Hub Name]</strong>, we’re here to guide you through it. Our platform offers personalized meal plans that align with your workout goals—whether you're aiming for muscle gain, fat loss, or overall wellness. From calorie counts to macronutrient breakdowns, every meal plan is crafted to fuel your body efficiently while satisfying your taste buds.</p>
+          </div>
+          <div class="n-r">
+            <img src="./media/n-r.jpg" alt="">
+          </div>
+        </div>
+
+          <div class="shop">
+            <div class="s-l">
+              <img src="./media/s-l.avif" alt="">
+            </div>
+            <div class="s-r">
+            <strong><h2>Shop for Essentials</h2></strong>
+    <p>Your fitness journey is supported by the right gear, and our shop is packed with everything you need to succeed. We offer a curated selection of high-quality fitness equipment, from dumbbells and resistance bands to yoga mats and kettlebells. No matter your fitness level or the type of workouts you enjoy, you’ll find the tools you need to train effectively at home or in the gym.</p>
+    <p>In addition to equipment, we stock top-rated supplements and accessories designed to maximize your performance and recovery. Explore products that boost your energy, enhance muscle recovery, and keep you on track to meet your fitness goals. Our shop is your one-stop destination for all things fitness!</p>
+  </div>
+          </div>
+          <div class="mission">
+            <div class="m-l">
+            <strong><h2>Our Mission: Building a Lifestyle of Fitness and Wellness</h2></strong>
+        <p>
+          At VitaFit, our mission is to make fitness a sustainable lifestyle, not just a temporary goal. We’re here to support you in every aspect of your journey—physically, mentally, and emotionally—through personalized workout plans, expert nutrition advice, and high-quality fitness gear.
+        </p>
+        <p>
+          Join our community and transform your approach to fitness. Together, we’ll help you unlock your full potential and make health and wellness an essential part of your everyday life.
+        </p>
       </div>
-    </nav>
+      <div class="m-pic">
+        <img src="./media/mission.avif" alt="">
+      </div>
+      </div>
+    </div>
   </body>
 </html>
