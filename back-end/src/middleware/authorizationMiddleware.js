@@ -1,4 +1,4 @@
-const User = require("../models/userModel");
+const User = require("../models/userModels");
 
 function authorizeRole(role) {
   return async (req, res, next) => {
@@ -13,7 +13,7 @@ function authorizeRole(role) {
       const requiredRole = String(role).trim();
 
       if (userRole !== requiredRole) {
-        return res.status(403).json({msg:"user has no access"}); // Forbidden if user does not have the required role
+        return res.status(403).json({ msg: "user has no access" }); // Forbidden if user does not have the required role
       }
 
       next();

@@ -1,18 +1,19 @@
 const multer = require("multer");
 const { diskStorage } = require("multer");
-// const diskStorage = multer.diskStorage;
 const path = require("path");
+
 // Regular expression to eliminate whitespace and special characters from file names
 const re = new RegExp("\\s+", "g");
-const sanitizeFileName = (imageName) => {
-  return imageName.replace(re, "-").replace(/[^a-zA-Z0-9_\-\.]/g, "");
+const sanitizeFileName = (fileName) => {
+  return fileName.replace(re, "-").replace(/[^a-zA-Z0-9_\-\.]/g, "");
 };
+
 // Function to handle file naming
 const filename = (req, file, next) => {
   let lastDotIndex = file.originalname.lastIndexOf(".");
-  let originalnames = file.originalname.substring(0, lastDotIndex);
+  let originalName = file.originalname.substring(0, lastDotIndex);
   let ext = file.originalname.substring(lastDotIndex);
-  next(null, `${sanitizeFileName(originalnames)}-${Date.now()}${ext}`);
+  next(null, `${sanitizeFileName(originalName)}-${Date.now()}${ext}`);
 };
 
 // Function to filter file types
@@ -30,7 +31,7 @@ const filter = (req, file, next) => {
   } else {
     next(null, false);
     return next(
-      new Error("Only .jpeg, .jpg, .png, .mp4, .gif and .pdf formats allowed!")
+      new Error("Only .jpeg, .jpg, .png, .mp4, .gif, and .pdf formats allowed!")
     );
   }
 };
@@ -42,11 +43,13 @@ const getDestination = (folderName) => {
   };
 };
 
-// Storage configurations
+// Storage configurations for images
 const profileImageStorage = diskStorage({
-  destination: getDestination("profiles"),
+  destination: getDestination("profile"),
   filename,
 });
+
+// Storage configurations for videos
 
 // Multer instances
 const profileImage = multer({
@@ -54,6 +57,44 @@ const profileImage = multer({
   fileFilter: filter,
 });
 
+
+const imageStorage = diskStorage({
+  destination: getDestination("recipeImg"),
+  filename,
+});
+
+// Storage configurations for videos
+const videoStorage = diskStorage({
+  destination: getDestination("recipeVideo"),
+  filename,
+});
+
+// Multer instances for image and video uploads
+const uploadRecipeImage = multer({
+  storage: imageStorage,
+  fileFilter: filter,
+});
+
+const uploadRecipeVideo = multer({
+  storage: videoStorage,
+  fileFilter: filter,
+});
+
+//for products
+
+const productImageStorage = diskStorage({
+  destination: getDestination("productImage"),
+  filename
+})
+const uploadProductImage = multer({
+  storage: productImageStorage,
+  fileFilter: filter
+})
+
+
 module.exports = {
   profileImage,
+  uploadRecipeImage,
+  uploadRecipeVideo,
+  uploadProductImage
 };

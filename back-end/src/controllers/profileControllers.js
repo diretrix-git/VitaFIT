@@ -6,32 +6,40 @@ const domain = process.env.DOMAIN;
 
 const updateProfile = async (req, res) => {
   try {
-    const userId = req.user.id; //get user id from token
+    const userId = req.user.id; // Get user id from token
+
+    // Find the profile
     const profile = await Profile.findOne({ user: userId });
     if (!profile) {
-      return res.status(404).json({ msg: "profile not found" });
+      return res.status(404).json({ msg: "Profile not found" });
     }
+
+    // Prepare data for update
     const { firstName, phone, address } = req.body;
-    const prfofileData = {
-      firstName: firstName ? firstName : profile.firstName,
-      phone: phone ? phone : profile.phone,
-      address: address ? address : profile.address,
+    const profileData = {
+      firstName: firstName || profile.firstName,
+      phone: phone || profile.phone,
+      address: address || profile.address,
     };
+
+    // Handle profile picture upload
     if (req.file) {
-      console.log(req.file);
-      prfofileData.profilePic = `uploads/profiles/${req.file.filename}`;
+      profileData.profilePic = `uploads/profiles/${req.file.filename}`;
     }
-    const updatedProfile = await Profile.updateOne(
+
+    // Update the profile
+    const updatedProfile = await Profile.findOneAndUpdate(
       { user: userId },
-      {$set:prfofileData}
+      { $set: profileData },
+      { new: true, runValidators: true }
     );
 
-    return res
-      .status(200)
-      .json({ msg: "profile updated successfully", profile });
+    return res.status(200).json({
+      msg: "Profile updated successfully",
+      profile: updatedProfile,
+    });
   } catch (err) {
-    // console.log(err);
-    return res.status(500).json({ msg: "server error", error: err.message });
+    return res.status(500).json({ msg: "Server error", error: err.message });
   }
 };
 

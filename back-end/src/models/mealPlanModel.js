@@ -13,36 +13,11 @@ const mealPlanSchema = new Schema({
   },
   meals: [
     {
-      type: String,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: "Recipe", // Reference to the Recipe model
     },
   ],
   duration: {
-    type: Number,
-    required: true,
-  },
-});
-
-// Schema for Recipes
-const recipeSchema = new Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  mealplan: {
-    type: String,
-  },
-  ingredients: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
-  instructions: {
-    type: String,
-    required: true,
-  },
-  servingSize: {
     type: Number,
     required: true,
   },
@@ -72,11 +47,10 @@ const supplementSchema = new Schema({
 
 // Creating models
 const MealPlan = mongoose.model("MealPlan", mealPlanSchema);
-const Recipe = mongoose.model("Recipe", recipeSchema);
+// const Recipe = mongoose.model("Recipe", recipeSchema);
 const Supplement = mongoose.model("Supplement", supplementSchema);
 
 module.exports = {
   MealPlan,
-  Recipe,
   Supplement,
 };

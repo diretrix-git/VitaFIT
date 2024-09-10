@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const { subscribe } = require("../routes/workoutRoutes");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -12,9 +11,13 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  password: {
+    type: String,
+    required: true,
+  },
   userRole: {
     type: String,
-    enum: ["user", "admin", "seller"],
+    enum: ["user", "subscribedUser", "admin"],
     default: "user",
   },
   // subscribtion: {
@@ -28,10 +31,6 @@ const userSchema = new mongoose.Schema({
   //     default: "basic",
   //   },
   // },
-  password: {
-    type: String,
-    required: true,
-  },
 });
 
 userSchema.pre("save", async function (next) {
