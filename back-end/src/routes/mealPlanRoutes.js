@@ -6,6 +6,8 @@ const {
   updateMealPlan,
   deleteMealPlan,
 } = require("../controllers/mealPlanControllers");
+const { authMiddleware } = require("../middleware/authMiddleware");
+const { authorizeRole } = require("../middleware/authorizationMiddleware");
 const router = express.Router();
 
 // FOR MEAL PLANS
@@ -35,7 +37,12 @@ router.get("/mealPlans/:id", getMealPlan);
  * @type POST
  * @return response
  */
-router.post("/mealPlans", createMealPlan);
+router.post(
+  "/mealPlans",
+  authMiddleware,
+  authorizeRole("admin"),
+  createMealPlan
+);
 
 /**
  * @description To update a meal plans
@@ -44,7 +51,12 @@ router.post("/mealPlans", createMealPlan);
  * @type PUT
  * @return response
  */
-router.put("/mealPlans/:id", updateMealPlan);
+router.put(
+  "/mealPlans/:id",
+  authMiddleware,
+  authorizeRole("admin"),
+  updateMealPlan
+);
 
 /**
  * @description To delete a meal plans
@@ -53,5 +65,10 @@ router.put("/mealPlans/:id", updateMealPlan);
  * @type DELETE
  * @return response
  */
-router.delete("/mealPlans/:id", deleteMealPlan);
+router.delete(
+  "/mealPlans/:id",
+  authMiddleware,
+  authorizeRole("admin"),
+  deleteMealPlan
+);
 module.exports = router;

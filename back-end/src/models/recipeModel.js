@@ -25,7 +25,7 @@ const recipeSchema = new Schema({
     type: Number,
     required: true,
   },
-  image: {
+  recipeImage: {
     type: String,
     required: false,
   },

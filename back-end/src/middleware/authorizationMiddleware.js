@@ -12,6 +12,10 @@ function authorizeRole(role) {
       const userRole = String(user.userRole).trim();
       const requiredRole = String(role).trim();
 
+      console.log("Required Role:", requiredRole); // Log the required role
+      console.log("User Role:", userRole);
+      // console.log(requiredRole);
+      
       if (userRole !== requiredRole) {
         return res.status(403).json({ msg: "user has no access" }); // Forbidden if user does not have the required role
       }

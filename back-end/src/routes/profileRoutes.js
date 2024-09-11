@@ -19,7 +19,7 @@ const router = express.Router();
 router.put(
   "/update",
   authMiddleware,
-  authorizeRole("user", "subscribedUser", "admin"),
+  authorizeRole("admin", "user", "subscribedUser"),
   profileImage.single("profilePic"),
   updateProfile
 );
@@ -35,7 +35,7 @@ router.put(
 router.get(
   "/get",
   authMiddleware,
-  authorizeRole("user", "subscribedUser"),
+  authorizeRole("user", "subscribedUser", "admin"),
   getProfile
 );
 
@@ -50,7 +50,7 @@ router.get(
 router.delete(
   "/delete",
   authMiddleware,
-  authorizeRole("user", "subscribedUser"),
+  authorizeRole("user", "subscribedUser", "admin"),
   deleteProfile
 );
 

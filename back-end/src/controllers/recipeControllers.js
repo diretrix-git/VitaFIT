@@ -104,7 +104,7 @@ const updateRecipe = async (req, res) => {
 
     // Check if there's an image file in the request and add it to updateData
     if (req.file) {
-      updateData.image = `uploads/recipeImg/${req.file.filename}`;
+      updateData.recipeImage = `uploads/recipeImg/${req.file.filename}`;
     }
 
     // Update the recipe in the database

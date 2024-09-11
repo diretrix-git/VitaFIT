@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
   },
   userRole: {
     type: String,
-    enum: ["user", "subscribedUser", "admin"],
+    enum: ["admin", "user", "subscribedUser"],
     default: "user",
   },
   // subscribtion: {

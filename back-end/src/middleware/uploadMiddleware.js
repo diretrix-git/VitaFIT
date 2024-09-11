@@ -49,34 +49,29 @@ const profileImageStorage = diskStorage({
   filename,
 });
 
-// Storage configurations for videos
-
 // Multer instances
 const profileImage = multer({
   storage: profileImageStorage,
   fileFilter: filter,
 });
 
-
-const imageStorage = diskStorage({
+const recipeImageStorage = diskStorage({
   destination: getDestination("recipeImg"),
   filename,
 });
+const uploadRecipeImage = multer({
+  storage: recipeImageStorage,
+  fileFilter: filter,
+});
 
 // Storage configurations for videos
-const videoStorage = diskStorage({
+const recipeVideoStorage = diskStorage({
   destination: getDestination("recipeVideo"),
   filename,
 });
 
-// Multer instances for image and video uploads
-const uploadRecipeImage = multer({
-  storage: imageStorage,
-  fileFilter: filter,
-});
-
 const uploadRecipeVideo = multer({
-  storage: videoStorage,
+  storage: recipeVideoStorage,
   fileFilter: filter,
 });
 
@@ -84,17 +79,16 @@ const uploadRecipeVideo = multer({
 
 const productImageStorage = diskStorage({
   destination: getDestination("productImage"),
-  filename
-})
+  filename,
+});
 const uploadProductImage = multer({
   storage: productImageStorage,
-  fileFilter: filter
-})
-
+  fileFilter: filter,
+});
 
 module.exports = {
   profileImage,
   uploadRecipeImage,
   uploadRecipeVideo,
-  uploadProductImage
+  uploadProductImage,
 };
