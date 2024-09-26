@@ -62,8 +62,8 @@ router.put(
   "/recipes/:id",
   authMiddleware,
   authorizeRole("admin"), // Only admins can update recipes
-  uploadRecipeImage.single("image"), // For image upload
-  uploadRecipeVideo.single("video"), // For video upload
+  uploadRecipeImage.single("recipeImage"), // For image upload
+ 
   updateRecipe
 );
 

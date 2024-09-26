@@ -6,15 +6,12 @@ const getRecipe = async (req, res) => {
     // Find the recipe and populate the mealplan field
     const recipe = await Recipe.findById(req.params.id).populate("mealplan");
 
-    // Check if the recipe exists
     if (!recipe) {
       return res.status(404).json({ status: "fail", msg: "Recipe not found" });
     }
 
-    // Check user role to determine if video should be included
     const isSubscribed = req.user && req.user.role === "subscribed";
 
-    // Prepare the recipe data to be sent in response
     const recipeData = {
       title: recipe.title,
       ingredients: recipe.ingredients,
@@ -53,7 +50,7 @@ const getRecipes = async (req, res) => {
         servingSize: recipe.servingSize,
         mealplan: recipe.mealplan, // Include mealplan details if needed
         image: recipe.image, // Always include image
-        video: userRole === "subscribed" || "admin" ? recipe.video : undefined, // Include video only for subscribed users
+        video: userRole === "subscribed" || "admin" ? recipe.video : undefined, // Include video only for subscribed users and admin
       };
       return recipeData;
     });
@@ -111,7 +108,7 @@ const updateRecipe = async (req, res) => {
     const recipe = await Recipe.findByIdAndUpdate(req.params.id, updateData, {
       new: true,
       runValidators: true,
-    }).populate("mealplan");
+    });
 
     if (!recipe) {
       return res
