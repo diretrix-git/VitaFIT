@@ -1,3 +1,5 @@
+// controller for user registration
+
 const User = require("../models/userModels");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -5,62 +7,70 @@ const dotenv = require("dotenv");
 const Profile = require("../models/profileModel");
 dotenv.config();
 
-// controller for user registration
 const userRegister = async (req, res) => {
   try {
-    const { email, password, name, userRole } = req.body;
+    // console.log(req.body);
+    const data = req.body;
+    const email = data.email;
+    // console.log(data);
+    // console.log(data.name);
+    // const name=req.body.name;
 
-    if (!email || !password || !name) {
-      return res.status(400).json({ msg: "Please enter all required fields" });
+    if (!data.email || !data.password) {
+      return res.status(400).json({ msg: "Please enter email or password" });
     }
-
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
+    const user = await User.findOne({ email: email });
+    if (user) {
       return res.status(400).json({ msg: "User already exists" });
     }
-
     const newUser = new User({
-      name,
-      email,
-      password,
-      userRole,
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      userRole: data.userRole,
     });
 
-    // Save new user
-    await newUser.save();
+    const newProfile = new Profile({
+      user: newUser._id,
+    });
 
-    // Create profile
-    const newProfile = new Profile({ user: newUser._id });
-    await newProfile.save();
-
-    res.status(201).json({
+    const response = await newUser.save();
+    const profileResponse = await newProfile.save();
+    return res.status(201).json({
       msg: "User registered successfully",
-      user: newUser,
-      profile: newProfile,
+      user: response,
+      profile: profileResponse,
     });
   } catch (err) {
-    console.log(err);
-    res.status(500).json({ msg: "Server error", error: err.message });
+    // console.log(err);
+    return res.status(500).json({ msg: "Server error", error: err });
   }
 };
 
 // controller for user login
 const userLogin = async (req, res) => {
   const { email, password } = req.body;
-
+  // const data=req.body;
+  // const email=data.email;
+  // const password=data.password;
   try {
-    const user = await User.findOne({ email });
+    let user = await User.findOne({ email: email });
+    console.log(user);
+
     if (!user) {
       return res.status(400).json({ msg: "Invalid credentials" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
+
     if (!isMatch) {
       return res.status(400).json({ msg: "Invalid credentials" });
     }
 
     const payload = {
-      user: { id: user.id },
+      user: {
+        id: user.id,
+      },
     };
 
     jwt.sign(
@@ -70,14 +80,14 @@ const userLogin = async (req, res) => {
       (err, token) => {
         if (err) throw err;
         res.status(200).json({
-          msg: "User logged in successfully",
-          token,
-          user,
+          msg: "user logged in successfully",
+          token: `${token}`,
+          user: user,
         });
       }
     );
   } catch (error) {
-    res.status(500).json({ msg: "Server error", error: error.message });
+    return res.status(400).json({ msg: "Unable to login", error });
   }
 };
 
