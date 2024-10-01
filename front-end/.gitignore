@@ -6,6 +6,8 @@
 .pnp.js
 /package.json
 /package-lock.json
+/tailwind.config.js
+/.gitignore
 # testing
 /coverage
 
