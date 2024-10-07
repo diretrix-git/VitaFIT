@@ -12,21 +12,21 @@ const {
 
 // Route to create a new category
 router.post(
-  "/categories",
+  "/create",
   authMiddleware,
   authorizeRole("admin"),
   createProductCategory
 );
 
 // Route to get all categories
-router.get("/categories", getProductCategories);
+router.get("/", getProductCategories);
 
 // Route to get a single category by ID
-router.get("/categories/:id", getProductCategoryById);
+router.get("/:id", getProductCategoryById);
 
 // Route to update a category by ID
 router.put(
-  "/categories/:id",
+  "/update/:id",
   authMiddleware,
   authorizeRole("admin"),
   updateProductCategory
@@ -34,7 +34,7 @@ router.put(
 
 // Route to delete a category by ID
 router.delete(
-  "/categories/:id",
+  "/delete/:id",
   authMiddleware,
   authorizeRole("admin"),
   deleteProductCategory

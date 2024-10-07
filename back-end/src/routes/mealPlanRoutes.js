@@ -19,7 +19,7 @@ const router = express.Router();
  * @type GET
  * @return response
  */
-router.get("/mealPlans", getMealPlans);
+router.get("/", getMealPlans);
 
 /**
  * @description To get a meal plans
@@ -28,7 +28,7 @@ router.get("/mealPlans", getMealPlans);
  * @type GET
  * @return response
  */
-router.get("/mealPlans/:id", getMealPlan);
+router.get("/:id", getMealPlan);
 
 /**
  * @description To create a meal plans
@@ -38,7 +38,7 @@ router.get("/mealPlans/:id", getMealPlan);
  * @return response
  */
 router.post(
-  "/mealPlans",
+  "/create",
   authMiddleware,
   authorizeRole("admin"),
   createMealPlan
@@ -52,7 +52,7 @@ router.post(
  * @return response
  */
 router.put(
-  "/mealPlans/:id",
+  "/:id",
   authMiddleware,
   authorizeRole("admin"),
   updateMealPlan
@@ -66,7 +66,7 @@ router.put(
  * @return response
  */
 router.delete(
-  "/mealPlans/:id",
+  "/:id",
   authMiddleware,
   authorizeRole("admin"),
   deleteMealPlan

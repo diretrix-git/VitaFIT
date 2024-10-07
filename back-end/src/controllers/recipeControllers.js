@@ -35,7 +35,7 @@ const getRecipe = async (req, res) => {
 const getRecipes = async (req, res) => {
   try {
     // Fetch the user's role from the request object (assuming it's added by your authentication middleware)
-    const userRole = req.user.role; // Example: 'normal' or 'subscribed'
+    // const userRole = req.user.userRole; // Example: 'normal' or 'subscribed'
 
     // Fetch recipes and populate mealplan
     const recipes = await Recipe.find().populate("mealplan").exec();
@@ -50,7 +50,7 @@ const getRecipes = async (req, res) => {
         servingSize: recipe.servingSize,
         mealplan: recipe.mealplan, // Include mealplan details if needed
         image: recipe.image, // Always include image
-        video: userRole === "subscribed" || "admin" ? recipe.video : undefined, // Include video only for subscribed users and admin
+        // video: userRole === "subscribed" || "admin" ? recipe.video : undefined, // Include video only for subscribed users and admin
       };
       return recipeData;
     });
@@ -66,8 +66,12 @@ const getRecipes = async (req, res) => {
 // Create recipe
 const createRecipe = async (req, res) => {
   try {
-    const { title, ingredients, instructions, servingSize, mealplan } =
-      req.body;
+    const { title, instructions, servingSize, mealplan } = req.body;
+    const ingredients = req.body.ingredients.map((ing) => ({
+      name: ing.name,
+      quantity: ing.quantity,
+      unit: ing.unit,
+    }));
     const newRecipe = new Recipe({
       title,
       ingredients,
@@ -75,7 +79,7 @@ const createRecipe = async (req, res) => {
       servingSize,
       mealplan,
       image: req.files && req.files.image ? req.files.image[0].path : undefined,
-      video: req.files && req.files.video ? req.files.video[0].path : undefined,
+      // video: req.files && req.files.video ? req.files.video[0].path : undefined,
     });
 
     await newRecipe.save();
@@ -96,8 +100,21 @@ const createRecipe = async (req, res) => {
 // Update recipe
 const updateRecipe = async (req, res) => {
   try {
-    // Create an object to hold the fields to update
-    const updateData = { ...req.body };
+    const { ingredients, ...rest } = req.body;
+
+    // Combine parsed ingredients with other updates
+    const updateData = {
+      ...rest,
+      ingredients: parsedIngredients,
+      image: req.file ? req.file.path : undefined, // Handle new image upload if present
+    };
+
+    // Handle dynamic ingredients array
+    const parsedIngredients = ingredients.map((ing) => ({
+      name: ing.name,
+      quantity: ing.quantity,
+      unit: ing.unit,
+    }));
 
     // Check if there's an image file in the request and add it to updateData
     if (req.file) {

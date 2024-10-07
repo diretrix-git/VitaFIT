@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const productController = require("../controllers/productControllers");
+// const productController = require("../controllers/productControllers");
 const { authMiddleware } = require("../middleware/authMiddleware");
 
 const {
@@ -20,7 +20,7 @@ const { uploadProductImage } = require("../middleware/uploadMiddleware");
  * @type GET
  * @return response
  */
-router.get("/products", getProducts);
+router.get("/", getProducts);
 
 /**
  * @description To get a product
@@ -29,7 +29,7 @@ router.get("/products", getProducts);
  * @type GET
  * @return response
  */
-router.get("/products/:id", getProduct);
+router.get("/:id", getProduct);
 
 /**
  * @description To create a product
@@ -39,7 +39,7 @@ router.get("/products/:id", getProduct);
  * @return response
  */
 router.post(
-  "/products",
+  "/create",
   authMiddleware,
   authorizeRole("admin"),
   uploadProductImage.single("image"), // For image upload
@@ -54,7 +54,7 @@ router.post(
  * @return response
  */
 router.put(
-  "/products/:id",
+  "/update/:id",
   authMiddleware,
   authorizeRole("admin"),
   uploadProductImage.single("image"),
@@ -69,7 +69,7 @@ router.put(
  * @return response
  */
 router.delete(
-  "/products/:id",
+  "/delete/:id",
   authMiddleware,
   authorizeRole("admin"),
   deleteProduct

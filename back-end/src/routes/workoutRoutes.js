@@ -9,67 +9,64 @@ const {
 
 const { authMiddleware } = require("../middleware/authMiddleware");
 const { authorizeRole } = require("../middleware/authorizationMiddleware");
-const { profileImage } = require("../middleware/uploadMiddleware"); // If you're uploading images with workouts
 
 const router = express.Router();
 
 /**
  * @description To get all workouts
- * @api /api/workouts
+ * @api /api/workout
  * @access public
  * @type GET
  * @return response
  */
-router.get("/workouts", getWorkouts);
+router.get("/", getWorkouts);
 
 /**
  * @description To get a workout by ID
- * @api /api/workouts/:id
+ * @api /api/workout/:id
  * @access public
  * @type GET
  * @return response
  */
-router.get("/workouts/:id", getWorkout);
+router.get("/:id", getWorkout);
 
 /**
  * @description To create a new workout
- * @api /api/workouts
+ * @api /api/workout
  * @access private (admin)
  * @type POST
  * @return response
  */
 router.post(
-  "/workouts",
+  "/create",
   authMiddleware,
   authorizeRole("admin"), // Only users can admin workouts
-  profileImage.single("image"), // If you're uploading an image with the workout
   createWorkout
 );
 
 /**
  * @description To update a workout by ID
- * @api /api/workouts/:id
+ * @api /api/workout/:id
  * @access private (admin)
  * @type PUT
  * @return response
  */
 router.put(
-  "/workouts/:id",
+  "/:id",
   authMiddleware,
   authorizeRole("admin"), // Only admins can update workouts
-  profileImage.single("image"), // If you're updating an image with the workout
   updateWorkout
 );
 
 /**
  * @description To delete a workout by ID
- * @api /api/workouts/:id
+ * @api /api/workout/:id
  * @access private (admin)
  * @type DELETE
  * @return response
  */
 router.delete(
-  "/workouts/:id",
+  "/:id",
   authMiddleware,
   authorizeRole("admin"), // Only admins can delete workouts
   deleteWorkout

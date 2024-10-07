@@ -24,33 +24,33 @@ const mealPlanSchema = new Schema({
 });
 
 // Schema for Supplements
-const supplementSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  type: {
-    type: String,
-    required: true,
-  },
-  benefits: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
-  dosage: {
-    type: String,
-    required: true,
-  },
-});
+// const supplementSchema = new Schema({
+//   name: {
+//     type: String,
+//     required: true,
+//   },
+//   type: {
+//     type: String,
+//     required: true,
+//   },
+//   benefits: [
+//     {
+//       type: String,
+//       required: true,
+//     },
+//   ],
+//   dosage: {
+//     type: String,
+//     required: true,
+//   },
+// });
 
 // Creating models
 const MealPlan = mongoose.model("MealPlan", mealPlanSchema);
 // const Recipe = mongoose.model("Recipe", recipeSchema);
-const Supplement = mongoose.model("Supplement", supplementSchema);
+// const Supplement = mongoose.model("Supplement", supplementSchema);
 
 module.exports = {
   MealPlan,
-  Supplement,
+  // Supplement,
 };

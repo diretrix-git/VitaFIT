@@ -12,10 +12,8 @@ const { authMiddleware } = require("../middleware/authMiddleware");
 const { authorizeRole } = require("../middleware/authorizationMiddleware");
 const {
   uploadRecipeImage,
-  uploadRecipeVideo,
+  // uploadRecipeVideo,
 } = require("../middleware/uploadMiddleware");
-
-// FOR RECIPES
 
 /**
  * @description To get all recipes
@@ -24,7 +22,7 @@ const {
  * @type GET
  * @return response
  */
-router.get("/recipes", getRecipes);
+router.get("/", getRecipes);
 
 /**
  * @description To get a recipe
@@ -33,21 +31,21 @@ router.get("/recipes", getRecipes);
  * @type GET
  * @return response
  */
-router.get("/recipes/:id", getRecipe);
+router.get("/:id", getRecipe);
 
 /**
  * @description To create a recipe
- * @api /api/recipes
+ * @api /api/recipes/create
  * @access private (user)
  * @type POST
  * @return response
  */
 router.post(
-  "/recipes",
+  "/create",
   authMiddleware,
   authorizeRole("admin"),
   uploadRecipeImage.single("image"), // For image upload
-  uploadRecipeVideo.single("video"), // For video upload
+  // uploadRecipeVideo.single("video"), // For video upload
   createRecipe
 );
 
@@ -59,7 +57,7 @@ router.post(
  * @return response
  */
 router.put(
-  "/recipes/:id",
+  "/:id",
   authMiddleware,
   authorizeRole("admin"), // Only admins can update recipes
   uploadRecipeImage.single("recipeImage"), // For image upload
@@ -75,7 +73,7 @@ router.put(
  * @return response
  */
 router.delete(
-  "/recipes/:id",
+  "/:id",
   authMiddleware,
   authorizeRole("admin"), // Only admins can delete recipes
   deleteRecipe

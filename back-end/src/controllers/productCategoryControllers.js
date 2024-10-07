@@ -33,6 +33,7 @@ const getProductCategoryById = async (req, res) => {
 const createProductCategory = async (req, res) => {
   try {
     const { name } = req.body;
+    console.log(req.body)
     if (!name) {
       return res.status(400).json({ message: "Name is required" });
     }

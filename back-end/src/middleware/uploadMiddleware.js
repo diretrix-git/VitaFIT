@@ -78,7 +78,7 @@ const uploadRecipeVideo = multer({
 //for products
 
 const productImageStorage = diskStorage({
-  destination: getDestination("productImage"),
+  destination: getDestination("productImg"),
   filename,
 });
 const uploadProductImage = multer({
