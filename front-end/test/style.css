@@ -1,0 +1,8 @@
+.cursor {
+  height: 180px;
+  width: 180px;
+  background-color: black;
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%) ;
+}

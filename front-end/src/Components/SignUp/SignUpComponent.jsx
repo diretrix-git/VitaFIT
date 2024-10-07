@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
@@ -12,7 +12,7 @@ export const SignupComponent = () => {
     confirmPassword: "",
   });
 
-  console.log(userData)
+  console.log(userData);
   // const [userName, setuserName] = useState("Krish");
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
@@ -55,7 +55,7 @@ export const SignupComponent = () => {
     if (Object.keys(validationErrors).length === 0) {
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/register",
+          "http://localhost:5000/api/user/register",
           {
             name: userData.username,
             email: userData.email,
@@ -86,7 +86,15 @@ export const SignupComponent = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+      <div className="bg-white relative p-8 rounded-lg shadow-lg w-full max-w-md">
+        <Link
+          to="/"
+          //   onClick={closeModal}
+
+          className="absolute top-2 right-4 text-3xl text-gray-500 hover:text-gray-700"
+        >
+          &times; {/* Close icon */}
+        </Link>
         <h2 className="text-2xl font-bold mb-6 text-gray-800">Register</h2>
         <ToastContainer />
         <form onSubmit={handleSubmit}>
@@ -201,6 +209,18 @@ export const SignupComponent = () => {
             Register
           </button>
         </form>
+        <p className="text-center mt-4 space-y-2">
+          <span>
+            Already have an account?{" "}
+            <span
+              className="text-indigo-500 hover:text-indigo-600 cursor-pointer"
+              onClick={() => navigate("/login")}
+            >
+              Log in
+            </span>
+            .
+          </span>
+        </p>
       </div>
     </div>
   );
