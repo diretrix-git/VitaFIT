@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import CardComponent from "../card/CardComponent";
+// import CardComponent from "../card/CardComponent";
 // import ProductList from "../ProductCard/ProductList";
 import axios from "axios";
+import WorkoutCardComponent from "./WorkoutCardComponent";
 
 const domain = "http://localhost:5000";
 
 const WorkoutComponent = () => {
-  const [workout, setworkout] = useState([]);
+  const [workouts, setworkout] = useState([]);
   const fetchworkout = async () => {
     try {
       const response = await axios.get(`${domain}/api/workout`);
-      console.log("response", response);
+      console.log("response", response.data);
       setworkout(response.data);
     } catch (error) {
       console.error("Error fetching data", error);
@@ -22,10 +23,10 @@ const WorkoutComponent = () => {
 
   return (
     <>
-      {workout.length === 0 ? (
+      {workouts.length === 0 ? (
         <h1>Loading</h1>
       ) : (
-        <CardComponent datas={workout} />
+        <WorkoutCardComponent workoutData={workouts} />
       )}
     </>
   );

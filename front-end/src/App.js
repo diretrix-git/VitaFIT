@@ -17,7 +17,8 @@ import AddProductComponent from "./Components/AddProduct/addProduct";
 import CategoryComponent from "./Components/AddCategory/AddCategoryComponent";
 import ContactForm from "./Components/ContactUs/ContactusComponent";
 import RecipeCardComponent from "./Components/Recipe/RecipeCardComponent";
-
+import AddWorkoutTypeComponent from "./Components/Workout/AddWorkoutTypeComponent"
+import AddWorkout from "./Components/Workout/AddWorkoutComponent";
 function App() {
   return (
     <>
@@ -39,6 +40,8 @@ function App() {
           <Route path="/test2" element={<ZzzComponent />} />
           <Route path="/test3" element={<Test />} />
           <Route path="/addrecipe" element={<RecipeCardComponent />} />
+          <Route path="/addworkout-type" element={<AddWorkoutTypeComponent />} />
+          <Route path="/addworkout" element={<AddWorkout />} />
         </Routes>
       </Router>
     </>

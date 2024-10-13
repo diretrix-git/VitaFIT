@@ -17,7 +17,7 @@ const RecipeForm = () => {
     recipeImage: "",
   });
 
-//   console.log("inf", formData);
+  //   console.log("inf", formData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,6 +36,7 @@ const RecipeForm = () => {
     });
   };
 
+  console.log("fd ", formData);
   // Handle input change for dynamic ingredient fields
   const handleIngredientChange = (index, event) => {
     const newIngredients = ingredients.map((ingredient, i) => {
@@ -123,11 +124,16 @@ const RecipeForm = () => {
       recipeData.append(`ingredients[${index}][quantity]`, ingredient.quantity);
       recipeData.append(`ingredients[${index}][unit]`, ingredient.unit);
     });
-
+    console.log("rd", recipeData);
     try {
-      const response = await axiosInstance.post("/recipes/create", recipeData);
-    //   console.log("rep",response);
-      toast.success("Recipe created successfully!", response);
+      // console.log("130",recipeData)
+      const response = await axiosInstance.post("/recipes/create", recipeData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log("rep", response);
+      toast.success("Recipe created successfully!", response.data.success);
     } catch (error) {
       toast.error("Failed to create recipe");
     }
@@ -156,7 +162,7 @@ const RecipeForm = () => {
   }, []);
 
   //   console.log(mealplan)
-//   console.log(ingredients);
+  //   console.log(ingredients);
 
   return (
     <div className="max-w-4xl mx-auto bg-white p-8 shadow-lg rounded-lg">
@@ -247,7 +253,7 @@ const RecipeForm = () => {
             Add Ingredient
           </button>
         </div>
-        s{/* Instructions */}
+        {/* Instructions */}
         <div className="flex flex-col">
           <label className="text-lg font-medium">Instructions</label>
           <textarea
@@ -278,7 +284,7 @@ const RecipeForm = () => {
             type="file"
             name="recipeImage"
             onChange={handleFileChange}
-            required
+            // required
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>

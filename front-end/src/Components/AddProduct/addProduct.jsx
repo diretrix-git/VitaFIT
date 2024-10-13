@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axiosInstance from "../../config/axiosConfig";
+import { motion } from "framer-motion";
 
 const AddProductComponent = () => {
   const [formData, setFormData] = useState({
@@ -10,10 +11,10 @@ const AddProductComponent = () => {
     price: "",
     description: "",
     productImage: "",
-    // brand: "",
+    brand: "",
     // rating: "",
     // numReviews: "",
-    // countInStock: "",
+    countInStock: "",
   });
 
   const [category, setCategory] = useState([]);
@@ -34,7 +35,7 @@ const AddProductComponent = () => {
       productImage: file,
     });
   };
-
+  console.log(formData);
   console.log("image:", formData.productImage);
 
   const handleSubmit = async (e) => {
@@ -46,16 +47,16 @@ const AddProductComponent = () => {
     data.append("price", formData.price);
     data.append("description", formData.description);
     data.append("productImage", formData.productImage);
-    // data.append("brand", formData.brand);
+    data.append("brand", formData.brand);
     // data.append("rating", formData.rating);
     // data.append("numReviews", formData.numReviews);
-    // data.append("countInStock", formData.countInStock);
+    data.append("countInStock", formData.countInStock);
 
     console.log("Data:", data);
     console.log("FormData:", formData);
 
     try {
-      const response = await axiosInstance.post("/products/create", data,{
+      const response = await axiosInstance.post("/products/create", data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -79,7 +80,6 @@ const AddProductComponent = () => {
       toast.error(error.response?.data?.msg || "An error occurred");
     }
   };
-  
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -104,7 +104,10 @@ const AddProductComponent = () => {
   }, []);
 
   return (
-    <form
+    <motion.form
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
       onSubmit={handleSubmit}
       className="max-w-xl mx-auto p-8 bg-white rounded-lg shadow-lg m-8"
     >
@@ -173,7 +176,7 @@ const AddProductComponent = () => {
           type="file"
           name="productImage"
           onChange={handleFileChange}
-          required
+          // required
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
@@ -190,7 +193,7 @@ const AddProductComponent = () => {
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
-      <div className="mb-4">
+      {/* <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Rating:
         </label>
@@ -202,8 +205,8 @@ const AddProductComponent = () => {
           // required
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
-      </div>
-      <div className="mb-4">
+      </div> */}
+      {/* <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Number of Reviews:
         </label>
@@ -215,7 +218,7 @@ const AddProductComponent = () => {
           // required
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
-      </div>
+      </div> */}
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Count in Stock:
@@ -237,7 +240,7 @@ const AddProductComponent = () => {
           Add Product
         </button>
       </div>
-    </form>
+    </motion.form>
   );
 };
 

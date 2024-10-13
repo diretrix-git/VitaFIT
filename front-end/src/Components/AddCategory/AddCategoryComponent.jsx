@@ -24,7 +24,7 @@ const CategoryComponent = () => {
           `/category/update/${categoryId}`,
           categoryData
         );
-        console.log(editResponse)
+        console.log(editResponse);
         toast.success(editResponse.data.message);
         setEditingCategory(false); // Reset editing state
       } else {
@@ -67,7 +67,7 @@ const CategoryComponent = () => {
   const handleDelete = async (id) => {
     try {
       const response = await axiosInstance.delete(`/category/delete/${id}`);
-      console.log(response)
+      console.log(response);
       toast.success(response.data.message);
       await fetchCategories();
     } catch (error) {

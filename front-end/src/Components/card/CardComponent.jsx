@@ -1,10 +1,10 @@
 import React from "react";
 
 const CardComponent = ({ datas }) => {
-  // const domain = `http://localhost:5000`;
+  const domain = `http://localhost:5000`;
   const imgAddress = (item) => {
     if (item.productImage) {
-      return `${item.productImage}`;
+      return `${domain}/${item.productImage}`;
     } else {
       return item.imgUrl;
     }
@@ -24,7 +24,14 @@ const CardComponent = ({ datas }) => {
             />
             <div className="px-6 py-4">
               <div className="font-bold text-xl mb-2"> {item.name}</div>
+              <div className="font-bold text-xl mb-2"> {item.title}</div>
+              <div className="font-bold text-xl mb-2"> {item.type}</div>
+              <div className="font-bold text-xl mb-2"> {item.difficulty}</div>
               <p className="text-gray-700 text-base">{item.description}</p>
+              <p className="text-gray-700 text-base">{item.plan}</p>
+              <p className="text-gray-700 text-base">{item.type}</p>
+              {/* <p className="text-gray-700 text-base">{item.category.name}</p> */}
+              <p className="text-gray-700 text-base">Stock Left {item.stock}</p>
               <p>{item.price}</p>
               <p>{item.sets}</p>
             </div>

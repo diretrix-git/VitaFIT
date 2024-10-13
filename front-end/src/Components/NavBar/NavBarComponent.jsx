@@ -31,12 +31,14 @@ const NavbarComponent = () => {
         {authState.isAuthenticated ? (
           <>
             <Link to="/workout">Workout</Link>
+            <Link to="/addworkout">Add Workout</Link>
             <Link to="/nutrition">Nutrition</Link>
 
             {authState.userRole === "admin" ? (
               <>
                 <Link to="/addproduct">Add Product</Link>
                 <Link to="/addcategory">Add Category</Link>
+                <Link to="/addworkout-type">Add Workout-Type</Link>
               </>
             ) : null}
             <button onClick={handleLogout}>Log Out</button>
