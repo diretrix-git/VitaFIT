@@ -44,7 +44,7 @@ router.post(
   "/create",
   authMiddleware,
   authorizeRole("admin"),
-  uploadRecipeImage.single("image"), // For image upload
+  uploadRecipeImage.single("recipeImage"), // For image upload
   // uploadRecipeVideo.single("video"), // For video upload
   createRecipe
 );
@@ -61,7 +61,7 @@ router.put(
   authMiddleware,
   authorizeRole("admin"), // Only admins can update recipes
   uploadRecipeImage.single("recipeImage"), // For image upload
- 
+
   updateRecipe
 );
 

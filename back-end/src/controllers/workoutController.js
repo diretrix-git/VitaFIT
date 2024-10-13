@@ -1,4 +1,82 @@
 const Workout = require("../models/workoutModel");
+const WorkoutType = require("../models/workoutTypeModel");
+
+// create a new workout (admin access)
+const createWorkout = async (req, res) => {
+  try {
+    // Destructure required fields from request body
+    const { type, difficulty, plan, exercises } = req.body;
+
+    // Map exercises to include exercise images
+    const mappedExercises = exercises.map((ex, index) => {
+      const exerciseImageFile = req.files.find(
+        (file) => file.fieldname === `exercises[${index}][exerciseImage]`
+      );
+
+      return {
+        name: ex.name,
+        sets: ex.sets,
+        reps: ex.reps,
+        rest: ex.rest,
+        exerciseImage: exerciseImageFile
+          ? `uploads/exerciseImg/${exerciseImageFile.filename}`
+          : null, // Store image path or null if no image provided
+      };
+    });
+
+    // Validate required fields
+    if (
+      !type ||
+      !Array.isArray(req.body.workoutPlanDetails) ||
+      !plan ||
+      !mappedExercises.length
+    ) {
+      return res.status(400).json({
+        message:
+          "All fields are required, including exercises and workout plan details.",
+      });
+    }
+
+    // Check if workout type exists
+    let workoutType = await WorkoutType.findById(type);
+    if (!workoutType) {
+      // If the workout type does not exist, create a new one
+      workoutType = new WorkoutType({ name: type });
+      await workoutType.save();
+    }
+
+    // Prepare workout data
+    const workoutData = {
+      type,
+      difficulty,
+      plan,
+      workoutPlanDetails: req.body.workoutPlanDetails.map((wp) => ({
+        description: wp.description,
+        duration: wp.duration,
+        frequency: wp.frequency,
+      })),
+      exercises: mappedExercises,
+    };
+
+    // Create new workout instance
+    const newWorkout = new Workout(workoutData);
+
+    // Save new workout to database
+    const workoutResponse = await newWorkout.save();
+    res.status(201).json({
+      status: "success",
+      data: {
+        message: "Workout created successfully",
+        workout: workoutResponse,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "fail",
+      err: err.message || "An error occurred",
+    });
+  }
+};
 
 // get a single workout by ID
 const getWorkout = async (req, res) => {
@@ -27,28 +105,15 @@ const getWorkout = async (req, res) => {
 
 const getWorkouts = async (req, res) => {
   try {
-    const workouts = await Workout.find();
-    res.status(200).json(workouts);
-  } catch (err) {
-    return res.status(500).json({ err: err.msg });
-  }
-};
-
-// create a new workout (admin access)
-
-const createWorkout = async (req, res) => {
-  try {
-    const newWorkout = await Workout.create(req.body);
-    res.status(201).json({
+    const workouts = await Workout.find().populate("type", "name");
+    res.status(200).json({
       status: "success",
-      data: {
-        workout: newWorkout,
-      },
+      data: workouts,
     });
   } catch (err) {
     res.status(400).json({
       status: "fail",
-      err: err.msg,
+      message: err.message,
     });
   }
 };
@@ -57,27 +122,50 @@ const createWorkout = async (req, res) => {
 
 const updateWorkout = async (req, res) => {
   try {
-    const workout = await Workout.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    console.log("Request Files:", req.files); // Log request files
+    console.log("Request Body:", req.body); // Log request body
 
+    const workout = await Workout.findById(req.params.id);
     if (!workout) {
       return res.status(404).json({
         status: "fail",
-        msg: "workout not found",
+        msg: "Workout not found",
       });
     }
+
+    // Map over exercises and update image if provided
+    const updatedExercises = workout.exercises.map((exercise, index) => ({
+      ...exercise,
+      exerciseImage:
+        req.files && req.files[`exercises[${index}][exerciseImage]`]
+          ? `uploads/exerciseImg/${
+              req.files[`exercises[${index}][exerciseImage]`][0].filename
+            }`
+          : exercise.exerciseImage,
+    }));
+
+    workout.exercises = updatedExercises;
+    workout.type = req.body.type || workout.type;
+    workout.difficulty = req.body.difficulty || workout.difficulty;
+
+    // Handle workout image if it was updated
+    if (req.files && req.files["workoutImage"]) {
+      workout.workoutImage = `uploads/workoutImg/${req.files["workoutImage"][0].filename}`;
+    }
+
+    const updatedWorkout = await workout.save();
+
     return res.status(200).json({
       status: "success",
       data: {
-        workout,
+        workout: updatedWorkout,
       },
     });
   } catch (err) {
-    res.status(400).json({
+    console.error("Error in updateWorkout:", err); // Log the error
+    return res.status(500).json({
       status: "fail",
-      err: err.message,
+      message: err.message || "An unexpected error occurred",
     });
   }
 };

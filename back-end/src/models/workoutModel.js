@@ -1,8 +1,51 @@
 const mongoose = require("mongoose");
 
+// schema for exercises
+
+const exerciseSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  sets: {
+    type: Number,
+    required: true,
+  },
+  reps: {
+    type: Number,
+    required: true,
+  },
+  rest: {
+    type: Number,
+    required: true,
+  },
+  exerciseImage: {
+    type: String,
+    // default: null,
+  },
+});
+
+// schema for workout plan details
+
+const workoutPlanDetails = new mongoose.Schema({
+  description: {
+    type: String,
+    required: true,
+  },
+  duration: {
+    type: Number, // duration in minutes
+    required: true,
+  },
+  frequency: {
+    type: String,
+    required: true, // e.g., '3 times a week'
+  },
+});
+
 const workoutSchema = new mongoose.Schema({
   type: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "WorkoutType", // Reference to WorkoutTypeModel
     required: true,
   },
   difficulty: {
@@ -14,19 +57,11 @@ const workoutSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  exercises: [
-    {
-      name: String,
-      sets: Number,
-      reps: Number,
-      rest: Number, // rest time in seconds
-    },
-  ],
-  workoutPlanDetails: {
-    description: String,
-    duration: Number, // duration in minutes
-    frequency: String, // e.g., '3 times a week'
-  },
+  exercises: [exerciseSchema],
+  workoutPlanDetails: [workoutPlanDetails],
+  // workoutImage: {
+  //   type: String,
+  // },
 });
 
 const Workout = mongoose.model("Workout", workoutSchema);

@@ -1,4 +1,5 @@
 const { Recipe } = require("../models/recipeModel");
+// const { Mealplan } = require("../models/mealPlanModel");
 
 // Get recipe by ID with population
 const getRecipe = async (req, res) => {
@@ -72,21 +73,49 @@ const createRecipe = async (req, res) => {
       quantity: ing.quantity,
       unit: ing.unit,
     }));
-    const newRecipe = new Recipe({
+    if (!title || !instructions || !servingSize || !mealplan || !ingredients) {
+      return res
+        .status(400)
+        .json({ message: "Please provide all the required fields" });
+    }
+
+    // const mealplanExists = await Mealplan.findById(mealplan);
+    // if (!mealplanExists) {
+    //   return res.status(400).json({ message: "Mealplan does not exist" });
+    // }
+
+    const recipeData = {
       title,
       ingredients,
       instructions,
       servingSize,
       mealplan,
-      image: req.files && req.files.image ? req.files.image[0].path : undefined,
-      // video: req.files && req.files.video ? req.files.video[0].path : undefined,
+    };
+    if (req.file) {
+      recipeData.recipeImage = `uploads/recipeImg/${req.file.filename}`;
+    }
+    const newRecipe = new Recipe({
+      ...recipeData,
     });
+    // const newRecipe = new Recipe({
+    //   title,
+    //   ingredients,
+    //   instructions,
+    //   servingSize,
+    //   mealplan,
+    //   recipeImage:
+    //     req.files && req.files.recipeImage
+    //       ? req.files.recipeImage[0].path
+    //       : undefined, // Handle image upload if present
+    //   // video: req.files && req.files.video ? req.files.video[0].path : undefined,
+    // });
 
-    await newRecipe.save();
+    const recipeResponse = await newRecipe.save();
     res.status(201).json({
       status: "success",
       data: {
-        recipe: newRecipe,
+        message: "Recipe created successfully",
+        recipe: recipeResponse,
       },
     });
   } catch (err) {
@@ -102,19 +131,21 @@ const updateRecipe = async (req, res) => {
   try {
     const { ingredients, ...rest } = req.body;
 
+    // Handle dynamic ingredients array only if ingredients are provided
+    const parsedIngredients = ingredients
+      ? ingredients.map((ing) => ({
+          name: ing.name,
+          quantity: ing.quantity,
+          unit: ing.unit,
+        }))
+      : undefined;
+
     // Combine parsed ingredients with other updates
     const updateData = {
       ...rest,
-      ingredients: parsedIngredients,
-      image: req.file ? req.file.path : undefined, // Handle new image upload if present
+      ...(parsedIngredients && { ingredients: parsedIngredients }), // Add ingredients if they exist
+      recipeImage: req.file ? req.file.path : undefined, // Handle new image upload if present
     };
-
-    // Handle dynamic ingredients array
-    const parsedIngredients = ingredients.map((ing) => ({
-      name: ing.name,
-      quantity: ing.quantity,
-      unit: ing.unit,
-    }));
 
     // Check if there's an image file in the request and add it to updateData
     if (req.file) {

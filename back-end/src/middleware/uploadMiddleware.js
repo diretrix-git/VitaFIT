@@ -86,9 +86,35 @@ const uploadProductImage = multer({
   fileFilter: filter,
 });
 
+//for workout
+const workoutImageStorage = diskStorage({
+  destination: getDestination("workoutImg"),
+  filename,
+});
+const uploadWorkoutImage = multer({
+  storage: workoutImageStorage,
+  fileFilter: filter,
+});
+
+//for exercise
+const exerciseImageStorage = diskStorage({
+  destination: getDestination("exerciseImg"),
+  filename,
+});
+const uploadExerciseImage = multer({
+  storage: exerciseImageStorage,
+  fileFilter: filter,
+  limits: { fileSize: 5 * 1024 * 1024 }, // file size limit 5mb
+});
+// .fields([
+//   { name: "exercises[exerciseImage]", maxCount: 8 } // Allow up to 8 images
+// ]);
+
 module.exports = {
   profileImage,
   uploadRecipeImage,
   uploadRecipeVideo,
   uploadProductImage,
+  uploadWorkoutImage,
+  uploadExerciseImage,
 };

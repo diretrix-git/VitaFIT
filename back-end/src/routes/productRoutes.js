@@ -42,7 +42,7 @@ router.post(
   "/create",
   authMiddleware,
   authorizeRole("admin"),
-  uploadProductImage.single("image"), // For image upload
+  uploadProductImage.single("productImage"), // For image upload
   createProduct
 );
 
@@ -57,7 +57,7 @@ router.put(
   "/update/:id",
   authMiddleware,
   authorizeRole("admin"),
-  uploadProductImage.single("image"),
+  uploadProductImage.single("productImage"),
   updateProduct
 );
 

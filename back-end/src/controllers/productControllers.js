@@ -1,5 +1,61 @@
 const Product = require("../models/productModel");
+const Category = require("../models/productCategoryModel");
 
+// Create a new product
+const createProduct = async (req, res) => {
+  try {
+    const { name, description, price, category, countInStock, brand } =
+      req.body;
+
+    if (
+      !name ||
+      !description
+      // !price ||
+      // !category ||
+      // !countInStock ||
+      // !brand
+    ) {
+      return res
+        .status(400)
+        .json({ message: "Please provide all the required fields" });
+    }
+    const categoryExists = await Category.findById(category);
+    if (!categoryExists) {
+      return res.status(400).json({ message: "Category does not exist" });
+    }
+    const productData = {
+      name,
+      description,
+      price,
+      category,
+      countInStock,
+      brand,
+    };
+    if (req.file) {
+      productData.productImage = `uploads/productImg/${req.file.filename}`;
+    }
+    const newProduct = new Product({
+      ...productData,
+    });
+    const productResponse = await newProduct.save();
+    res.status(201).json({
+      message: "Product created successfully",
+      product: productResponse,
+    });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+// const product = new Product(req.body);
+// try {
+//   await product.save();
+//   res
+//     .status(201)
+//     .json({ msg: "Product created successfully", product: product });
+// } catch (error) {
+//   res.status(400).json({ message: error.message });
+// }
 // Get all products
 const getProducts = async (req, res) => {
   try {
@@ -18,19 +74,6 @@ const getProduct = async (req, res) => {
     res.json(product);
   } catch (error) {
     res.status(500).json({ message: error.message });
-  }
-};
-
-// Create a new product
-const createProduct = async (req, res) => {
-  const product = new Product(req.body);
-  try {
-    await product.save();
-    res
-      .status(201)
-      .json({ msg: "Product created successfully", product: product });
-  } catch (error) {
-    res.status(400).json({ message: error.message });
   }
 };
 

@@ -1,4 +1,5 @@
 const express = require("express");
+const router = express.Router();
 const {
   getWorkout,
   getWorkouts,
@@ -9,9 +10,15 @@ const {
 
 const { authMiddleware } = require("../middleware/authMiddleware");
 const { authorizeRole } = require("../middleware/authorizationMiddleware");
-
-const router = express.Router();
-
+const {
+  uploadWorkoutImage,
+  uploadExerciseImage,
+} = require("../middleware/uploadMiddleware");
+// const maxCount = 8; // Maximum number of exercises
+// const uploadFields = Array.from({ length: maxCount }, (_, i) => ({
+//   name: `exercises[${i}][exerciseImage]`,
+//   maxCount: 8,
+// }));
 /**
  * @description To get all workouts
  * @api /api/workout
@@ -32,7 +39,7 @@ router.get("/:id", getWorkout);
 
 /**
  * @description To create a new workout
- * @api /api/workout
+ * @api /api/workout/create
  * @access private (admin)
  * @type POST
  * @return response
@@ -40,7 +47,11 @@ router.get("/:id", getWorkout);
 router.post(
   "/create",
   authMiddleware,
-  authorizeRole("admin"), // Only users can admin workouts
+  authorizeRole("admin"), // Only admins can create workout
+  // uploadExerciseImage.fields([
+  //   { name: "exercises[exerciseImage]", maxCount: 8 },
+  // ]), // Updated to allow 8 images
+  uploadExerciseImage.any(),
   createWorkout
 );
 
@@ -55,6 +66,12 @@ router.put(
   "/:id",
   authMiddleware,
   authorizeRole("admin"), // Only admins can update workouts
+  // uploadExerciseImage.fields([
+  //   // { name: "workoutImage", maxCount: 1 }, // For workout image
+  //   { name: "exercises[exerciseImage]", maxCount: 8 }, // For up to 8 exercise images dynamically
+  // ]),
+  uploadExerciseImage.any(),
+
   updateWorkout
 );
 
