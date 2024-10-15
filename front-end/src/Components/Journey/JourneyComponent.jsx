@@ -26,7 +26,7 @@ const JourneyComponent = () => {
       {/** interface*/}
       <motion.div ref={containerRef} className="journey" >
       
-        <h1 className=" text-white text-[5.5em] font-bold  h-[18vh]  ml-[.8em] ">
+        <h1 className="text-white text-[5.5em] font-bold  h-[18vh]  ml-[.8em] ">
           Your
         </h1>
         <h1 className=" text-white text-[5.5em] font-bold   h-[18vh] ml-[.8em] ">

@@ -1,6 +1,7 @@
-.journey{
-    background-image: url('/public/media/fitness.avif') ;
-    height: 100vh;
-    background-size: cover;
-    padding-top: 5em;
+.journey {
+  background-image: url("/public/media/home.jpg");
+  height: 110vh;
+  background-size: cover;
+  padding-top: 5em;
+  margin-top: -5rem;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
-import NavBarComponent from "./Components/NavBar/NavBarComponent";
+import {NavbarComponent} from "./Components/NavBar/NavBarComponent";
+import {SlideTabsExample} from "./Components/NavBar/NavTest";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import JourneyComponent from "./Components/Journey/JourneyComponent";
 
@@ -17,17 +18,18 @@ import AddProductComponent from "./Components/AddProduct/addProduct";
 import CategoryComponent from "./Components/AddCategory/AddCategoryComponent";
 import ContactForm from "./Components/ContactUs/ContactusComponent";
 import RecipeCardComponent from "./Components/Recipe/RecipeCardComponent";
-import AddWorkoutTypeComponent from "./Components/Workout/AddWorkoutTypeComponent"
+import AddWorkoutTypeComponent from "./Components/Workout/AddWorkoutTypeComponent";
 import AddWorkout from "./Components/Workout/AddWorkoutComponent";
+import NotFound from "./Components/NotFound/NotFound";
 function App() {
   return (
     <>
       <Router>
-        <NavBarComponent />
-
+        <NavbarComponent />
+        {/* <SlideTabsExample/> */}
         <Routes>
           <Route path="/login" element={<LoginComponent />} />
-          <Route path="/" element={<JourneyComponent />} />
+          <Route path="/" element={<JourneyComponent />} />-
           <Route path="/signup" element={<SignupComponent />} />
           <Route path="/product" element={<ProductComponent />} />
           <Route path="/recipe" element={<RecipeComponent />} />
@@ -40,8 +42,12 @@ function App() {
           <Route path="/test2" element={<ZzzComponent />} />
           <Route path="/test3" element={<Test />} />
           <Route path="/addrecipe" element={<RecipeCardComponent />} />
-          <Route path="/addworkout-type" element={<AddWorkoutTypeComponent />} />
+          <Route
+            path="/addworkout-type"
+            element={<AddWorkoutTypeComponent />}
+          />
           <Route path="/addworkout" element={<AddWorkout />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </>

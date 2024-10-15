@@ -19,6 +19,8 @@ const WorkoutCardComponent = ({ workoutData }) => {
     ? workoutData.data.filter((item) => item.type.name === selectedType)
     : workoutData.data;
 
+    console.log(filteredWorkouts)
+
   return (
     <div className="p-4">
       {/* Dropdown for workout types */}
@@ -44,7 +46,7 @@ const WorkoutCardComponent = ({ workoutData }) => {
           {/* Workout Plan Details */}
           <div className="mt-8">
             <h3 className="text-xl font-semibold">Workout Plan Details</h3>
-            <p>{item.workoutPlanDetails.description}</p>
+            <p>{item.workoutPlanDetails.duration} c</p>
           </div>
 
           {/* Exercise Cards */}
