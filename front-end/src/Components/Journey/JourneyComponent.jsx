@@ -3,6 +3,7 @@ import "./style.css";
 import gsap from "gsap";
 import { fadeIn } from "../variants";
 import { motion } from "framer-motion";
+import Test from "./../test3/test";
 
 const JourneyComponent = () => {
   const containerRef = useRef(null);
@@ -24,8 +25,7 @@ const JourneyComponent = () => {
   return (
     <>
       {/** interface*/}
-      <motion.div ref={containerRef} className="journey" >
-      
+      <motion.div ref={containerRef} className="journey">
         <h1 className="text-white text-[5.5em] font-bold  h-[18vh]  ml-[.8em] ">
           Your
         </h1>
@@ -161,6 +161,7 @@ const JourneyComponent = () => {
           </div>
         </div>
       </div>
+      <Test />
     </>
   );
 };

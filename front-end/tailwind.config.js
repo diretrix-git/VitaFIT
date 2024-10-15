@@ -7,6 +7,9 @@ module.exports = {
       screens: {
         xs: { max: "424px" }, // less than 425px
       },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+      },
     },
   },
   plugins: [],

@@ -20,8 +20,8 @@ const SlideTabs = () => {
 
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
-  // console.log(authState.isAuthenticated);
-  // console.log(authState.userRole);
+  console.log(authState.isAuthenticated);
+  console.log(authState.userRole);
   //   const isOpen = useSelector((state) => state.navbar.isOpen);
 
   const handleLogout = () => {
@@ -70,10 +70,10 @@ const SlideTabs = () => {
           <Link to=""> About Us </Link>
         </Tab>
         <Tab setPosition={setPosition}>
-          <Link to=""> Services</Link>
+          <Link to="/services"> Services</Link>
         </Tab>
         <Tab setPosition={setPosition}>
-          <Link to=""> Workout Plans </Link>
+          <Link to="/workout"> Workout Plans </Link>
         </Tab>
         <Tab setPosition={setPosition}>
           <Link to=""> Pricing</Link>

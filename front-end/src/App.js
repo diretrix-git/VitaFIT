@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import {NavbarComponent} from "./Components/NavBar/NavBarComponent";
-import {SlideTabsExample} from "./Components/NavBar/NavTest";
+import { NavbarComponent } from "./Components/NavBar/NavBarComponent";
+import { SlideTabsExample } from "./Components/NavBar/NavTest";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import JourneyComponent from "./Components/Journey/JourneyComponent";
 
@@ -40,7 +40,13 @@ function App() {
           <Route path="/contactus" element={<ContactForm />} />
           <Route path="/test" element={<TestComponenet />} />
           <Route path="/test2" element={<ZzzComponent />} />
-          <Route path="/test3" element={<Test />} />
+          <Route
+            path="/test3"
+            element={
+              <Test
+              />
+            }
+          />
           <Route path="/addrecipe" element={<RecipeCardComponent />} />
           <Route
             path="/addworkout-type"
