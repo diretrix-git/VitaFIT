@@ -2,9 +2,7 @@ import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/authSlice";
-// import "./navbar.css";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-// import { div } from "framer-motion/client";
 
 export const NavbarComponent = () => {
   return <SlideTabs />;
@@ -16,13 +14,11 @@ const SlideTabs = () => {
     width: 0,
     opacity: 0,
   });
-  const navigate = useNavigate();
 
+  const [menuOpen, setMenuOpen] = useState(false); // To toggle the mobile menu
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
-  console.log(authState.isAuthenticated);
-  console.log(authState.userRole);
-  //   const isOpen = useSelector((state) => state.navbar.isOpen);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -41,6 +37,13 @@ const SlideTabs = () => {
     }
   });
 
+  const handleMenuToggle = () => {
+    setMenuOpen((prev) => {
+      console.log("Menu Open:", !prev); // Check the state here
+      return !prev;
+    });
+  };
+
   return (
     <motion.div
       variants={{
@@ -49,54 +52,167 @@ const SlideTabs = () => {
       }}
       animate={hidden ? "hidden" : "visible"}
       transition={{ duration: 0.35, ease: "easeInOut" }}
-      className="flex justify-between items-center sticky top-0 w-full p-2.5 shadow-lg z-50 bg-[#2c2b2a59] bg-opacity-50 backdrop-blur-md"
+      className="flex justify-between items-center sticky top-0 w-full p-2.5 shadow-lg z-50 bg-[#2c2b2a59] bg-opacity-50 backdrop-blur-md overflow-x-hidden"
     >
+      {/* Logo */}
       <h2 className="text-white text-2xl font-bold cursor-pointer">
         <Link to="/">VitaFit</Link>
       </h2>
+
+      {/* Hamburger Icon */}
+      <div className="md:hidden">
+        <button
+          onClick={handleMenuToggle}
+          className="text-white focus:outline-none"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className="w-8 h-8"
+          >
+            {menuOpen ? (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            ) : (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+              />
+            )}
+          </svg>
+        </button>
+      </div>
+
+      {/* Full Navigation - Hidden on Mobile */}
       <ul
+        className={`relative mx-auto hidden md:flex w-full md:w-auto rounded-full bg-white p-1`}
         onMouseLeave={() => {
           setPosition((pv) => ({
             ...pv,
             opacity: 0,
           }));
         }}
-        className="relative mx-auto flex w-fit rounded-full bg-white p-1" //border-2 border-black
       >
         <Tab setPosition={setPosition}>
-          <Link to=""> Home </Link>
+          <Link className="text-sm md:text-base" to="/">
+            {" "}
+            Home{" "}
+          </Link>
         </Tab>
         <Tab setPosition={setPosition}>
-          <Link to=""> About Us </Link>
+          <Link className="text-sm md:text-base" to="/about">
+            {" "}
+            About Us{" "}
+          </Link>
         </Tab>
         <Tab setPosition={setPosition}>
-          <Link to="/services"> Services</Link>
+          <Link className="text-sm md:text-base" to="/product">
+            {" "}
+            Shop
+          </Link>
         </Tab>
         <Tab setPosition={setPosition}>
-          <Link to="/workout"> Workout Plans </Link>
+          <Link className="text-sm md:text-base" to="/workout">
+            {" "}
+            Workout Plans{" "}
+          </Link>
         </Tab>
         <Tab setPosition={setPosition}>
-          <Link to=""> Pricing</Link>
+          <Link className="text-sm md:text-base" to="/pricing">
+            {" "}
+            Pricing
+          </Link>
         </Tab>
         <Tab setPosition={setPosition}>
-          <Link to="/addproduct"> Contact Us </Link>
+          <Link className="text-sm md:text-base" to="/contact">
+            {" "}
+            Contact Us{" "}
+          </Link>
         </Tab>
         <Cursor position={position} />
       </ul>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.3 }}
+          className="md:hidden absolute flex flex-col text-white space-y-4 z-50"
+        >
+          {/*  flex flex-col items-center bg-gray-700 text-white space-y-4 mt-4 p-4 rounded-md top-16 right-4 z-1000 */}
+          <Link className="text-sm" to="/">
+            {" "}
+            Home{" "}
+          </Link>
+          <Link className="text-sm" to="/about">
+            {" "}
+            About Us{" "}
+          </Link>
+          <Link className="text-sm" to="/services">
+            {" "}
+            Services{" "}
+          </Link>
+          <Link className="text-sm" to="/workout">
+            {" "}
+            Workout Plans{" "}
+          </Link>
+          <Link className="text-sm" to="/pricing">
+            {" "}
+            Pricing{" "}
+          </Link>
+          <Link className="text-sm" to="/contact">
+            {" "}
+            Contact Us{" "}
+          </Link>
+          {authState.isAuthenticated ? (
+            <button
+              onClick={handleLogout}
+              className="text-white bg-red-500 px-4 py-2 rounded-md"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="bg-black text-white rounded-xl px-4 py-2 text-sm"
+            >
+              Login
+            </Link>
+          )}
+        </motion.div>
+      )}
+
+      {/* Auth Button for Desktop */}
       {authState.isAuthenticated ? (
         <button
           onClick={handleLogout}
-          className="text-white bg-red-500 px-4 py-2 rounded-md"
+          className="hidden md:block text-white bg-red-500 px-4 py-2 rounded-md"
         >
           Logout
         </button>
       ) : (
-        <Link
-          to="/login"
-          className="text-white bg-yellow-500 px-4 py-2 rounded-md"
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="hidden md:block"
         >
-          Sign In
-        </Link>
+          <Link
+            to="/login"
+            className="bg-black rounded-3xl text-white text-xl hover:rounded-xl px-8 py-3 transition-all duration-300"
+          >
+            Login
+          </Link>
+        </motion.div>
       )}
     </motion.div>
   );

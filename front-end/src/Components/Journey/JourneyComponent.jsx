@@ -3,45 +3,42 @@ import "./style.css";
 import gsap from "gsap";
 import { fadeIn } from "../variants";
 import { motion } from "framer-motion";
-import Test from "./../test3/test";
+import transition from "../../transition";
 
 const JourneyComponent = () => {
   const containerRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate all h1 elements within the container
       gsap.from(".journey h1", {
-        y: 100, // Start from below
-        opacity: 0, // Start invisible
-        duration: 0.7, // Duration for each h1
-        stagger: 0.2, // Stagger delay for each h1
+        y: 100,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.2,
       });
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
+  const headings = ["Your", "Journey to", "Greatness Starts", "Here."];
+
   return (
     <>
-      {/** interface*/}
       <motion.div ref={containerRef} className="journey">
-        <h1 className="text-white text-[5.5em] font-bold  h-[18vh]  ml-[.8em] ">
-          Your
-        </h1>
-        <h1 className=" text-white text-[5.5em] font-bold   h-[18vh] ml-[.8em] ">
-          Journey to
-        </h1>
-        <h1 className=" text-white text-[5.5em] font-bold   h-[18vh] ml-[.8em]  ">
-          Greatness Starts
-        </h1>
-        <h1 className=" text-white text-[5.5em] font-bold   h-[18vh] ml-[.8em]  ">
-          Here.
-        </h1>
+        {/* Text */}
+        {headings.map((text, index) => (
+          <h1
+            key={index}
+            className="text-white font-bold tracking-tight leading-snug text-[2.2em] sm:text-[3.5em] md:text-[4.5em] lg:text-[5.5em] h-[8vh] sm:h-[10vh] md:h-[12vh] lg:h-[15vh] ml-[.2em] sm:ml-[.5em] md:ml-[.8em]"
+          >
+            {text}
+          </h1>
+        ))}
       </motion.div>
       {/**body */}
 
-      <div className="container bg-[#f4f4f4] w-full pt-[5em] mx-auto pb-[2em] min-w-full ">
+      <div className="container w-full pt-[5em] mx-auto pb-[2em] min-w-full ">  /*bg-[#f4f4f4] */
         <motion.div
           variants={fadeIn(1)} // Fade in with a 0.3s delay
           initial="hidden"
@@ -161,9 +158,8 @@ const JourneyComponent = () => {
           </div>
         </div>
       </div>
-      <Test />
     </>
   );
 };
 
-export default JourneyComponent;
+export default transition(JourneyComponent);

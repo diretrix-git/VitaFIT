@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 // import ProductList from "../ProductCard/ProductList";
 import axios from "axios";
 import ProductCard from "./ProductCard";
+import transition from "../../transition";
 
 const domain = "http://localhost:5000";
 
@@ -51,4 +52,4 @@ const ProductComponent = () => {
   );
 };
 
-export default ProductComponent;
+export default transition(ProductComponent);

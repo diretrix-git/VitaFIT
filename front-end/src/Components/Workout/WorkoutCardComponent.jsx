@@ -19,7 +19,7 @@ const WorkoutCardComponent = ({ workoutData }) => {
     ? workoutData.data.filter((item) => item.type.name === selectedType)
     : workoutData.data;
 
-    console.log(filteredWorkouts)
+  console.log(filteredWorkouts);
 
   return (
     <div className="p-4">
@@ -65,7 +65,7 @@ const WorkoutCardComponent = ({ workoutData }) => {
                   }
                   alt={exercise.name}
                   className="w-full h-auto rounded-lg border-black border shadow-md object-cover"
-                  style={{ aspectRatio: '16 / 9' }} // Maintain a rectangular aspect ratio
+                  style={{ aspectRatio: "16 / 9" }} // Maintain a rectangular aspect ratio
                 />
                 <div className="absolute top-2 left-2 bg-black text-white py-1 px-3 rounded-full text-xs">
                   {item.difficulty}
@@ -74,7 +74,9 @@ const WorkoutCardComponent = ({ workoutData }) => {
 
               {/* Exercise Info */}
               <div className="w-full md:w-2/3 pl-6 flex flex-col justify-between space-y-4">
-                <h4 className="text-3xl font-bold text-gray-800">{exercise.name}</h4>
+                <h4 className="text-3xl font-bold text-gray-800">
+                  {exercise.name}
+                </h4>
 
                 <div className="flex items-center justify-around text-lg text-gray-700">
                   <p>
@@ -84,7 +86,8 @@ const WorkoutCardComponent = ({ workoutData }) => {
                     Reps: <span className="font-semibold">{exercise.reps}</span>
                   </p>
                   <p>
-                    Rest: <span className="font-semibold">{exercise.rest} sec</span>
+                    Rest:{" "}
+                    <span className="font-semibold">{exercise.rest} sec</span>
                   </p>
                 </div>
 
@@ -101,8 +104,6 @@ const WorkoutCardComponent = ({ workoutData }) => {
 };
 
 export default WorkoutCardComponent;
-
-
 
 // import React, { useState } from "react";
 

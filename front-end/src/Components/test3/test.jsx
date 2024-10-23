@@ -2,20 +2,22 @@ import React from "react";
 
 const Card = ({ image, title, details }) => {
   return (
-    <div className="relative h-96 w-full md:w-80 [perspective:1000px] group">
+    <div className="relative h-80 w-full sm:w-72 lg:w-80 [perspective:1000px] group">
       <div className="relative h-full w-full rounded-xl shadow-xl transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
         {/* Front side */}
         <div className="absolute inset-0 [backface-visibility:hidden]">
           <img
             src={image}
-            className="h-full w-full rounded-xl object-cover shadow-xl shadow-black/40"
+            className="h-full w-full rounded-xl object-cover shadow-xl"
             alt={title}
           />
         </div>
         {/* Back side */}
-        <div className="absolute inset-0 h-full w-full bg-black/70 px-12 text-center text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden] flex items-center justify-center flex-col">
-          <h1 className="text-3xl font-bold">{title}</h1>
-          <p className="text-lg">{details}</p>
+        <div className="absolute inset-0 h-full w-full bg-black/80 px-6 py-4 text-center text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden] flex items-center justify-center flex-col">
+          <h1 className="text-2xl font-bold">{title}</h1>
+          <p className="text-base">
+            {details || "No additional details available."}
+          </p>
         </div>
       </div>
     </div>
@@ -32,7 +34,7 @@ const CardGrid = () => {
     },
     {
       image:
-        "https://i.pinimg.com/control/564x/fe/5c/f3/fe5cf30aec2b23cea36355320b809ba4.jpg",
+        "https://i.pinimg.com/564x/fe/5c/f3/fe5cf30aec2b23cea36355320b809ba4.jpg",
       title: "Card 2",
       details: "Details for card 2",
     },
@@ -45,8 +47,8 @@ const CardGrid = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-between min-h-screen bg-slate-100 p-4">
-      <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3 w-full max-w-5xl">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4">
+      <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-5xl">
         {cards.map((card, index) => (
           <Card
             key={index}

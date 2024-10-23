@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
@@ -14,7 +14,7 @@ const RecipeCard = ({ recipeData }) => {
   return (
     <div className="flex flex-wrap gap-6 justify-center">
       {recipeData.map((item, index) => (
-        <motion.div
+        <div
           key={index}
           className="w-full md:w-80 bg-white space-y-6 p-6 rounded-[20px] shadow-md"
           initial={{ opacity: 0, y: 30 }}
@@ -23,7 +23,7 @@ const RecipeCard = ({ recipeData }) => {
           whileHover={{ scale: 1.05 }}
         >
           <Link to={`/recipes`} className="block">
-            <motion.img
+            <img
               src={`${imgAddress(item)}`}
               alt="recipe image"
               className="w-full h-48 object-cover bg-[#969696] rounded-[20px]"
@@ -31,14 +31,14 @@ const RecipeCard = ({ recipeData }) => {
             />
           </Link>
 
-          <motion.h3
+          <h3
             className="w-full h-16 font-semibold text-xl md:text-2xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
             {item.title}
-          </motion.h3>
+          </h3>
 
           <div className="flex flex-col gap-4">
             <Link to={`/recipes/`}>
@@ -79,26 +79,26 @@ const RecipeCard = ({ recipeData }) => {
 
             <div className="flex justify-between items-center">
               <Link to={`/update/`}>
-                <motion.button
+                <button
                   className="flex rounded-[9px] bg-black py-3 px-3 items-center gap-2"
                   whileHover={{ scale: 1.1 }}
                 >
                   <div className="w-6 h-6 text-white" />
                   <h6 className="text-base font-normal text-white">Edit</h6>
-                </motion.button>
+                </button>
               </Link>
 
-              <motion.button
+              <button
                 className="flex rounded-[9px] bg-[#EC2626] py-3 px-3 items-center gap-2"
                 whileHover={{ scale: 1.1 }}
                 onClick={() => console.log("Delete recipe")}
               >
                 <MdDeleteOutline className="w-6 h-6 text-white" />
                 <h6 className="text-base font-normal text-white">Delete</h6>
-              </motion.button>
+              </button>
             </div>
           </div>
-        </motion.div>
+        </div>
       ))}
     </div>
   );
