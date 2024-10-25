@@ -36,6 +36,7 @@ app.use("/api/products", require("./src/routes/productRoutes"));
 app.use("/api", require("./src/routes/orderRoutes.js"));
 app.use("/api/category", require("./src/routes/productCategoryRoutes.js"));
 app.use("/api/workout-type", require("./src/routes/workoutTypeRoutes"));
+app.use("/api/contact", require("./src/routes/contactRoutes"));
 
 // Start the server
 app.listen(port, () => {
