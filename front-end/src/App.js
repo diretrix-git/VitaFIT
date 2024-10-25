@@ -40,7 +40,6 @@ function App() {
         {/* Use `useLocation` inside Router */}
         {/** Pass `location` to `Routes` so that `AnimatePresence` detects changes */}
         <Content />
-        <Footer />
       </Router>
     </>
   );

@@ -1,6 +1,7 @@
 // src/NotFound.js
 import React from "react";
 import { motion } from "framer-motion";
+import transition from "../../transition";
 
 const NotFound = () => {
   return (
@@ -34,4 +35,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default transition(NotFound);
