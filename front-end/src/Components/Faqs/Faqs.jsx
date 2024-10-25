@@ -1,5 +1,6 @@
 import { FaPlus, FaMinus } from "react-icons/fa"; // Import both icons
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Faqs = () => {
   const items = [
@@ -39,11 +40,25 @@ const Faqs = () => {
 
     return (
       <div className="py-7 border-b border-white/30">
-        <div className="flex items-center cursor-pointer" onClick={toggleAccordion}>
+        <div
+          className="flex items-center cursor-pointer"
+          onClick={toggleAccordion}
+        >
           <span className="flex-1 text-lg font-bold">{question}</span>
-          {isOpen ? <FaMinus /> : <FaPlus />} {/* Toggle between plus and minus */}
+          {isOpen ? <FaMinus /> : <FaPlus />}{" "}
+          {/* Toggle between plus and minus */}
         </div>
-        {isOpen && <div className="mt-2">{answer}</div>}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0, marginTop: 0 }}
+              animate={{ opacity: 1, height: "auto", marginTop: "16px" }}
+              exit={{ opacity: 0, height: 0, marginTop: 0 }}
+            >
+              {answer}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     );
   };

@@ -1,7 +1,8 @@
 import React from "react";
 import { FaCogs, FaHandsHelping, FaCoffee } from "react-icons/fa"; // Example icons
+import Service from "./Service";
 
-const Service = () => {
+const Services = () => {
   const services = [
     {
       title: "Tailored Workout Plans",
@@ -38,22 +39,17 @@ const Service = () => {
         </div>
         <div className="mt-16 flex flex-col sm:flex-row gap-4">
           {services.map((service, index) => (
-            <div
+            <Service
+              title={service.title}
+              description={service.description}
+              icon={service.icon}
               key={index}
-              className="border border-white/30 px-5 py-10 text-center rounded-xl sm:flex-1"
-            >
-              <div className="inline-flex h-14 w-14 bg-white text-black justify-center items-center rounded-lg ">
-                {service.icon}
-              </div>
-              <div>
-                <h3 className="mt-6 font-bold">{service.title}</h3>
-                <p className="mt-2 text-white/70">{service.description}</p>
-              </div>
-            </div>
+            />
           ))}
         </div>
       </div>
     </div>
   );
 };
-export default Service;
+
+export default Services;

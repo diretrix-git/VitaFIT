@@ -1,30 +1,76 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import axiosInstance from "../../config/axiosConfig";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    telephone: "",
     message: "",
   });
-
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    // Handle form submission
+
+    const data = new FormData();
+    data.append("name", formData.name);
+    data.append("email", formData.email);
+    data.append("message", formData.message);
+
+    try {
+      const response = await axiosInstance.post("/contact/create", data, {
+        headers: { "Content-Type": "application/json" },
+      });
+      toast.success(response.data.message);
+      console.log("Message sent successfully:", response);
+      //   make form data empty
+      // setFormData({
+      //   name: "",
+      //   email: "",
+      //   message: "",
+      // });
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error(error.response?.data?.msg || "An error occurred");
+    }
   };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await fetch("/api/contact", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(formData),
+  //     });
+  //     if (response.ok) {
+  //       alert("Message sent successfully!");
+  //       setFormData({ name: "", email: "", message: "" });
+  //     } else {
+  //       alert("Failed to send message.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     alert("There was an error sending your message.");
+  //   }
+  // };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#E2DDDB]">
-      {/* Modal container with fade-in animation */}
+      <ToastContainer />
+
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0, scale: 0.9, y:20 }}
+        animate={{ opacity: 1, scale: 1, y:0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="bg-gray-800 text-gray-100 p-10 rounded-lg shadow-lg w-full max-w-4xl flex"
       >
@@ -66,23 +112,6 @@ const ContactForm = () => {
                 id="email"
                 name="email"
                 value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 border border-gray-600 bg-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-            <div>
-              <label
-                className="block text-sm font-medium mb-2"
-                htmlFor="telephone"
-              >
-                Telephone (With DDD)
-              </label>
-              <input
-                type="tel"
-                id="telephone"
-                name="telephone"
-                value={formData.telephone}
                 onChange={handleChange}
                 required
                 className="w-full px-4 py-3 border border-gray-600 bg-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"

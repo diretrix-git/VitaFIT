@@ -8,7 +8,7 @@ export const NavbarComponent = () => {
   return <SlideTabs />;
 };
 
-const SlideTabs = () => {
+const SlideTabs = ({ scrollToSection, contactRef }) => {
   const [position, setPosition] = useState({
     left: 0,
     width: 0,
@@ -93,7 +93,7 @@ const SlideTabs = () => {
 
       {/* Full Navigation - Hidden on Mobile */}
       <ul
-        className={`relative mx-auto hidden md:flex w-full md:w-auto rounded-full bg-white p-1`}
+        className={`relative mx-auto hidden md:flex w-full md:w-auto rounded-full bg-white p-1 `}
         onMouseLeave={() => {
           setPosition((pv) => ({
             ...pv,
@@ -121,7 +121,6 @@ const SlideTabs = () => {
         </Tab>
         <Tab setPosition={setPosition}>
           <Link className="text-sm md:text-base" to="/workout">
-            {" "}
             Workout Plans{" "}
           </Link>
         </Tab>
@@ -132,7 +131,7 @@ const SlideTabs = () => {
           </Link>
         </Tab>
         <Tab setPosition={setPosition}>
-          <Link className="text-sm md:text-base" to="/contact">
+          <Link className="text-sm md:text-base" to="/contactus">
             {" "}
             Contact Us{" "}
           </Link>
@@ -147,7 +146,7 @@ const SlideTabs = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3 }}
-          className="md:hidden absolute flex flex-col text-white space-y-4 z-50"
+          className="md:hidden flex flex-col text-white space-y-4 z-1000"
         >
           {/*  flex flex-col items-center bg-gray-700 text-white space-y-4 mt-4 p-4 rounded-md top-16 right-4 z-1000 */}
           <Link className="text-sm" to="/">

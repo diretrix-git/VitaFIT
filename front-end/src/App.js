@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { AnimatePresence } from "framer-motion";
 import { NavbarComponent } from "./Components/NavBar/NavBarComponent";
+import NavTest from "./Components/NavBar/NavTest";
 import {
   BrowserRouter as Router,
   Route,
@@ -21,6 +22,7 @@ import WorkoutComponent from "./Components/Workout/WorkoutComponent";
 import AddProductComponent from "./Components/AddProduct/addProduct";
 import CategoryComponent from "./Components/AddCategory/AddCategoryComponent";
 import ContactForm from "./Components/ContactUs/ContactusComponent";
+import GetMessage from "./Components/ContactUs/GetMessage";
 import RecipeCardComponent from "./Components/Recipe/RecipeCardComponent";
 import RecipeTest from "./Components/Recipe/ReciptTest";
 import AddWorkoutTypeComponent from "./Components/Workout/AddWorkoutTypeComponent";
@@ -29,17 +31,19 @@ import NotFound from "./Components/NotFound/NotFound";
 import Footer from "./Components/footer/Footer";
 import PricingSection from "./Components/Pricing/Pricing";
 import Home from "./Components/Home/Home";
+import AdminDashboard from "./Components/adminDashboard/AdminDashboard";
 
 function App() {
   return (
     <>
       <Router>
         <NavbarComponent />
-        {/* <Header /> */}
+        {/* <NavTest /> */}
 
         {/* Use `useLocation` inside Router */}
         {/** Pass `location` to `Routes` so that `AnimatePresence` detects changes */}
         <Content />
+        {/* <Footer /> */}
       </Router>
     </>
   );
@@ -70,6 +74,8 @@ function Content() {
         <Route path="/addworkout" element={<AddWorkout />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/recipeTest" element={<RecipeTest />} />
+        <Route path="/message" element={<GetMessage />} />
+        <Route path="/admin" element={<AdminDashboard />} />
         {/* <Route path="/pricing" element={<PricingSection />} /> */}
       </Routes>
     </AnimatePresence>
