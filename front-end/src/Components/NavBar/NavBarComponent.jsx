@@ -8,7 +8,7 @@ export const NavbarComponent = () => {
   return <SlideTabs />;
 };
 
-const SlideTabs = ({ scrollToSection, contactRef }) => {
+const SlideTabs = () => {
   const [position, setPosition] = useState({
     left: 0,
     width: 0,
