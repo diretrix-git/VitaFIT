@@ -1,3 +1,48 @@
+export const pricing = [
+  {
+    id: "0",
+    title: "Basic",
+    description: "Start your fitness journey",
+    price: "29.99",
+    features: [
+      "Monthly payment with no long-term contract",
+      "Access to basic gym equipment",
+      "Standard locker room access",
+      "Mobile app for workout tracking",
+      "Monthly fitness tips newsletter",
+    ],
+  },
+  {
+    id: "1",
+    title: "Pro",
+    description: "Enhanced fitness experience",
+    price: "49.99",
+    features: [
+      "Monthly plan with 3-month minimum commitment",
+      "All Basic features included",
+      "Unlimited group fitness classes",
+      "Free towel service",
+      "Access to sauna and spa",
+      "Quarterly fitness assessment",
+    ],
+  },
+  {
+    id: "2",
+    title: "Elite",
+    description: "Ultimate fitness transformation",
+    price: "89.99",
+    features: [
+      "Monthly plan with 10% discount on 12-month commitment",
+      "All Pro features included",
+      "2 personal training sessions per month",
+      "Nutrition consultation",
+      "Priority class booking",
+      "Free guest passes (2/month)",
+      "VIP locker with laundry service",
+    ],
+  },
+];
+
 export const navigation = [
   {
     id: "0",
@@ -32,8 +77,6 @@ export const navigation = [
     onlyMobile: true,
   },
 ];
-
-
 
 export const roadmap = [
   {
@@ -134,42 +177,6 @@ export const collabApps = [
     title: "Raindrop",
     width: 38,
     height: 32,
-  },
-];
-
-export const pricing = [
-  {
-    id: "0",
-    title: "Basic",
-    description: "AI chatbot, personalized recommendations",
-    price: "0",
-    features: [
-      "An AI chatbot that can understand your queries",
-      "Personalized recommendations based on your preferences",
-      "Ability to explore the app and its features without any cost",
-    ],
-  },
-  {
-    id: "1",
-    title: "Premium",
-    description: "Advanced AI chatbot, priority support, analytics dashboard",
-    price: "9.99",
-    features: [
-      "An advanced AI chatbot that can understand complex queries",
-      "An analytics dashboard to track your conversations",
-      "Priority support to solve issues quickly",
-    ],
-  },
-  {
-    id: "2",
-    title: "Enterprise",
-    description: "Custom AI chatbot, advanced analytics, dedicated account",
-    price: null,
-    features: [
-      "An AI chatbot that can understand your queries",
-      "Personalized recommendations based on your preferences",
-      "Ability to explore the app and its features without any cost",
-    ],
   },
 ];
 

@@ -30,6 +30,17 @@ const Faqs = () => {
         "Our team is here to assist you! You can reach out to our support team for personalized recommendations on the best equipment for your specific fitness goals.",
     },
   ];
+  const featureVariants = {
+    hidden: { opacity: 0, x: -10 },
+    visible: (i) => ({
+      opacity: 1,
+      x: 0,
+      transition: {
+        delay: i * 0.1,
+        duration: 0.5,
+      },
+    }),
+  };
 
   const AccordionItem = ({ question, answer }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -69,11 +80,20 @@ const Faqs = () => {
         <h2 className="text-center text-5xl font-bold tracking-tighter">
           Frequently Asked Questions
         </h2>
-        <div className="mt-12">
+        <motion.div className="mt-12">
           {items.map(({ question, answer }, index) => (
-            <AccordionItem key={index} question={question} answer={answer} />
+            <motion.div
+              key={index}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0 }}
+              variants={featureVariants}
+            >
+              <AccordionItem key={index} question={question} answer={answer} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

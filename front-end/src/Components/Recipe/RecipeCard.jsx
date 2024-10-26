@@ -2,7 +2,7 @@
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
-import axiosInstance from "../../config/axiosConfig";
+// import axiosInstance from "../../config/axiosConfig";
 
 const RecipeCard = ({ recipeData }) => {
   const domain = `http://localhost:5000`;
@@ -25,7 +25,7 @@ const RecipeCard = ({ recipeData }) => {
           <Link to={`/recipes`} className="block">
             <img
               src={`${imgAddress(item)}`}
-              alt="recipe image"
+              alt="recipe"
               className="w-full h-48 object-cover bg-[#969696] rounded-[20px]"
               whileHover={{ scale: 1.05 }}
             />

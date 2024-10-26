@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import "./style.css";
 import gsap from "gsap";
-import { fadeIn } from "../variants";
+// import { fadeIn } from "../variants";
 import {
   motion,
   useScroll,

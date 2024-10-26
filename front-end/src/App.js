@@ -2,14 +2,14 @@ import React from "react";
 import "./App.css";
 import { AnimatePresence } from "framer-motion";
 import { NavbarComponent } from "./Components/NavBar/NavBarComponent";
-import NavTest from "./Components/NavBar/NavTest";
+// import NavTest from "./Components/NavBar/NavTest";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   useLocation,
 } from "react-router-dom";
-import JourneyComponent from "./Components/Journey/JourneyComponent";
+// import JourneyComponent from "./Components/Journey/JourneyComponent";
 import SignupComponent from "./Components/SignUp/SignUpComponent";
 import TestComponenet from "./Components/test/testComponenet";
 import Test from "./Components/test3/test";
@@ -29,9 +29,10 @@ import AddWorkoutTypeComponent from "./Components/Workout/AddWorkoutTypeComponen
 import AddWorkout from "./Components/Workout/AddWorkoutComponent";
 import NotFound from "./Components/NotFound/NotFound";
 import Footer from "./Components/footer/Footer";
-import PricingSection from "./Components/Pricing/Pricing";
+// import PricingSection from "./Components/Pricing/Pricing";
 import Home from "./Components/Home/Home";
 import AdminDashboard from "./Components/adminDashboard/AdminDashboard";
+import ScrollTopTop from "./Components/ScrollToTop/ScrollToTop";
 
 function App() {
   return (
@@ -43,7 +44,8 @@ function App() {
         {/* Use `useLocation` inside Router */}
         {/** Pass `location` to `Routes` so that `AnimatePresence` detects changes */}
         <Content />
-        {/* <Footer /> */}
+        <Footer />
+        <ScrollTopTop />
       </Router>
     </>
   );
