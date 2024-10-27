@@ -1,100 +1,90 @@
-// import { motion } from "framer-motion";
-import { FaStar } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { MdDeleteOutline } from "react-icons/md";
-// import axiosInstance from "../../config/axiosConfig";
+import React from "react";
+import { FaStar, FaUtensils, FaClock } from "react-icons/fa";
+import { MdDeleteOutline, MdEdit } from "react-icons/md";
+import { Link, useNavigate } from "react-router-dom";
 
+// Recipe Card Component
 const RecipeCard = ({ recipeData }) => {
   const domain = `http://localhost:5000`;
+  const navigate = useNavigate();
 
   const imgAddress = (item) => {
-    return item.productImage ? `${domain}/${item.productImage}` : item.imgUrl;
+    return item.productImage ? `${domain}/${item.recipeImage}` : item.imgUrl;
+  };
+
+  const handleCardClick = (recipeId) => {
+    navigate(`/recipe/${recipeId}`);
   };
 
   return (
-    <div className="flex flex-wrap gap-6 justify-center">
+    <div className="flex flex-wrap gap-6 justify-center p-4">
       {recipeData.map((item, index) => (
         <div
           key={index}
-          className="w-full md:w-80 bg-white space-y-6 p-6 rounded-[20px] shadow-md"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
-          whileHover={{ scale: 1.05 }}
+          className="w-full md:w-96 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+          onClick={() => handleCardClick(item._id)}
         >
-          <Link to={`/recipes`} className="block">
+          {/* Image Container */}
+          <div className="relative h-64 overflow-hidden">
             <img
-              src={`${imgAddress(item)}`}
-              alt="recipe"
-              className="w-full h-48 object-cover bg-[#969696] rounded-[20px]"
-              whileHover={{ scale: 1.05 }}
+              src={imgAddress(item)}
+              alt={item.title}
+              className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
             />
-          </Link>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute top-4 right-4 bg-yellow-400 text-black font-bold px-3 py-1 rounded-full flex items-center gap-1">
+              <FaStar />
+              <span>{item.rating || "4.5"}</span>
+            </div>
+          </div>
 
-          <h3
-            className="w-full h-16 font-semibold text-xl md:text-2xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            {item.title}
-          </h3>
+          {/* Content Container */}
+          <div className="p-6 space-y-4">
+            {/* Title */}
+            <h3 className="font-bold text-2xl text-gray-800 line-clamp-2">
+              {item.title}
+            </h3>
 
-          <div className="flex flex-col gap-4">
-            <Link to={`/recipes/`}>
-              <div className="flex flex-row gap-8">
-                <span className="space-y-2">
-                  <p className="text-xs text-black/50 font-normal">Category</p>
-                  <p className="text-base text-black/70 font-semibold">
-                    {item.mealplan._id}
-                  </p>
-                </span>
-                <span className="w-[1px] h-[50px] bg-black/30"></span>
-                <span className="space-y-2">
-                  <p className="text-xs text-black/50 font-normal">Rating</p>
-                  <span className="flex items-center gap-1 text-[#FFC700]">
-                    <FaStar className="w-6 h-6" />
-                    <p className="text-base text-black/70 font-semibold">
-                      {item.rating || "rating"}
-                    </p>
-                  </span>
+            {/* Quick Info */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="flex items-center gap-2">
+                <FaUtensils className="text-gray-500" />
+                <span className="text-sm text-gray-600">
+                  Serves: {item.servingSize || "4"}
                 </span>
               </div>
-            </Link>
-
-            <span className="w-full h-[1px] bg-black/30"></span>
-
-            <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
-                <img
-                  src="../Cook.jpg"
-                  alt="profile"
-                  className="bg-[#D9D9D9] rounded-full w-8 h-8"
-                />
-                <h5 className="font-normal text-base text-black/70">
-                  {item.author || "Author"}
-                </h5>
+                <FaClock className="text-gray-500" />
+                <span className="text-sm text-gray-600">30 mins</span>
               </div>
             </div>
 
-            <div className="flex justify-between items-center">
-              <Link to={`/update/`}>
-                <button
-                  className="flex rounded-[9px] bg-black py-3 px-3 items-center gap-2"
-                  whileHover={{ scale: 1.1 }}
-                >
-                  <div className="w-6 h-6 text-white" />
-                  <h6 className="text-base font-normal text-white">Edit</h6>
-                </button>
-              </Link>
+            {/* Category */}
+            <div className="py-3 border-y border-gray-200">
+              <p className="text-xs text-gray-500">Category</p>
+              <p className="font-medium text-gray-700">
+                {item.mealplan?.name || "Meal Plan"}
+              </p>
+            </div>
 
-              <button
-                className="flex rounded-[9px] bg-[#EC2626] py-3 px-3 items-center gap-2"
-                whileHover={{ scale: 1.1 }}
-                onClick={() => console.log("Delete recipe")}
+            {/* Action Buttons */}
+            <div
+              className="flex gap-3 pt-2"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Link
+                to={`/update/${item._id}`}
+                className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-2.5 px-4 rounded-lg transition-colors duration-200"
               >
-                <MdDeleteOutline className="w-6 h-6 text-white" />
-                <h6 className="text-base font-normal text-white">Delete</h6>
+                <MdEdit className="w-5 h-5" />
+                <span>Edit</span>
+              </Link>
+              <button
+                onClick={() => console.log("Delete recipe")}
+                className="flex-1 flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white py-2.5 px-4 rounded-lg transition-colors duration-200"
+              >
+                <MdDeleteOutline className="w-5 h-5" />
+                <span>Delete</span>
               </button>
             </div>
           </div>

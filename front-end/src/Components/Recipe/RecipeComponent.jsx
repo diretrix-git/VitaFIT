@@ -31,7 +31,9 @@ const RecipeComponent = () => {
       {recipes.length === 0 ? (
         <h1>Loading</h1>
       ) : (
-        <RecipeCard recipeData={recipes} />
+        <>
+          <RecipeCard recipeData={recipes} />
+        </>
       )}
     </>
   );

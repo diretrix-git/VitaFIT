@@ -9,7 +9,10 @@ import {
   // useMotionValueEvent,
 } from "framer-motion";
 import transition from "../../transition";
-import { FaCogs, FaHandsHelping, FaBullhorn } from "react-icons/fa"; // Example icons
+// import { FaCogs, FaHandsHelping, FaBullhorn } from "react-icons/fa"; // Example icons
+// import { FaDumbbell, FaHeartbeat, FaUsers } from "react-icons/fa";
+import { FaHistory, FaTrophy, FaHandshake } from "react-icons/fa";
+import ScrollingText from "./Proverb";
 
 const JourneyComponent = () => {
   const containerRef = useRef(null);
@@ -27,10 +30,7 @@ const JourneyComponent = () => {
     return () => ctx.revert();
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    // target: sectionRef,
-    // offset: ["start center", "center center"], // Start transition when section hits the center
-  });
+  const { scrollYProgress } = useScroll({});
 
   // useMotionValueEvent(scrollYProgress, "change", (val) => {
   //   console.log(val);
@@ -39,6 +39,10 @@ const JourneyComponent = () => {
   // Control scale and opacity for the Services section
   const scale = useTransform(scrollYProgress, [0, 0.5], [0.85, 1]);
   const headings = ["Your", "Journey to", "Greatness Starts", "Here."];
+  const cardVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0 },
+  };
 
   return (
     <>
@@ -46,7 +50,7 @@ const JourneyComponent = () => {
         {/* Sticky Hero Section */}
         <motion.div
           ref={containerRef}
-          className="journey sticky top-0 h-screen  "
+          className="journey font-montserrat sticky top-0 h-screen  "
         >
           {/* Text */}
           {headings.map((text, index) => (
@@ -58,64 +62,141 @@ const JourneyComponent = () => {
             </h1>
           ))}
         </motion.div>
-
         <motion.div
-          className="max-w-7xl mx-auto flex flex-col md:flex-row bg-gray-100 rounded-2xl shadow-lg overflow-hidden h-screen"
+          className="max-w-7xl mx-auto flex flex-col lg:flex-row bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl shadow-2xl overflow-hidden min-h-[100vh] lg:h-screen"
           style={{ scale }}
         >
           {/* Left Side: Text Section */}
-          <div className="md:w-1/2 p-10">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              MUCH MORE THAN <br /> THE MACHINES
-            </h2>
-            <p className="text-gray-700 text-lg mb-6">
-              We offer high-quality equipment and customized services to meet
-              your needs. In addition to service and advanced support with a
-              team of dedicated experts, we provide marketing and architecture
-              services to strengthen and reposition your brand in the market.
-            </p>
+          <div className="lg:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <span className="text-red-500 font-bold text-lg sm:text-xl tracking-wider">
+                ABOUT US
+              </span>
+              <h2 className="text-4xl sm:text-5xl font-bold text-white mt-2 mb-6">
+                Building Strength,
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400">
+                  Creating Legends
+                </span>
+              </h2>
+            </motion.div>
 
-            {/* Service List with Icons */}
+            {/* About Us Cards */}
             <div className="space-y-4">
               <motion.div
-                className="flex items-center bg-black text-white p-4 rounded-lg"
-                whileHover={{ scale: 1.05 }}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                transition={{ duration: 0.3 }}
+                className="group flex items-start p-4 sm:p-6 rounded-xl bg-gradient-to-r from-gray-800 to-gray-700 hover:from-red-900 hover:to-red-800 transition-all duration-300 cursor-pointer"
+                whileHover={{ scale: 1.02, translateX: 10 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <FaCogs className="w-6 h-6 mr-4" />
-                <span>HIGH QUALITY EQUIPMENT</span>
+                <div className="bg-gradient-to-br from-red-500 to-orange-500 p-3 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                  <FaHistory className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                </div>
+                <div className="ml-4">
+                  <h3 className="font-bold text-white text-lg sm:text-xl">
+                    Our Legacy
+                  </h3>
+                  <p className="text-gray-300 text-sm font-jost sm:text-base mt-1">
+                    A decade of transforming lives through innovative fitness
+                    solutions.
+                  </p>
+                </div>
               </motion.div>
 
               <motion.div
-                className="flex items-center bg-black text-white p-4 rounded-lg"
-                whileHover={{ scale: 1.05 }}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                transition={{ duration: 0.3, delay: 0.1 }}
+                className="group flex items-start p-4 sm:p-6 rounded-xl bg-gradient-to-r from-gray-800 to-gray-700 hover:from-red-900 hover:to-red-800 transition-all duration-300 cursor-pointer"
+                whileHover={{ scale: 1.02, translateX: 10 }}
+                whileTap={{ scale: 0.98 }}
+                name="about"
               >
-                <FaHandsHelping className="w-6 h-6 mr-4" />
-                <span>ADVANCED SERVICE AND SUPPORT</span>
+                <div className="bg-gradient-to-br from-red-500 to-orange-500 p-3 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                  <FaTrophy className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                </div>
+                <div className="ml-4">
+                  <h3 className="font-bold text-white text-lg sm:text-xl">
+                    Our Achievement
+                  </h3>
+                  <p className="text-gray-300 text-sm sm:text-base mt-1">
+                    Award-winning fitness center with elite training programs.
+                  </p>
+                </div>
               </motion.div>
 
               <motion.div
-                className="flex items-center bg-black text-white p-4 rounded-lg"
-                whileHover={{ scale: 1.05 }}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                transition={{ duration: 0.3, delay: 0.2 }}
+                className="group flex items-start p-4 sm:p-6 rounded-xl bg-gradient-to-r from-gray-800 to-gray-700 hover:from-red-900 hover:to-red-800 transition-all duration-300 cursor-pointer"
+                whileHover={{ scale: 1.02, translateX: 10 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <FaBullhorn className="w-6 h-6 mr-4" />
-                <span>MARKETING AND ARCHITECTURE SERVICES</span>
+                <div className="bg-gradient-to-br from-red-500 to-orange-500 p-3 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                  <FaHandshake className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                </div>
+                <div className="ml-4">
+                  <h3 className="font-bold text-white text-lg sm:text-xl">
+                    Our Commitment
+                  </h3>
+                  <p className="text-gray-300 text-sm sm:text-base mt-1">
+                    Dedicated to your fitness journey with personalized support.
+                  </p>
+                </div>
               </motion.div>
             </div>
           </div>
 
           {/* Right Side: Image Section */}
-          <div className="md:w-1/2">
+          <motion.div
+            className="lg:w-1/2 min-h-[300px] sm:min-h-[400px] lg:min-h-full relative overflow-hidden"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-red-500/20 to-black/40 mix-blend-multiply z-10" />
             <img
-              src="/media/home.jpg" // Replace this with your image path
-              alt="Service "
-              className="w-full h-full object-cover"
+              src="/media/home.jpg"
+              alt="Our Gym Facility"
+              className="w-full h-full object-cover absolute inset-0 hover:scale-110 transition-transform duration-700"
             />
-          </div>
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent z-20">
+              <div className="flex justify-between text-white max-w-sm mx-auto">
+                <div className="text-center">
+                  <div className="text-3xl sm:text-4xl font-bold text-red-500">
+                    10+
+                  </div>
+                  <div className="text-sm text-gray-300">Years</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl sm:text-4xl font-bold text-red-500">
+                    5K+
+                  </div>
+                  <div className="text-sm text-gray-300">Members</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl sm:text-4xl font-bold text-red-500">
+                    50+
+                  </div>
+                  <div className="text-sm text-gray-300">Trainers</div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
+        <ScrollingText />
         {/**body */}
       </div>
-
-
     </>
   );
 };

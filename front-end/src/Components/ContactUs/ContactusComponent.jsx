@@ -69,7 +69,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="min-h-screen w-full px-4 py-12 bg-gray-950">
+    <div className="min-h-screen w-full px-4 py-12 bg-gray-950" name="contactus">
       {/* Toast Container */}
       <ToastContainer
         position="top-right"

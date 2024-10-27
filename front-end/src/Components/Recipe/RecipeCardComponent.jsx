@@ -36,7 +36,7 @@ const RecipeForm = () => {
     });
   };
 
-  console.log("fd ", formData);
+  // console.log("fd ", formData);
   // Handle input change for dynamic ingredient fields
   const handleIngredientChange = (index, event) => {
     const newIngredients = ingredients.map((ingredient, i) => {
@@ -124,7 +124,7 @@ const RecipeForm = () => {
       recipeData.append(`ingredients[${index}][quantity]`, ingredient.quantity);
       recipeData.append(`ingredients[${index}][unit]`, ingredient.unit);
     });
-    console.log("rd", recipeData);
+    // console.log("rd", recipeData);
     try {
       // console.log("130",recipeData)
       const response = await axiosInstance.post("/recipes/create", recipeData, {
@@ -132,7 +132,7 @@ const RecipeForm = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("rep", response);
+      // console.log("rep", response);
       toast.success("Recipe created successfully!", response.data.success);
     } catch (error) {
       toast.error("Failed to create recipe");

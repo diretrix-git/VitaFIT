@@ -50,7 +50,7 @@ const PricingList = () => {
   };
 
   return (
-    <div className="flex gap-[1rem] max-lg:flex-wrap">
+    <div className="flex gap-[1rem] max-lg:flex-wrap" name="pricing">
       {pricing.map((item, cardIndex) => (
         <motion.div
           key={item.id}

@@ -35,6 +35,7 @@ export default {
         },
       },
       fontFamily: {
+        montserrat: ["Montserrat", "sans-serif"],
         jost: ["Jost", "sans-serif"],
         sans: ["var(--font-sora)", ...fontFamily.sans],
         code: "var(--font-code)",

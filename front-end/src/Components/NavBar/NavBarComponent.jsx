@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/authSlice";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { Link as ScrollLink } from "react-scroll";
 
 export const NavbarComponent = () => {
   return <SlideTabs />;
@@ -19,6 +20,10 @@ const SlideTabs = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
+
+  console.log(authState.isAuthenticated); // Check the authentication state
+  console.log(authState.userRole); // Check the user role
+  console.log(authState.token); // Check the user role
 
   const handleLogout = () => {
     dispatch(logout());
@@ -93,7 +98,7 @@ const SlideTabs = () => {
 
       {/* Full Navigation - Hidden on Mobile */}
       <ul
-        className={`relative mx-auto hidden md:flex w-full md:w-auto rounded-full bg-white p-1 `}
+        className={`relative mx-auto  hidden md:flex w-full md:w-auto rounded-full bg-white p-1 `}
         onMouseLeave={() => {
           setPosition((pv) => ({
             ...pv,
@@ -101,41 +106,165 @@ const SlideTabs = () => {
           }));
         }}
       >
-        <Tab setPosition={setPosition}>
+        {/* <Tab setPosition={setPosition}>
           <Link className="text-sm md:text-base" to="/">
-            {" "}
-            Home{" "}
+            
+            Home
           </Link>
+        </Tab> */}
+        {authState.isAuthenticated ? (
+          <>
+            <Tab setPosition={setPosition}>
+              <ScrollLink
+                className="text-sm md:text-base"
+                to="about"
+                smooth={true}
+                duration={500}
+                offset={-340}
+              >
+                About Us
+              </ScrollLink>
+            </Tab>
+            <Tab setPosition={setPosition}>
+              <Link className="text-sm md:text-base" to="/workout">
+                Workout Plans
+              </Link>
+            </Tab>
+            <Tab setPosition={setPosition}>
+              <Link className="text-sm md:text-base" to="/recipe">
+                Recipes
+              </Link>
+            </Tab>
+            <Tab setPosition={setPosition}>
+              <ScrollLink
+                className="text-sm md:text-base"
+                to="faqs"
+                smooth={true}
+                duration={500}
+                offset={0}
+              >
+                FAQs
+              </ScrollLink>
+            </Tab>
+            <Tab setPosition={setPosition}>
+              <ScrollLink
+                className="text-sm md:text-base"
+                to="contactus"
+                smooth={true}
+                duration={500}
+                offset={0}
+              >
+                Contact Us
+              </ScrollLink>
+            </Tab>
+          </>
+        ) : (
+          <>
+            <Tab setPosition={setPosition}>
+              <ScrollLink
+                className="text-sm md:text-base"
+                to="about"
+                smooth={true}
+                duration={500}
+                offset={-340}
+              >
+                About Us
+              </ScrollLink>
+            </Tab>
+
+            <Tab setPosition={setPosition}>
+              <ScrollLink
+                className="text-sm md:text-base"
+                to="services"
+                smooth={true}
+                duration={500}
+                offset={60}
+              >
+                Services
+              </ScrollLink>
+            </Tab>
+            <Tab setPosition={setPosition}>
+              <ScrollLink
+                className="text-sm md:text-base"
+                to="pricing"
+                smooth={true}
+                duration={500}
+                offset={0}
+              >
+                Pricing
+              </ScrollLink>
+            </Tab>
+            <Tab setPosition={setPosition}>
+              <ScrollLink
+                className="text-sm md:text-base"
+                to="faqs"
+                smooth={true}
+                duration={500}
+                offset={0}
+              >
+                FAQs
+              </ScrollLink>
+            </Tab>
+            <Tab setPosition={setPosition}>
+              <ScrollLink
+                className="text-sm md:text-base"
+                to="contactus"
+                smooth={true}
+                duration={500}
+                offset={0}
+              >
+                Contact Us
+              </ScrollLink>
+            </Tab>
+          </>
+        )}
+
+        {/* <Tab setPosition={setPosition}>
+          <ScrollLink
+            className="text-sm md:text-base"
+            to="services"
+            smooth={true}
+            duration={500}
+            offset={60}
+          >
+            Services
+          </ScrollLink>
         </Tab>
         <Tab setPosition={setPosition}>
-          <Link className="text-sm md:text-base" to="/about">
-            {" "}
-            About Us{" "}
-          </Link>
-        </Tab>
-        <Tab setPosition={setPosition}>
-          <Link className="text-sm md:text-base" to="/product">
-            {" "}
-            Shop
-          </Link>
-        </Tab>
-        <Tab setPosition={setPosition}>
-          <Link className="text-sm md:text-base" to="/workout">
-            Workout Plans{" "}
-          </Link>
-        </Tab>
-        <Tab setPosition={setPosition}>
-          <Link className="text-sm md:text-base" to="/pricing">
-            {" "}
+          <ScrollLink
+            className="text-sm md:text-base"
+            to="pricing"
+            smooth={true}
+            duration={500}
+            offset={0}
+          >
             Pricing
-          </Link>
+          </ScrollLink>
         </Tab>
         <Tab setPosition={setPosition}>
-          <Link className="text-sm md:text-base" to="/contactus">
-            {" "}
-            Contact Us{" "}
-          </Link>
+          <ScrollLink
+            className="text-sm md:text-base"
+            to="faqs"
+            smooth={true}
+            duration={500}
+            offset={0}
+          >
+            
+            FAQs
+          </ScrollLink>
         </Tab>
+        <Tab setPosition={setPosition}>
+          <ScrollLink
+            className="text-sm md:text-base"
+            to="contactus"
+            smooth={true}
+            duration={500}
+            offset={0}
+          >
+            
+            Contact Us
+          </ScrollLink>
+        </Tab> */}
         <Cursor position={position} />
       </ul>
 
@@ -150,28 +279,22 @@ const SlideTabs = () => {
         >
           {/*  flex flex-col items-center bg-gray-700 text-white space-y-4 mt-4 p-4 rounded-md top-16 right-4 z-1000 */}
           <Link className="text-sm" to="/">
-            {" "}
-            Home{" "}
+            Home
           </Link>
           <Link className="text-sm" to="/about">
-            {" "}
-            About Us{" "}
+            About Us
           </Link>
           <Link className="text-sm" to="/services">
-            {" "}
-            Services{" "}
+            Services
           </Link>
           <Link className="text-sm" to="/workout">
-            {" "}
-            Workout Plans{" "}
+            Workout Plans
           </Link>
           <Link className="text-sm" to="/pricing">
-            {" "}
-            Pricing{" "}
+            Pricing
           </Link>
           <Link className="text-sm" to="/contact">
-            {" "}
-            Contact Us{" "}
+            Contact Us
           </Link>
           {authState.isAuthenticated ? (
             <button

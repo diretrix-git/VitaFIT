@@ -75,7 +75,7 @@ const Faqs = () => {
   };
 
   return (
-    <div className="bg-black text-white bg-gradient-to-b from-[#9c76d6] to-black py-[72px]">
+    <div className="bg-black text-white bg-gradient-to-b from-[#9c76d6] to-black py-[72px]" name="faqs">
       <div className="container">
         <h2 className="text-center text-5xl font-bold tracking-tighter">
           Frequently Asked Questions

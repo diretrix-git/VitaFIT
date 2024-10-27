@@ -10,7 +10,6 @@ const CategoryComponent = () => {
   const [categoryDescription, setCategoryDescription] = useState(""); // Added for description
   const [editingCategory, setEditingCategory] = useState(false);
   const [categoryId, setCategoryId] = useState("");
-
   const categoryData = {
     name: categoryName,
     description: categoryDescription, // Added description to category data

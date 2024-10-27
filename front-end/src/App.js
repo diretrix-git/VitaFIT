@@ -17,6 +17,7 @@ import ZzzComponent from "./Components/zzz/ZzzComponent";
 import LoginComponent from "./Components/loginComponent/loginComponent";
 import ProductComponent from "./Components/Product/ProductComponent";
 import RecipeComponent from "./Components/Recipe/RecipeComponent";
+import RecipeDetailPage from "./Components/Recipe/RecipeDetails";
 import MealPlanComponent from "./Components/MealPlan/MealplanComponent";
 import WorkoutComponent from "./Components/Workout/WorkoutComponent";
 import AddProductComponent from "./Components/AddProduct/addProduct";
@@ -63,6 +64,7 @@ function Content() {
         <Route path="/signup" element={<SignupComponent />} />
         <Route path="/product" element={<ProductComponent />} />
         <Route path="/recipe" element={<RecipeComponent />} />
+        <Route path="/recipe/:id" element={<RecipeDetailPage />} />
         <Route path="/mealplan" element={<MealPlanComponent />} />
         <Route path="/workout" element={<WorkoutComponent />} />
         <Route path="/addproduct" element={<AddProductComponent />} />

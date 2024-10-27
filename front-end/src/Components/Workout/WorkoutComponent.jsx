@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import CardComponent from "../card/CardComponent";
-// import ProductList from "../ProductCard/ProductList";
 import axios from "axios";
 import WorkoutCardComponent from "./WorkoutCardComponent";
 import transition from "../../transition";
