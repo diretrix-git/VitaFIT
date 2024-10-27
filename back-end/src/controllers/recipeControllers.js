@@ -4,8 +4,9 @@ const { Recipe } = require("../models/recipeModel");
 // Get recipe by ID with population
 const getRecipe = async (req, res) => {
   try {
+    const {id} = req.params
     // Find the recipe and populate the mealplan field
-    const recipe = await Recipe.findById(req.params.id).populate("mealplan");
+    const recipe = await Recipe.findById(id).populate("mealplan");
 
     if (!recipe) {
       return res.status(404).json({ status: "fail", msg: "Recipe not found" });
