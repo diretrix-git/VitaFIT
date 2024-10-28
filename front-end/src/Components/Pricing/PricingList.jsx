@@ -84,8 +84,8 @@ const PricingList = () => {
           >
             {item.price && (
               <>
-                <div className="h3">$</div>
-                <div className="text-[5.5rem] leading-none font-bold">
+                <div className="h3 text-white">$</div>
+                <div className="text-[5.5rem] text-white leading-none font-bold">
                   {item.price}
                 </div>
               </>
@@ -153,7 +153,7 @@ const PricingList = () => {
                 >
                   <CheckIcon />
                 </motion.div>
-                <p className="body-2 ml-4">{feature}</p>
+                <p className="body-2 text-white ml-4">{feature}</p>
               </motion.li>
             ))}
           </ul>

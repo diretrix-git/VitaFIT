@@ -62,7 +62,7 @@ const LoginComponent = () => {
         dispatch(login({ token, userRole: user.userRole }));
 
         setTimeout(() => {
-          Navigate("/product");
+          Navigate("/workoutplan");
         }, 1000);
 
         // show success message
