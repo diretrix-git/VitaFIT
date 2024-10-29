@@ -1,16 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import "./style.css";
 import gsap from "gsap";
-// import { fadeIn } from "../variants";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  // useMotionValueEvent,
-} from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import transition from "../../transition";
-// import { FaCogs, FaHandsHelping, FaBullhorn } from "react-icons/fa"; // Example icons
-// import { FaDumbbell, FaHeartbeat, FaUsers } from "react-icons/fa";
 import { FaHistory, FaTrophy, FaHandshake } from "react-icons/fa";
 import ScrollingText from "./Proverb";
 
@@ -73,13 +65,13 @@ const JourneyComponent = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="text-red-500 font-bold text-lg sm:text-xl tracking-wider">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7B2CBF] to-[#C77DFF] font-bold text-lg sm:text-xl tracking-wider">
                 ABOUT US
               </span>
               <h2 className="text-4xl sm:text-5xl font-bold text-white mt-2 mb-6">
                 Building Strength,
                 <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7B2CBF] to-[#9D4EDD]">
                   Creating Legends
                 </span>
               </h2>
@@ -92,11 +84,11 @@ const JourneyComponent = () => {
                 initial="hidden"
                 whileInView="visible"
                 transition={{ duration: 0.3 }}
-                className="group flex items-start p-4 sm:p-6 rounded-xl bg-gradient-to-r from-gray-800 to-gray-700 hover:from-red-900 hover:to-red-800 transition-all duration-300 cursor-pointer"
-                whileHover={{ scale: 1.02, translateX: 10 }}
-                whileTap={{ scale: 0.98 }}
+                className="group flex items-start p-4 sm:p-6 rounded-xl bg-gradient-to-r from-gray-800 to-gray-700 hover:from-[#9D4EDD] hover:to-[#8f6ca4] transition-all duration-300 cursor-pointer"
+                // whileHover={{ scale: 1.02, translateX: 10 }}
+                // whileTap={{ scale: 0.98 }}
               >
-                <div className="bg-gradient-to-br from-red-500 to-orange-500 p-3 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                <div className="bg-gradient-to-br from-[#7B2CBF] to-[#C77DFF] p-3 rounded-lg ">
                   <FaHistory className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                 </div>
                 <div className="ml-4">
@@ -115,12 +107,12 @@ const JourneyComponent = () => {
                 initial="hidden"
                 whileInView="visible"
                 transition={{ duration: 0.3, delay: 0.1 }}
-                className="group flex items-start p-4 sm:p-6 rounded-xl bg-gradient-to-r from-gray-800 to-gray-700 hover:from-red-900 hover:to-red-800 transition-all duration-300 cursor-pointer"
-                whileHover={{ scale: 1.02, translateX: 10 }}
-                whileTap={{ scale: 0.98 }}
+                className="group flex items-start p-4 sm:p-6 rounded-xl bg-gradient-to-r from-gray-800 to-gray-700 hover:from-[#9D4EDD] hover:to-[#8f6ca4] transition-all duration-300 cursor-pointer"
+                // whileHover={{ scale: 1.02, translateX: 10 }}
+                // whileTap={{ scale: 0.98 }}
                 name="about"
               >
-                <div className="bg-gradient-to-br from-red-500 to-orange-500 p-3 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                <div className="bg-gradient-to-br from-[#7B2CBF] to-[#C77DFF] p-3 rounded-lg ">
                   <FaTrophy className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                 </div>
                 <div className="ml-4">
@@ -138,11 +130,11 @@ const JourneyComponent = () => {
                 initial="hidden"
                 whileInView="visible"
                 transition={{ duration: 0.3, delay: 0.2 }}
-                className="group flex items-start p-4 sm:p-6 rounded-xl bg-gradient-to-r from-gray-800 to-gray-700 hover:from-red-900 hover:to-red-800 transition-all duration-300 cursor-pointer"
-                whileHover={{ scale: 1.02, translateX: 10 }}
-                whileTap={{ scale: 0.98 }}
+                className="group flex items-start p-4 sm:p-6 rounded-xl bg-gradient-to-r from-gray-800 to-gray-700 hover:from-[#9D4EDD] hover:to-[#8f6ca4] transition-all duration-300 cursor-pointer"
+                // whileHover={{ scale: 1.02, translateX: 10 }}
+                // whileTap={{ scale: 0.98 }}
               >
-                <div className="bg-gradient-to-br from-red-500 to-orange-500 p-3 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                <div className="bg-gradient-to-br from-[#7B2CBF] to-[#C77DFF] p-3 rounded-lg ">
                   <FaHandshake className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                 </div>
                 <div className="ml-4">
@@ -173,19 +165,19 @@ const JourneyComponent = () => {
             <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent z-20">
               <div className="flex justify-between text-white max-w-sm mx-auto">
                 <div className="text-center">
-                  <div className="text-3xl sm:text-4xl font-bold text-red-500">
+                  <div className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9D4EDD] to-[#7B2CBF] ">
                     10+
                   </div>
                   <div className="text-sm text-gray-300">Years</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl sm:text-4xl font-bold text-red-500">
+                  <div className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9D4EDD] to-[#7B2CBF]">
                     5K+
                   </div>
                   <div className="text-sm text-gray-300">Members</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl sm:text-4xl font-bold text-red-500">
+                  <div className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9D4EDD] to-[#7B2CBF]">
                     50+
                   </div>
                   <div className="text-sm text-gray-300">Trainers</div>

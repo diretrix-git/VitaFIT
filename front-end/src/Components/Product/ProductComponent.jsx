@@ -33,6 +33,8 @@ const ProductComponent = () => {
     // Add your delete logic here
   };
 
+  console.log(products)
+
   return (
     <>
       {products.length === 0 ? (

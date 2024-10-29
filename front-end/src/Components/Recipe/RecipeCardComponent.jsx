@@ -17,7 +17,7 @@ const RecipeForm = () => {
     recipeImage: "",
   });
 
-  //   console.log("inf", formData);
+    console.log("inf", formData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -117,7 +117,7 @@ const RecipeForm = () => {
     recipeData.append("mealplan", formData.mealplan);
     recipeData.append("instructions", formData.instructions);
     recipeData.append("servingSize", formData.servingSize);
-    recipeData.append("recipeImage", formData.recipeImage);
+    // recipeData.append("recipeImage", formData.recipeImage);
 
     ingredients.forEach((ingredient, index) => {
       recipeData.append(`ingredients[${index}][name]`, ingredient.name);
@@ -125,6 +125,9 @@ const RecipeForm = () => {
       recipeData.append(`ingredients[${index}][unit]`, ingredient.unit);
     });
     // console.log("rd", recipeData);
+    if(formData.recipeImage) {
+      recipeData.append("recipeImage", formData.recipeImage)
+    }
     try {
       // console.log("130",recipeData)
       const response = await axiosInstance.post("/recipes/create", recipeData, {
@@ -160,10 +163,6 @@ const RecipeForm = () => {
     };
     fetchMealPlan();
   }, []);
-
-  //   console.log(mealplan)
-  //   console.log(ingredients);
-
   return (
     <div className="max-w-4xl mx-auto bg-white p-8 shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-6 text-center">

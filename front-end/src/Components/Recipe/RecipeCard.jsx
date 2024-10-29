@@ -6,11 +6,33 @@ import { Link, useNavigate } from "react-router-dom";
 // Recipe Card Component
 const RecipeCard = ({ recipeData }) => {
   const domain = `http://localhost:5000`;
+  const defaultImage =
+    "https://i.pinimg.com/474x/b3/9f/4f/b39f4f4575a3e376aad55e8af4fb82b8.jpg";
   const navigate = useNavigate();
 
+  // const imgAddress = (item) => {
+  //   console.log("Item in imgAddress:", item); // Add this
+  //   console.log("Recipe image path:", item.recipeImage); // Add this
+  //   if (item.recipeImage) {
+  //     const fullPath = `${domain}/${item.recipeImage}`;
+  //     console.log("Full image URL:", fullPath); // Add this
+  //     return fullPath;
+  //   } else {
+  //     return item.imgUrl;
+  //   }
+  // };
+
   const imgAddress = (item) => {
-    return item.productImage ? `${domain}/${item.recipeImage}` : item.imgUrl;
+    console.log("Processing item:", item);
+    if (item.recipeImage) {
+      const fullPath = `${domain}/${item.recipeImage}`;
+      console.log("Generated image path:", fullPath);
+      return fullPath;
+    }
+    // return defaultImage;
   };
+  console.log("Received recipe data:", recipeData);
+  // return item.productImage ? `${domain}/${item.recipeImage}` : item.imgUrl;
 
   const handleCardClick = (recipeId) => {
     navigate(`/recipe/${recipeId}`);
@@ -30,6 +52,12 @@ const RecipeCard = ({ recipeData }) => {
               src={imgAddress(item)}
               alt={item.title}
               className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
+              onError={(e) => {
+                console.log("Image load error for:", e.target.src);
+                if (e.target.src !== defaultImage) {
+                  e.target.src = defaultImage;
+                }
+              }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute top-4 right-4 bg-yellow-400 text-black font-bold px-3 py-1 rounded-full flex items-center gap-1">

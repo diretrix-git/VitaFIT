@@ -4,14 +4,13 @@ import { opacity, slideUp } from "./anim";
 import styles from "./style.module.scss";
 
 const words = [
-  "Hello",
-  "Bonjour",
-  "Ciao",
-  "Olà",
-  "やあ",
-  "Hallå",
-  "Guten tag",
-  "Hallo",
+  "Get Fit!",
+  "Stay Strong!",
+  "You Got This!",
+  "Just Breathe!",
+  "Push Harder!",
+  "Keep Going!",
+  "Feel the Burn!",
 ];
 
 export default function Preloader() {

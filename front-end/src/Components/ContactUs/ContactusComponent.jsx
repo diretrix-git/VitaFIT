@@ -69,7 +69,10 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="min-h-screen w-full px-4 py-12 bg-gray-950" name="contactus">
+    <div
+      className="min-h-screen w-full px-4 py-12 bg-gray-950"
+      name="contactus"
+    >
       {/* Toast Container */}
       <ToastContainer
         position="top-right"
@@ -104,15 +107,15 @@ const ContactForm = () => {
 
               <div className="space-y-4 pt-6">
                 <div className="flex items-center space-x-4 text-gray-300">
-                  <Mail className="w-5 h-5 text-blue-500" />
+                  <Mail className="w-5 h-5 text-purple-600" />
                   <span>contact@yourcompany.com</span>
                 </div>
                 <div className="flex items-center space-x-4 text-gray-300">
-                  <Phone className="w-5 h-5 text-blue-500" />
+                  <Phone className="w-5 h-5 text-purple-600" />
                   <span>+1 (123) 456-7890</span>
                 </div>
                 <div className="flex items-center space-x-4 text-gray-300">
-                  <MapPin className="w-5 h-5 text-blue-500" />
+                  <MapPin className="w-5 h-5 text-purple-600" />
                   <span>123 Business Avenue, Suite 100</span>
                 </div>
               </div>
@@ -172,14 +175,14 @@ const ContactForm = () => {
                   onChange={handleChange}
                   required
                   rows="5"
-                  className="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                  className="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-white transition-all"
                   placeholder="Your message here..."
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-4 px-6 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all hover:scale-[1.01] active:scale-[0.99]"
+                className="w-full py-4 px-6 bg-gradient-to-r from-[#9D4EDD] to-[#7B2CBF] text-white rounded-lg hover:from-[#7B2CBF] hover:to-[#9D4EDD] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all active:scale-[0.99]"
               >
                 Send Message
               </button>

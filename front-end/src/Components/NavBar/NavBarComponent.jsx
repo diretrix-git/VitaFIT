@@ -21,9 +21,9 @@ const SlideTabs = () => {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
 
-  console.log(authState.isAuthenticated); // Check the authentication state
-  console.log(authState.userRole); // Check the user role
-  console.log(authState.token); // Check the user role
+  // console.log(authState.isAuthenticated); // Check the authentication state
+  // console.log(authState.userRole); // Check the user role
+  // console.log(authState.token); // Check the user role
 
   const handleLogout = () => {
     dispatch(logout());
@@ -65,7 +65,7 @@ const SlideTabs = () => {
       </h2>
 
       {/* Hamburger Icon */}
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <button
           onClick={handleMenuToggle}
           className="text-white focus:outline-none"
@@ -96,9 +96,9 @@ const SlideTabs = () => {
         </button>
       </div>
 
-      {/* Full Navigation - Hidden on Mobile */}
+      {/* Full Navigation - Hidden on Mobile & tablet */}
       <ul
-        className={`relative mx-auto  hidden md:flex w-full md:w-auto rounded-full bg-white p-1 `}
+        className={`relative mx-auto  hidden lg:flex w-full lg:w-auto rounded-full bg-white p-1 `}
         onMouseLeave={() => {
           setPosition((pv) => ({
             ...pv,
@@ -218,53 +218,6 @@ const SlideTabs = () => {
             </Tab>
           </>
         )}
-
-        {/* <Tab setPosition={setPosition}>
-          <ScrollLink
-            className="text-sm md:text-base"
-            to="services"
-            smooth={true}
-            duration={500}
-            offset={60}
-          >
-            Services
-          </ScrollLink>
-        </Tab>
-        <Tab setPosition={setPosition}>
-          <ScrollLink
-            className="text-sm md:text-base"
-            to="pricing"
-            smooth={true}
-            duration={500}
-            offset={0}
-          >
-            Pricing
-          </ScrollLink>
-        </Tab>
-        <Tab setPosition={setPosition}>
-          <ScrollLink
-            className="text-sm md:text-base"
-            to="faqs"
-            smooth={true}
-            duration={500}
-            offset={0}
-          >
-            
-            FAQs
-          </ScrollLink>
-        </Tab>
-        <Tab setPosition={setPosition}>
-          <ScrollLink
-            className="text-sm md:text-base"
-            to="contactus"
-            smooth={true}
-            duration={500}
-            offset={0}
-          >
-            
-            Contact Us
-          </ScrollLink>
-        </Tab> */}
         <Cursor position={position} />
       </ul>
 
@@ -275,7 +228,7 @@ const SlideTabs = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3 }}
-          className="md:hidden flex flex-col text-white space-y-4 z-1000"
+          className="lg:hidden  flex flex-col text-white space-y-4 z-1000"
         >
           {/*  flex flex-col items-center bg-gray-700 text-white space-y-4 mt-4 p-4 rounded-md top-16 right-4 z-1000 */}
           <Link className="text-sm" to="/">
@@ -318,7 +271,7 @@ const SlideTabs = () => {
       {authState.isAuthenticated ? (
         <button
           onClick={handleLogout}
-          className="hidden md:block text-white bg-red-500 px-4 py-2 rounded-md"
+          className="hidden lg:block text-white bg-red-500 px-4 py-2 rounded-md"
         >
           Logout
         </button>
@@ -326,11 +279,11 @@ const SlideTabs = () => {
         <motion.div
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="hidden md:block"
+          className="hidden lg:block"
         >
           <Link
             to="/login"
-            className="bg-black rounded-3xl text-white text-xl hover:rounded-xl px-8 py-3 transition-all duration-300"
+            className="bg-white rounded-3xl text-black text-xl hover:rounded-xl px-8 py-3 transition-all duration-300"
           >
             Login
           </Link>

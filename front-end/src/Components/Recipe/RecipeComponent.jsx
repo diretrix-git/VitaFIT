@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
-// import CardComponent from "../card/CardComponent";
 import axiosInstance from "../../config/axiosConfig";
-
 import RecipeCard from "./RecipeCard";
-// import RecipeCardComponent from "./RecipeCardComponent";
-// import { h1 } from "framer-motion/client";
-
-// const domain = "http://localhost:5000";
-
 const RecipeComponent = () => {
   const [recipes, setRecipes] = useState([]);
   console.log(recipes);
   const fetchRecipes = async () => {
     try {
       const response = await axiosInstance.get(`/recipes`);
-      console.log("response", response);
-
+      console.log("Recipe response:", response.data.data.recipes);
+      // Log the first recipe's image path to verify the data
+      if (response.data.data.recipes.length > 0) {
+        console.log(
+          "First recipe image path:",
+          response.data.data.recipes[0].recipeImage
+        );
+      }
       setRecipes(response.data.data.recipes);
     } catch (error) {
       console.error("Error fetching data", error);
@@ -24,8 +23,6 @@ const RecipeComponent = () => {
   useEffect(() => {
     fetchRecipes();
   }, []);
-  // console.log("Recipes", recipes)
-  // const userRole = "admin";
   return (
     <>
       {recipes.length === 0 ? (

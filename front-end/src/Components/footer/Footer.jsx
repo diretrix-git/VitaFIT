@@ -4,10 +4,10 @@ import {
   FaEnvelope,
   FaMapMarkerAlt,
   FaInstagram,
-  FaGithub,
+  // FaGithub,
   FaFacebook,
   FaLinkedin,
-  FaTwitter,
+  // FaTwitter,
 } from "react-icons/fa";
 
 const Footer = () => {
@@ -18,11 +18,6 @@ const Footer = () => {
       label: "Instagram",
     },
     {
-      icon: <FaGithub size={20} />,
-      href: "https://github.com",
-      label: "Github",
-    },
-    {
       icon: <FaFacebook size={20} />,
       href: "https://facebook.com",
       label: "Facebook",
@@ -31,11 +26,6 @@ const Footer = () => {
       icon: <FaLinkedin size={20} />,
       href: "https://linkedin.com",
       label: "LinkedIn",
-    },
-    {
-      icon: <FaTwitter size={20} />,
-      href: "https://twitter.com",
-      label: "Twitter",
     },
   ];
 
@@ -148,9 +138,10 @@ export default Footer;
 //   return (
 //     <div
 //       className="relative h-[500px]"
-//       style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)",
+//       style={{
+//         clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)",
 //         // minHeight: "100vh", // Ensure the footer spans full height
-//        }}
+//       }}
 //     >
 //       <div className="relative h-[calc(100vh+500px)] -top-[100vh]">
 //         <div className="h-[500px] sticky top-[calc(100vh-500px)]">

@@ -13,28 +13,28 @@ const RecipeDetailPage = () => {
 
   const { id } = useParams();
   const [recipeDetails, setRecipeDetails] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchRecipeDetails();
+  }, []);
 
   const fetchRecipeDetails = async () => {
     try {
       const response = await axiosInstance.get(`/recipes/${id}`);
       const recipeData = response.data.data.recipe;
       setRecipeDetails(recipeData);
-      setLoading(false);
+      // setLoading(false);
     } catch (error) {
-      console.error("Error fetching data", error);
-      setLoading(false);
+      // console.error("Error fetching data", error);
+      // setLoading(false);
     }
   };
 
-  useEffect(() => {
-    fetchRecipeDetails();
-  }, [id]);
-
-  if (loading) return <h1>Loading...</h1>;
+  // if (loading) return <h1>Loading...</h1>;
   if (!recipeDetails) return <h1>Recipe not found</h1>;
 
-  console.log(recipeDetails);
+  // console.log(recipeDetails);
 
   return (
     <div className="min-h-screen text-black bg-gray-100 p-6">

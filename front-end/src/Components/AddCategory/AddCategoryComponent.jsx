@@ -51,7 +51,7 @@ const CategoryComponent = () => {
       const response = await axiosInstance.get("/category");
       setCategories(response.data.categories);
     } catch (error) {
-      console.error("Error fetching categories:", error);
+      // console.error("Error fetching categories:", error);
       toast.error("Failed to fetch categories");
     }
   };

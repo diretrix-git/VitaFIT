@@ -6,6 +6,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      boxShadow: {
+        input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
+      },
       colors: {
         color: {
           1: "#AC6AFF",
@@ -14,9 +17,6 @@ export default {
           4: "#7ADB78",
           5: "#858DFF",
           6: "#FF98E2",
-        },
-        stroke: {
-          1: "#26242C",
         },
         n: {
           1: "#FFFFFF",
