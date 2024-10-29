@@ -10,7 +10,7 @@ const words = [
   "Just Breathe!",
   "Push Harder!",
   "Keep Going!",
-  "Feel the Burn!",
+  // "Feel the Burn!",
 ];
 
 export default function Preloader() {
