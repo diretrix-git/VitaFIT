@@ -3,7 +3,7 @@ const app = express();
 const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors");
-
+const path = require('path');
 const connectDB = require("./src/config/db");
 
 // Set the port from .env or default to 3000
@@ -24,7 +24,7 @@ app.use(
 connectDB();
 
 // Serve static files from the uploads directory
-app.use("/uploads", express.static(__dirname + "/uploads"));
+app.use("/uploads", express.static(path.join(__dirname + "/uploads")));
 
 // Route Handlers
 app.use("/api/profile", require("./src/routes/profileRoutes"));

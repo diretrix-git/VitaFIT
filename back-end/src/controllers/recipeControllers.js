@@ -4,7 +4,7 @@ const { Recipe } = require("../models/recipeModel");
 // Get recipe by ID with population
 const getRecipe = async (req, res) => {
   try {
-    const {id} = req.params
+    const { id } = req.params;
     // Find the recipe and populate the mealplan field
     const recipe = await Recipe.findById(id).populate("mealplan");
 
@@ -19,7 +19,7 @@ const getRecipe = async (req, res) => {
       ingredients: recipe.ingredients,
       instructions: recipe.instructions,
       servingSize: recipe.servingSize,
-      image: recipe.image,
+      recipeImage: recipe.recipeImage,
       // Only include video if the user is subscribed
       video: isSubscribed ? recipe.video : undefined,
       mealplan: recipe.mealplan,
@@ -51,7 +51,7 @@ const getRecipes = async (req, res) => {
         instructions: recipe.instructions,
         servingSize: recipe.servingSize,
         mealplan: recipe.mealplan, // Include mealplan details if needed
-        image: recipe.image, // Always include image
+        recipeImage: recipe.recipeImage, // Always include image
         // video: userRole === "subscribed" || "admin" ? recipe.video : undefined, // Include video only for subscribed users and admin
       };
       return recipeData;

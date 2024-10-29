@@ -45,7 +45,6 @@ router.post(
   authMiddleware,
   authorizeRole("admin"),
   uploadRecipeImage.single("recipeImage"), // For image upload
-  // uploadRecipeVideo.single("video"), // For video upload
   createRecipe
 );
 
