@@ -8,6 +8,7 @@ import Potential from "../Potential/Potential";
 import Faqs from "../Faqs/Faqs";
 import Preloader from "../Preloader/Preloader";
 import { AnimatePresence, motion } from "framer-motion";
+import transition from "../../transition";
 const fadeIn = {
   initial: {
     opacity: 0,
@@ -74,4 +75,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default transition(Home);
