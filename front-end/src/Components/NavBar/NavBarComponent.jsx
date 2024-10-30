@@ -231,7 +231,7 @@ const SlideTabs = () => {
           className="lg:hidden  flex flex-col text-white space-y-4 z-1000"
         >
           {/*  flex flex-col items-center bg-gray-700 text-white space-y-4 mt-4 p-4 rounded-md top-16 right-4 z-1000 */}
-          <Link className="text-sm" to="/">
+          {/* <Link className="text-sm" to="/">
             Home
           </Link>
           <Link className="text-sm" to="/about">
@@ -248,7 +248,113 @@ const SlideTabs = () => {
           </Link>
           <Link className="text-sm" to="/contact">
             Contact Us
-          </Link>
+          </Link> */}
+          {authState.isAuthenticated ? (
+            <>
+              <Tab setPosition={setPosition}>
+                <ScrollLink
+                  className="text-sm md:text-base"
+                  to="about"
+                  smooth={true}
+                  duration={500}
+                  offset={-340}
+                >
+                  About Us
+                </ScrollLink>
+              </Tab>
+              <Tab setPosition={setPosition}>
+                <Link className="text-sm md:text-base" to="/workout">
+                  Workout Plans
+                </Link>
+              </Tab>
+              <Tab setPosition={setPosition}>
+                <Link className="text-sm md:text-base" to="/recipe">
+                  Recipes
+                </Link>
+              </Tab>
+              <Tab setPosition={setPosition}>
+                <ScrollLink
+                  className="text-sm md:text-base"
+                  to="faqs"
+                  smooth={true}
+                  duration={500}
+                  offset={0}
+                >
+                  FAQs
+                </ScrollLink>
+              </Tab>
+              <Tab setPosition={setPosition}>
+                <ScrollLink
+                  className="text-sm md:text-base"
+                  to="contactus"
+                  smooth={true}
+                  duration={500}
+                  offset={0}
+                >
+                  Contact Us
+                </ScrollLink>
+              </Tab>
+            </>
+          ) : (
+            <>
+              <Tab setPosition={setPosition}>
+                <ScrollLink
+                  className="text-sm md:text-base"
+                  to="about"
+                  smooth={true}
+                  duration={500}
+                  offset={-340}
+                >
+                  About Us
+                </ScrollLink>
+              </Tab>
+
+              <Tab setPosition={setPosition}>
+                <ScrollLink
+                  className="text-sm md:text-base"
+                  to="services"
+                  smooth={true}
+                  duration={500}
+                  offset={60}
+                >
+                  Services
+                </ScrollLink>
+              </Tab>
+              <Tab setPosition={setPosition}>
+                <ScrollLink
+                  className="text-sm md:text-base"
+                  to="pricing"
+                  smooth={true}
+                  duration={500}
+                  offset={0}
+                >
+                  Pricing
+                </ScrollLink>
+              </Tab>
+              <Tab setPosition={setPosition}>
+                <ScrollLink
+                  className="text-sm md:text-base"
+                  to="faqs"
+                  smooth={true}
+                  duration={500}
+                  offset={0}
+                >
+                  FAQs
+                </ScrollLink>
+              </Tab>
+              <Tab setPosition={setPosition}>
+                <ScrollLink
+                  className="text-sm md:text-base"
+                  to="contactus"
+                  smooth={true}
+                  duration={500}
+                  offset={0}
+                >
+                  Contact Us
+                </ScrollLink>
+              </Tab>
+            </>
+          )}
           {authState.isAuthenticated ? (
             <button
               onClick={handleLogout}
