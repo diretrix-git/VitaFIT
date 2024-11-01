@@ -1,4 +1,4 @@
-import { pricing } from "../../constants/index";
+// import { pricing } from "../../constants/index";
 import CheckIcon from "../../assets/svg/Check";
 import { motion } from "framer-motion";
 
@@ -48,6 +48,50 @@ const PricingList = () => {
       },
     }),
   };
+  const pricing = [
+    {
+      id: "0",
+      title: "Basic",
+      description: "Start your fitness journey",
+      price: "29.99",
+      features: [
+        "Monthly payment with no long-term contract",
+        "Access to basic gym equipment",
+        "Standard locker room access",
+        "Mobile app for workout tracking",
+        "Monthly fitness tips newsletter",
+      ],
+    },
+    {
+      id: "1",
+      title: "Pro",
+      description: "Enhanced fitness experience",
+      price: "49.99",
+      features: [
+        "Monthly plan with 3-month minimum commitment",
+        "All Basic features included",
+        "Unlimited group fitness classes",
+        "Free towel service",
+        "Access to sauna and spa",
+        "Quarterly fitness assessment",
+      ],
+    },
+    {
+      id: "2",
+      title: "Elite",
+      description: "Ultimate fitness transformation",
+      price: "89.99",
+      features: [
+        "Monthly plan with 10% discount on 12-month commitment",
+        "All Pro features included",
+        "2 personal training sessions per month",
+        "Nutrition consultation",
+        "Priority class booking",
+        "Free guest passes (2/month)",
+        "VIP locker with laundry service",
+      ],
+    },
+  ];
 
   return (
     <div className="flex gap-[1rem] max-lg:flex-wrap" name="pricing">
