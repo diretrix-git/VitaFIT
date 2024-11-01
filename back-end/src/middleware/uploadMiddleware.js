@@ -106,9 +106,6 @@ const uploadExerciseImage = multer({
   fileFilter: filter,
   limits: { fileSize: 5 * 1024 * 1024 }, // file size limit 5mb
 });
-// .fields([
-//   { name: "exercises[exerciseImage]", maxCount: 8 } // Allow up to 8 images
-// ]);
 
 module.exports = {
   profileImage,
