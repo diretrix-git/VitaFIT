@@ -1,12 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const ScrollingText = () => {
-  const text = "« Every Step Forward Is A Victory »";
-  const duration = 12;
-
+const ScrollingText = ({ text = "Every Step Forward Is A Victory", duration = 12, repeatCount = Infinity }) => {
   return (
-    <div className="relative w-full overflow-hidden p-12 bg-black">
+    <div className="relative w-full overflow-hidden p-12 bg-white">
       <div className="flex">
         {[...Array(4)].map((_, i) => (
           <motion.div
@@ -15,18 +12,14 @@ const ScrollingText = () => {
             animate={{ x: "-100%" }}
             transition={{
               duration,
-              repeat: Infinity,
+              repeat: repeatCount,
               ease: "linear",
               delay: -duration * (i / 4),
             }}
             className="flex-shrink-0 whitespace-nowrap"
           >
             <span
-              className="text-7xl font-bold tracking-wider inline-block"
-              style={{
-                color: "rgb(226, 221, 219)",
-                marginRight: "4rem", // Added 4rem (1rem = 16px) spacing after each text instance
-              }}
+              className="text-6xl lg:text-7xl font-bold tracking-wider text-black inline-block mr-16"
             >
               {text}
             </span>

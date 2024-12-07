@@ -54,7 +54,7 @@ const ContactForm = () => {
       const response = await axiosInstance.post("/contact/create", data, {
         headers: { "Content-Type": "application/json" },
       });
-      toast.success(response.data.message);
+      toast.success(response.data.message, { containerId: "contactussss" });
       console.log("Message sent successfully:", response);
       // make form data empty
       setFormData({
@@ -75,9 +75,10 @@ const ContactForm = () => {
     >
       {/* Toast Container */}
       <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
+        // position="top-right"
+        // autoClose={3000}
+        // hideProgressBar={false}
+        containerID= "contactussss"
       />
 
       <div

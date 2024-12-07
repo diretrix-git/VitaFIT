@@ -18,7 +18,7 @@ const WorkoutCardComponent = ({ workoutData }) => {
     : workoutData.data;
 
   return (
-    <div className="p-4 min-h-screen bg-gray-900">
+    <div className="p-4 min-h-screen bg-black">
       <div className="max-w-6xl mx-auto">
         {/* Dropdown for workout types */}
         <div className="mb-8">
@@ -62,7 +62,7 @@ const WorkoutCardComponent = ({ workoutData }) => {
             {item.exercises.map((exercise) => (
               <div
                 key={exercise.id}
-                className="flex flex-col md:flex-row items-center rounded-xl p-6 mt-6 bg-gray-800 border border-gray-700 hover:border-gray-600 transition-colors"
+                className="flex flex-col md:flex-row items-center rounded-xl p-6 mt-6 bg-gray-900 border border-gray-700 hover:border-gray-600 transition-colors"
               >
                 {/* Exercise Image */}
                 <div className="w-full md:w-1/3 relative mb-6 md:mb-0">

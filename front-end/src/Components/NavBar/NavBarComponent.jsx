@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/authSlice";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { Link as ScrollLink } from "react-scroll";
-
 export const NavbarComponent = () => {
   return <SlideTabs />;
 };
@@ -16,14 +15,10 @@ const SlideTabs = () => {
     opacity: 0,
   });
 
-  const [menuOpen, setMenuOpen] = useState(false); // To toggle the mobile menu
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
-
-  // console.log(authState.isAuthenticated); // Check the authentication state
-  // console.log(authState.userRole); // Check the user role
-  // console.log(authState.token); // Check the user role
 
   const handleLogout = () => {
     dispatch(logout());
@@ -43,10 +38,12 @@ const SlideTabs = () => {
   });
 
   const handleMenuToggle = () => {
-    setMenuOpen((prev) => {
-      console.log("Menu Open:", !prev); // Check the state here
-      return !prev;
-    });
+    setMenuOpen(!menuOpen);
+    if (!menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
   };
 
   return (
@@ -57,25 +54,25 @@ const SlideTabs = () => {
       }}
       animate={hidden ? "hidden" : "visible"}
       transition={{ duration: 0.35, ease: "easeInOut" }}
-      className="flex justify-between items-center sticky top-0 w-full p-2.5 shadow-lg z-50 bg-[#2c2b2a59] bg-opacity-50 backdrop-blur-md overflow-x-hidden"
+      className="flex justify-between items-center sticky top-0 w-full p-2.5 md:p-4 shadow-lg z-50 bg-[#2c2b2a59] bg-opacity-50 backdrop-blur-md"
     >
       {/* Logo */}
-      <h2 className="text-white text-2xl font-bold cursor-pointer">
+      <h2 className="text-white text-xl md:text-2xl font-bold cursor-pointer relative z-50">
         <Link to="/">VitaFit</Link>
       </h2>
 
-      {/* Hamburger Icon */}
-      <div className="lg:hidden">
+      {/* Hamburger Icon - Now with higher z-index */}
+      <div className="lg:hidden relative z-50">
         <button
           onClick={handleMenuToggle}
-          className="text-white focus:outline-none"
+          className="text-white focus:outline-none p-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            className="w-8 h-8"
+            className="w-6 h-6 md:w-8 md:h-8"
           >
             {menuOpen ? (
               <path
@@ -96,9 +93,9 @@ const SlideTabs = () => {
         </button>
       </div>
 
-      {/* Full Navigation - Hidden on Mobile & tablet */}
+      {/* Desktop Navigation */}
       <ul
-        className={`relative mx-auto  hidden lg:flex w-full lg:w-auto rounded-full bg-white p-1 `}
+        className="relative mx-auto hidden lg:flex w-auto rounded-full bg-white p-1"
         onMouseLeave={() => {
           setPosition((pv) => ({
             ...pv,
@@ -106,49 +103,26 @@ const SlideTabs = () => {
           }));
         }}
       >
-        {/* <Tab setPosition={setPosition}>
-          <Link className="text-sm md:text-base" to="/">
-            
-            Home
-          </Link>
-        </Tab> */}
         {authState.isAuthenticated ? (
           <>
             <Tab setPosition={setPosition}>
-              <ScrollLink
-                className="text-sm md:text-base"
-                to="about"
-                smooth={true}
-                duration={500}
-                offset={-340}
-              >
+              <ScrollLink to="about" smooth={true} duration={500} offset={-340}>
                 About Us
               </ScrollLink>
             </Tab>
             <Tab setPosition={setPosition}>
-              <Link className="text-sm md:text-base" to="/workout">
-                Workout Plans
-              </Link>
+              <Link to="/workout">Workout Plans</Link>
             </Tab>
             <Tab setPosition={setPosition}>
-              <Link className="text-sm md:text-base" to="/recipe">
-                Recipes
-              </Link>
+              <Link to="/recipe">Recipes</Link>
             </Tab>
             <Tab setPosition={setPosition}>
-              <ScrollLink
-                className="text-sm md:text-base"
-                to="faqs"
-                smooth={true}
-                duration={500}
-                offset={0}
-              >
+              <ScrollLink to="faqs" smooth={true} duration={500} offset={0}>
                 FAQs
               </ScrollLink>
             </Tab>
             <Tab setPosition={setPosition}>
               <ScrollLink
-                className="text-sm md:text-base"
                 to="contactus"
                 smooth={true}
                 duration={500}
@@ -161,20 +135,12 @@ const SlideTabs = () => {
         ) : (
           <>
             <Tab setPosition={setPosition}>
-              <ScrollLink
-                className="text-sm md:text-base"
-                to="about"
-                smooth={true}
-                duration={500}
-                offset={-340}
-              >
+              <ScrollLink to="about" smooth={true} duration={500} offset={-340}>
                 About Us
               </ScrollLink>
             </Tab>
-
             <Tab setPosition={setPosition}>
               <ScrollLink
-                className="text-sm md:text-base"
                 to="services"
                 smooth={true}
                 duration={500}
@@ -184,30 +150,17 @@ const SlideTabs = () => {
               </ScrollLink>
             </Tab>
             <Tab setPosition={setPosition}>
-              <ScrollLink
-                className="text-sm md:text-base"
-                to="pricing"
-                smooth={true}
-                duration={500}
-                offset={0}
-              >
+              <ScrollLink to="pricing" smooth={true} duration={500} offset={0}>
                 Pricing
               </ScrollLink>
             </Tab>
             <Tab setPosition={setPosition}>
-              <ScrollLink
-                className="text-sm md:text-base"
-                to="faqs"
-                smooth={true}
-                duration={500}
-                offset={0}
-              >
+              <ScrollLink to="faqs" smooth={true} duration={500} offset={0}>
                 FAQs
               </ScrollLink>
             </Tab>
             <Tab setPosition={setPosition}>
               <ScrollLink
-                className="text-sm md:text-base"
                 to="contactus"
                 smooth={true}
                 duration={500}
@@ -221,159 +174,74 @@ const SlideTabs = () => {
         <Cursor position={position} />
       </ul>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Adjusted z-index */}
       {menuOpen && (
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
+          initial={{ opacity: 0, x: "100%" }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: "100%" }}
           transition={{ duration: 0.3 }}
-          className="lg:hidden  flex flex-col text-white space-y-4 z-1000"
+          className="fixed lg:hidden top-0 right-0 w-full md:w-80 h-screen bg-[#2c2b2a] pt-20 px-6 z-40"
         >
-          {/*  flex flex-col items-center bg-gray-700 text-white space-y-4 mt-4 p-4 rounded-md top-16 right-4 z-1000 */}
-          {/* <Link className="text-sm" to="/">
-            Home
-          </Link>
-          <Link className="text-sm" to="/about">
-            About Us
-          </Link>
-          <Link className="text-sm" to="/services">
-            Services
-          </Link>
-          <Link className="text-sm" to="/workout">
-            Workout Plans
-          </Link>
-          <Link className="text-sm" to="/pricing">
-            Pricing
-          </Link>
-          <Link className="text-sm" to="/contact">
-            Contact Us
-          </Link> */}
-          {authState.isAuthenticated ? (
-            <>
-              <Tab setPosition={setPosition}>
-                <ScrollLink
-                  className="text-sm md:text-base"
-                  to="about"
-                  smooth={true}
-                  duration={500}
-                  offset={-340}
-                >
+          <div className="flex flex-col space-y-6">
+            {authState.isAuthenticated ? (
+              <>
+                <NavLink onClick={handleMenuToggle} to="about" offset={-340}>
                   About Us
-                </ScrollLink>
-              </Tab>
-              <Tab setPosition={setPosition}>
-                <Link className="text-sm md:text-base" to="/workout">
+                </NavLink>
+                <NavLink onClick={handleMenuToggle} to="/workout" isRoute>
                   Workout Plans
-                </Link>
-              </Tab>
-              <Tab setPosition={setPosition}>
-                <Link className="text-sm md:text-base" to="/recipe">
+                </NavLink>
+                <NavLink onClick={handleMenuToggle} to="/recipe" isRoute>
                   Recipes
-                </Link>
-              </Tab>
-              <Tab setPosition={setPosition}>
-                <ScrollLink
-                  className="text-sm md:text-base"
-                  to="faqs"
-                  smooth={true}
-                  duration={500}
-                  offset={0}
-                >
+                </NavLink>
+                <NavLink onClick={handleMenuToggle} to="faqs">
                   FAQs
-                </ScrollLink>
-              </Tab>
-              <Tab setPosition={setPosition}>
-                <ScrollLink
-                  className="text-sm md:text-base"
-                  to="contactus"
-                  smooth={true}
-                  duration={500}
-                  offset={0}
-                >
+                </NavLink>
+                <NavLink onClick={handleMenuToggle} to="contactus">
                   Contact Us
-                </ScrollLink>
-              </Tab>
-            </>
-          ) : (
-            <>
-              <Tab setPosition={setPosition}>
-                <ScrollLink
-                  className="text-sm md:text-base"
-                  to="about"
-                  smooth={true}
-                  duration={500}
-                  offset={-340}
+                </NavLink>
+                <button
+                  onClick={() => {
+                    handleMenuToggle();
+                    handleLogout();
+                  }}
+                  className="text-white bg-red-500 px-4 py-3 rounded-md text-center mt-4"
                 >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <NavLink onClick={handleMenuToggle} to="about" offset={-340}>
                   About Us
-                </ScrollLink>
-              </Tab>
-
-              <Tab setPosition={setPosition}>
-                <ScrollLink
-                  className="text-sm md:text-base"
-                  to="services"
-                  smooth={true}
-                  duration={500}
-                  offset={60}
-                >
+                </NavLink>
+                <NavLink onClick={handleMenuToggle} to="services" offset={60}>
                   Services
-                </ScrollLink>
-              </Tab>
-              <Tab setPosition={setPosition}>
-                <ScrollLink
-                  className="text-sm md:text-base"
-                  to="pricing"
-                  smooth={true}
-                  duration={500}
-                  offset={0}
-                >
+                </NavLink>
+                <NavLink onClick={handleMenuToggle} to="pricing">
                   Pricing
-                </ScrollLink>
-              </Tab>
-              <Tab setPosition={setPosition}>
-                <ScrollLink
-                  className="text-sm md:text-base"
-                  to="faqs"
-                  smooth={true}
-                  duration={500}
-                  offset={0}
-                >
+                </NavLink>
+                <NavLink onClick={handleMenuToggle} to="faqs">
                   FAQs
-                </ScrollLink>
-              </Tab>
-              <Tab setPosition={setPosition}>
-                <ScrollLink
-                  className="text-sm md:text-base"
-                  to="contactus"
-                  smooth={true}
-                  duration={500}
-                  offset={0}
-                >
+                </NavLink>
+                <NavLink onClick={handleMenuToggle} to="contactus">
                   Contact Us
-                </ScrollLink>
-              </Tab>
-            </>
-          )}
-          {authState.isAuthenticated ? (
-            <button
-              onClick={handleLogout}
-              className="text-white bg-red-500 px-4 py-2 rounded-md"
-            >
-              Logout
-            </button>
-          ) : (
-            <Link
-              to="/login"
-              className="bg-black text-white rounded-xl px-4 py-2 text-sm"
-            >
-              Login
-            </Link>
-          )}
+                </NavLink>
+                <Link
+                  to="/login"
+                  onClick={handleMenuToggle}
+                  className="bg-white text-black rounded-md px-4 py-3 text-center mt-4"
+                >
+                  Login
+                </Link>
+              </>
+            )}
+          </div>
         </motion.div>
       )}
 
-      {/* Auth Button for Desktop */}
+      {/* Desktop Auth Button */}
       {authState.isAuthenticated ? (
         <button
           onClick={handleLogout}
@@ -389,13 +257,40 @@ const SlideTabs = () => {
         >
           <Link
             to="/login"
-            className="bg-white rounded-3xl text-black text-xl hover:rounded-xl px-8 py-3 transition-all duration-300"
+            className="bg-white rounded-3xl text-black text-lg md:text-xl hover:rounded-xl px-6 md:px-8 py-2 md:py-3 transition-all duration-300"
           >
             Login
           </Link>
         </motion.div>
       )}
     </motion.div>
+  );
+};
+
+const NavLink = ({ children, to, offset = 0, isRoute = false, onClick }) => {
+  if (isRoute) {
+    return (
+      <Link
+        to={to}
+        onClick={onClick}
+        className="text-white text-lg md:text-xl hover:text-gray-300 transition-colors duration-200"
+      >
+        {children}
+      </Link>
+    );
+  }
+
+  return (
+    <ScrollLink
+      to={to}
+      smooth={true}
+      duration={500}
+      offset={offset}
+      onClick={onClick}
+      className="text-white text-lg md:text-xl hover:text-gray-300 transition-colors duration-200 cursor-pointer"
+    >
+      {children}
+    </ScrollLink>
   );
 };
 
@@ -407,9 +302,7 @@ const Tab = ({ children, setPosition }) => {
       ref={ref}
       onMouseEnter={() => {
         if (!ref?.current) return;
-
         const { width } = ref.current.getBoundingClientRect();
-
         setPosition({
           left: ref.current.offsetLeft,
           width,
@@ -426,13 +319,13 @@ const Tab = ({ children, setPosition }) => {
 const Cursor = ({ position }) => {
   return (
     <motion.li
-      animate={{
-        ...position,
-      }}
+      animate={position}
       className="absolute z-0 h-7 rounded-full bg-black md:h-12"
     />
   );
 };
+
+export default SlideTabs;
 
 // import React, { useEffect, useState } from "react";
 // import { Link, useNavigate } from "react-router-dom";

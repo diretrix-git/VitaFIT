@@ -186,7 +186,7 @@ const JourneyComponent = () => {
             </div>
           </motion.div>
         </motion.div>
-        <ScrollingText />
+        <ScrollingText duration={10} repeatCount={Infinity} />
         {/**body */}
       </div>
     </>

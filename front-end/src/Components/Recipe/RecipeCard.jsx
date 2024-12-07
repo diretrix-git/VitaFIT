@@ -96,7 +96,7 @@ const RecipeCard = ({ recipeData }) => {
             </div>
 
             {/* Action Buttons */}
-            <div
+            {/* <div
               className="flex gap-3 pt-2"
               onClick={(e) => e.stopPropagation()}
             >
@@ -114,7 +114,7 @@ const RecipeCard = ({ recipeData }) => {
                 <MdDeleteOutline className="w-5 h-5" />
                 <span>Delete</span>
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       ))}

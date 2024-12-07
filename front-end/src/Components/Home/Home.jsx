@@ -64,7 +64,7 @@ const Home = () => {
         className="w-full"
       >
         <JourneyComponent />
-        <Test />
+        {/* <Test /> */}
         <Services />
         <Potential />
         <PricingSection />

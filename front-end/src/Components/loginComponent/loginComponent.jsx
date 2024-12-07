@@ -87,7 +87,7 @@ const LoginComponent = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#050505]">
-      <div className="bg-[#000000] p-8 rounded-lg shadow-lg w-full max-w-md relative border border-white">
+      <div className="bg-[#212121] p-8 rounded-lg shadow-[0px_0px_24px_1px_#B76CF1] w-full max-w-md relative border border-white">
         <Link
           to="/"
           className="absolute top-2 right-4 text-3xl text-gray-500 hover:text-white"
@@ -145,17 +145,17 @@ const LoginComponent = () => {
             )}
           </div>
           <button
-            className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
+            className="w-full bg-[#B76CF1] text-white py-2 px-4 rounded-md hover:bg-[#7C2DC0] focus:outline-none focus:bg-indigo-600"
             type="submit"
           >
             Login
           </button>
         </form>
-        <p className="mt-4 text-center">
+        <p className="mt-4 text-center text-white">
           Don't have an account?{" "}
           <Link
             to="/signup" // Change this to your signup page route
-            className="text-indigo-500 hover:underline"
+            className="text-[#B76CF1] hover:underline"
           >
             Sign Up
           </Link>

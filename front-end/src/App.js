@@ -32,6 +32,7 @@ import Footer from "./Components/footer/Footer";
 import Home from "./Components/Home/Home";
 import AdminDashboard from "./Components/adminDashboard/AdminDashboard";
 import ScrollTopTop from "./Components/ScrollToTop/ScrollToTop";
+import RecipeEditPage from "./Components/Recipe/RecipeEditPage";
 
 function App() {
   return (
@@ -43,8 +44,8 @@ function App() {
         {/* Use `useLocation` inside Router */}
         {/** Pass `location` to `Routes` so that `AnimatePresence` detects changes */}
         <Content />
-        <Footer />
-        <ScrollTopTop />
+        {/* <Footer /> */}
+        {/* <ScrollTopTop /> */}
       </Router>
     </>
   );
@@ -136,6 +137,14 @@ function Content() {
             element={
               <ProtectedRoute roles={["admin"]}>
                 <TestComponenet />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/edit-recipe/:id" 
+            element={
+              <ProtectedRoute roles={["admin"]}>
+                <RecipeEditPage />
               </ProtectedRoute>
             }
           />

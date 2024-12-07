@@ -3,9 +3,13 @@ import axiosInstance from "../../config/axiosConfig";
 import { Link, useParams } from "react-router-dom";
 import { FaStar, FaUtensils } from "react-icons/fa";
 import { MdDeleteOutline, MdEdit } from "react-icons/md";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const RecipeDetailPage = () => {
   const domain = `http://localhost:5000`;
+  const navigate = useNavigate();
 
   const imgAddress = (item) => {
     return item?.recipeImage ? `${domain}/${item.recipeImage}` : item?.imgUrl;
@@ -13,7 +17,25 @@ const RecipeDetailPage = () => {
 
   const { id } = useParams();
   const [recipeDetails, setRecipeDetails] = useState(null);
+
   // const [loading, setLoading] = useState(true);
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await axiosInstance.delete(`/recipes/delete/${id}`); 
+      console.log(response);
+      console.log("deletedexistent recipe")
+      toast.success("recipe deleted successfully");
+      await fetchRecipeDetails();
+      setTimeout(() => {
+        navigate("/recipe");
+      }, 2000);
+    } catch (error) {
+      console.error("Error deleting recipe:", error);
+      toast.error(error.response?.data?.msg || "Failed to delete recipe");
+    }
+  };
+  // console.log(recipeDetails)
 
   useEffect(() => {
     fetchRecipeDetails();
@@ -38,6 +60,7 @@ const RecipeDetailPage = () => {
 
   return (
     <div className="min-h-screen text-black bg-gray-100 p-6">
+      <ToastContainer />
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Main Image - Spans 2 columns */}
         <div className="md:col-span-2 rounded-2xl overflow-hidden h-[400px] bg-white shadow-lg">
@@ -108,14 +131,14 @@ const RecipeDetailPage = () => {
         {/* Action Buttons */}
         <div className="md:col-span-3 flex gap-4 justify-end">
           <Link
-            to={`/update/${recipeDetails._id}`}
+            to={`/edit-recipe/${id}`}
             className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg transition-colors duration-200"
           >
             <MdEdit className="w-5 h-5" />
             <span>Edit Recipe</span>
           </Link>
           <button
-            onClick={() => console.log("Delete recipe")}
+            onClick={() => handleDelete(id)}
             className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-lg transition-colors duration-200"
           >
             <MdDeleteOutline className="w-5 h-5" />

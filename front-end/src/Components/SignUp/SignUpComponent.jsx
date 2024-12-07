@@ -85,28 +85,28 @@ export const SignupComponent = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white relative p-8 rounded-lg shadow-lg w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-[#050505]">
+      <div className="bg-[#212121] relative p-8 rounded-lg shadow-[0px_0px_24px_1px_#B76CF1] w-full max-w-md">
         <Link
           to="/"
           //   onClick={closeModal}
 
-          className="absolute top-2 right-4 text-3xl text-gray-500 hover:text-gray-700"
+          className="absolute top-2 right-4 text-3xl text-gray-500 hover:text-white"
         >
           &times; {/* Close icon */}
         </Link>
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">Register</h2>
+        <h2 className="text-2xl font-bold mb-6 text-white">Register</h2>
         <ToastContainer />
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
-              className="block text-gray-700 font-bold mb-2"
+              className="block text-white font-bold mb-2"
               htmlFor="username"
             >
               Username
             </label>
             <input
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md text-white bg-[#27272A] "
               type="text"
               id="username"
               placeholder="Enter your username"
@@ -120,14 +120,11 @@ export const SignupComponent = () => {
             )}
           </div>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="email"
-            >
+            <label className="block text-white font-bold mb-2" htmlFor="email">
               Email
             </label>
             <input
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md bg-[#27272A] text-white "
               type="email"
               id="email"
               placeholder="Enter your email"
@@ -142,13 +139,13 @@ export const SignupComponent = () => {
           </div>
           <div className="mb-4 relative ">
             <label
-              className="block text-gray-700 font-bold mb-2"
+              className="block text-white font-bold mb-2"
               htmlFor="password"
             >
               Password
             </label>
             <input
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md bg-[#27272A] text-white "
               type={showPassword ? "text" : "password"}
               id="password"
               placeholder="Enter your password"
@@ -172,13 +169,13 @@ export const SignupComponent = () => {
           </div>
           <div className="mb-6 relative">
             <label
-              className="block text-gray-700 font-bold mb-2"
+              className="block text-white font-bold mb-2"
               htmlFor="confirm-password"
             >
               Confirm Password
             </label>
             <input
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100"
+              className="w-full px-3 py-2 border bg-[#27272A]  border-gray-300 rounded-md text-white"
               type={showConfirmPassword ? "text" : "password"}
               id="confirm-password"
               placeholder="Confirm your password"
@@ -203,17 +200,17 @@ export const SignupComponent = () => {
             )}
           </div>
           <button
-            className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
+            className="w-full bg-[#B76CF1] text-white py-2 px-4 rounded-md hover:bg-[#7C2DC0] focus:outline-none focus:bg-indigo-600"
             type="submit"
           >
             Register
           </button>
         </form>
         <p className="text-center mt-4 space-y-2">
-          <span>
+          <span className="text-white">
             Already have an account?{" "}
             <span
-              className="text-indigo-500 hover:text-indigo-600 cursor-pointer"
+              className="text-[#B76CF1] hover:underline cursor-pointer"
               onClick={() => navigate("/login")}
             >
               Log in

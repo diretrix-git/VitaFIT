@@ -17,7 +17,7 @@ const RecipeForm = () => {
     recipeImage: "",
   });
 
-    console.log("inf", formData);
+  console.log("inf", formData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -125,8 +125,8 @@ const RecipeForm = () => {
       recipeData.append(`ingredients[${index}][unit]`, ingredient.unit);
     });
     // console.log("rd", recipeData);
-    if(formData.recipeImage) {
-      recipeData.append("recipeImage", formData.recipeImage)
+    if (formData.recipeImage) {
+      recipeData.append("recipeImage", formData.recipeImage);
     }
     try {
       // console.log("130",recipeData)
