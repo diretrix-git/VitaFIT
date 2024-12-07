@@ -130,6 +130,9 @@ const createRecipe = async (req, res) => {
 // Update recipe
 const updateRecipe = async (req, res) => {
   try {
+
+    const { id } = req.params;
+
     const { ingredients, ...rest } = req.body;
 
     // Handle dynamic ingredients array only if ingredients are provided
@@ -154,7 +157,7 @@ const updateRecipe = async (req, res) => {
     }
 
     // Update the recipe in the database
-    const recipe = await Recipe.findByIdAndUpdate(req.params.id, updateData, {
+    const recipe = await Recipe.findByIdAndUpdate(id, updateData, {
       new: true,
       runValidators: true,
     });
@@ -175,7 +178,8 @@ const updateRecipe = async (req, res) => {
 // Delete recipe
 const deleteRecipe = async (req, res) => {
   try {
-    const recipe = await Recipe.findByIdAndDelete(req.params.id);
+    const { id } = req.params;
+    const recipe = await Recipe.findByIdAndDelete(id);
     if (!recipe) {
       return res
         .status(404)

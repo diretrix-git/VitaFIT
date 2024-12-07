@@ -56,7 +56,7 @@ router.post(
  * @return response
  */
 router.put(
-  "/:id",
+  "/update/:id",
   authMiddleware,
   authorizeRole("admin"), // Only admins can update recipes
   uploadRecipeImage.single("recipeImage"), // For image upload
@@ -72,7 +72,7 @@ router.put(
  * @return response
  */
 router.delete(
-  "/:id",
+  "/delete/:id",
   authMiddleware,
   authorizeRole("admin"), // Only admins can delete recipes
   deleteRecipe
