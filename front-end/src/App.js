@@ -11,9 +11,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import SignupComponent from "./Components/SignUp/SignUpComponent";
-import TestComponenet from "./Components/test/testComponenet";
 import Test from "./Components/test3/test";
-import ZzzComponent from "./Components/zzz/ZzzComponent";
 import LoginComponent from "./Components/loginComponent/loginComponent";
 import ProductComponent from "./Components/Product/ProductComponent";
 import RecipeComponent from "./Components/Recipe/RecipeComponent";
@@ -133,26 +131,10 @@ function Content() {
             }
           />
           <Route
-            path="/test"
-            element={
-              <ProtectedRoute roles={["admin"]}>
-                <TestComponenet />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/edit-recipe/:id" 
+            path="/edit-recipe/:id"
             element={
               <ProtectedRoute roles={["admin"]}>
                 <RecipeEditPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/test2"
-            element={
-              <ProtectedRoute roles={["admin"]}>
-                <ZzzComponent />
               </ProtectedRoute>
             }
           />
