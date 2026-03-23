@@ -81,11 +81,10 @@ const createWorkout = async (req, res) => {
 // get a single workout by ID
 const getWorkout = async (req, res) => {
   try {
-    const workout = await Workout.findById(req.pasams.id);
+    const workout = await Workout.findById(req.params.id);
     if (!workout) {
       return res.status(404).json({
         msg: "Workout not found",
-        err: err.message,
       });
     }
 
@@ -122,9 +121,8 @@ const getWorkouts = async (req, res) => {
 
 const updateWorkout = async (req, res) => {
   try {
-    console.log("Request Files:", req.files); // Log request files
-    console.log("Request Body:", req.body); // Log request body
-
+    // console.log("Request Files:", req.files);
+    // console.log("Request Body:", req.body);
     const workout = await Workout.findById(req.params.id);
     if (!workout) {
       return res.status(404).json({
@@ -162,7 +160,6 @@ const updateWorkout = async (req, res) => {
       },
     });
   } catch (err) {
-    console.error("Error in updateWorkout:", err); // Log the error
     return res.status(500).json({
       status: "fail",
       message: err.message || "An unexpected error occurred",

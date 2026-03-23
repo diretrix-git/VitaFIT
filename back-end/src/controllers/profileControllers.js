@@ -24,7 +24,7 @@ const updateProfile = async (req, res) => {
 
     // Handle profile picture upload
     if (req.file) {
-      profileData.profilePic = `uploads/profiles/${req.file.filename}`;
+      profileData.profilePic = `uploads/profile/${req.file.filename}`;
     }
 
     // Update the profile

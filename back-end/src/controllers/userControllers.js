@@ -27,7 +27,6 @@ const userRegister = async (req, res) => {
       name: data.name,
       email: data.email,
       password: data.password,
-      userRole: data.userRole,
     });
 
     const newProfile = new Profile({
@@ -55,7 +54,7 @@ const userLogin = async (req, res) => {
   // const password=data.password;
   try {
     let user = await User.findOne({ email: email });
-    console.log(user);
+    // console.log(user);
 
     if (!user) {
       return res.status(400).json({ msg: "Invalid credentials" });

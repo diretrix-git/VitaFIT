@@ -59,7 +59,7 @@ const createProduct = async (req, res) => {
 // Get all products
 const getProducts = async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().populate("category", "name");
     res.json(products);
   } catch (error) {
     res.status(500).json({ message: error.message });
