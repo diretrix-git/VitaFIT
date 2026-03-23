@@ -3,7 +3,6 @@ import "./App.css";
 import ProtectedRoute from "./ProtectedRoutes/protectedRoutes";
 import { AnimatePresence } from "framer-motion";
 import { NavbarComponent } from "./Components/NavBar/NavBarComponent";
-// import NavTest from "./Components/NavBar/NavTest";
 import {
   BrowserRouter as Router,
   Route,
@@ -11,7 +10,6 @@ import {
   useLocation,
 } from "react-router-dom";
 import SignupComponent from "./Components/SignUp/SignUpComponent";
-import Test from "./Components/test3/test";
 import LoginComponent from "./Components/loginComponent/loginComponent";
 import ProductComponent from "./Components/Product/ProductComponent";
 import RecipeComponent from "./Components/Recipe/RecipeComponent";
@@ -26,10 +24,8 @@ import RecipeCardComponent from "./Components/Recipe/RecipeCardComponent";
 import AddWorkoutTypeComponent from "./Components/Workout/AddWorkoutTypeComponent";
 import AddWorkout from "./Components/Workout/AddWorkoutComponent";
 import NotFound from "./Components/NotFound/NotFound";
-import Footer from "./Components/footer/Footer";
 import Home from "./Components/Home/Home";
 import AdminDashboard from "./Components/adminDashboard/AdminDashboard";
-import ScrollTopTop from "./Components/ScrollToTop/ScrollToTop";
 import RecipeEditPage from "./Components/Recipe/RecipeEditPage";
 
 function App() {
@@ -37,13 +33,7 @@ function App() {
     <>
       <Router>
         <NavbarComponent />
-        {/* <NavTest /> */}
-
-        {/* Use `useLocation` inside Router */}
-        {/** Pass `location` to `Routes` so that `AnimatePresence` detects changes */}
         <Content />
-        {/* <Footer /> */}
-        {/* <ScrollTopTop /> */}
       </Router>
     </>
   );
@@ -135,14 +125,6 @@ function Content() {
             element={
               <ProtectedRoute roles={["admin"]}>
                 <RecipeEditPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/test3"
-            element={
-              <ProtectedRoute roles={["admin"]}>
-                <Test />
               </ProtectedRoute>
             }
           />

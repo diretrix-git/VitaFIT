@@ -3,7 +3,6 @@ import PricingSection from "../Pricing/Pricing";
 import Services from "../Services/Services";
 import Contact from "../ContactUs/ContactusComponent";
 import JourneyComponent from "../Journey/JourneyComponent";
-import Test from "./../test3/test";
 import Potential from "../Potential/Potential";
 import Faqs from "../Faqs/Faqs";
 import Preloader from "../Preloader/Preloader";

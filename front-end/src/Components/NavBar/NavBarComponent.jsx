@@ -95,7 +95,7 @@ const SlideTabs = () => {
 
       {/* Desktop Navigation */}
       <ul
-        className="relative mx-auto hidden lg:flex w-auto rounded-full bg-white p-1"
+        className="relative mx-auto hidden lg:flex w-auto rounded-full bg-white/10 backdrop-blur-sm border border-white/10 p-1"
         onMouseLeave={() => {
           setPosition((pv) => ({
             ...pv,
