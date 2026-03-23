@@ -30,13 +30,8 @@ const AddProductComponent = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setFormData({
-      ...formData,
-      productImage: file,
-    });
+    setFormData({ ...formData, productImage: file });
   };
-  console.log(formData);
-  console.log("image:", formData.productImage);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,23 +41,17 @@ const AddProductComponent = () => {
     data.append("name", formData.name);
     data.append("price", formData.price);
     data.append("description", formData.description);
-    data.append("productImage", formData.productImage);
     data.append("brand", formData.brand);
-    // data.append("rating", formData.rating);
-    // data.append("numReviews", formData.numReviews);
     data.append("countInStock", formData.countInStock);
-
-    console.log("Data:", data);
-    console.log("FormData:", formData);
+    if (formData.productImage) {
+      data.append("productImage", formData.productImage);
+    }
 
     try {
       const response = await axiosInstance.post("/products/create", data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: { "Content-Type": "multipart/form-data" },
       });
       toast.success(response.data.message);
-      console.log("Product added successfully:", response);
       //   make form data empty
       // setFormData({
       //   category: "",

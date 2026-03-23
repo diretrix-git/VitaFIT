@@ -11,31 +11,22 @@ const RecipeEditPage = () => {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [instructions, setInstructions] = useState("");
-  const [mealPlan, setMealPlan] = useState([]);
+  const [mealPlans, setMealPlans] = useState([]);
+  const [selectedMealPlan, setSelectedMealPlan] = useState("");
   const [servingSize, setServingSize] = useState("");
+
   useEffect(() => {
-    const fetchMealPlan = async () => {
+    const fetchMealPlans = async () => {
       try {
         const response = await axiosInstance.get("/mealplan");
-        // console.log(response);
-        const mealplans = response.data.data.mealPlans;
-        setMealPlan(mealplans);
-
-        // Set default category to the first one if available
-        // if (mealplans.length > 0) {
-        //   setFormData((prevFormData) => ({
-        //     ...prevFormData,
-        //     mealplan: mealplans[0]._id,
-        //   }));
-        // }
+        setMealPlans(response.data.data.mealPlans);
       } catch (error) {
         console.error("Error fetching meal plans:", error);
       }
     };
-    fetchMealPlan();
+    fetchMealPlans();
   }, []);
 
-  console.log("mealPlan", mealPlan);
   useEffect(() => {
     const fetchRecipeDetails = async () => {
       try {
@@ -44,7 +35,7 @@ const RecipeEditPage = () => {
         setTitle(recipe.title || "");
         setIngredients(recipe.ingredients || []);
         setInstructions(recipe.instructions || "");
-        setMealPlan(recipe.mealplan?.name || "");
+        setSelectedMealPlan(recipe.mealplan?._id || recipe.mealplan || "");
         setServingSize(recipe.servingSize || "");
       } catch (error) {
         toast.error("Failed to fetch recipe details");
@@ -54,23 +45,21 @@ const RecipeEditPage = () => {
   }, [id]);
 
   const handleIngredientChange = (index, field, value) => {
-    const updatedIngredients = ingredients.map((ingredient, idx) =>
-      idx === index ? { ...ingredient, [field]: value } : ingredient
+    setIngredients((prev) =>
+      prev.map((ing, idx) => (idx === index ? { ...ing, [field]: value } : ing))
     );
-    setIngredients(updatedIngredients);
   };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const updatedRecipe = {
+      await axiosInstance.put(`/recipes/update/${id}`, {
         title,
         ingredients,
         instructions,
-        mealPlan,
+        mealplan: selectedMealPlan,
         servingSize,
-      };
-      await axiosInstance.put(`/recipes/update/${id}`, updatedRecipe);
+      });
       toast.success("Recipe updated successfully");
       navigate(`/recipe/${id}`);
     } catch (error) {
@@ -84,11 +73,8 @@ const RecipeEditPage = () => {
       <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
         <h1 className="text-2xl font-bold mb-4">Edit Recipe</h1>
         <form onSubmit={handleFormSubmit} className="space-y-4">
-          {/* Title */}
           <div className="flex flex-col">
-            <label htmlFor="title" className="font-semibold mb-2">
-              Title
-            </label>
+            <label htmlFor="title" className="font-semibold mb-2">Title</label>
             <input
               type="text"
               id="title"
@@ -99,40 +85,31 @@ const RecipeEditPage = () => {
             />
           </div>
 
-          {/* Ingredients */}
           <div className="flex flex-col">
-            <label htmlFor="ingredients" className="font-semibold mb-2">
-              Ingredients
-            </label>
+            <label className="font-semibold mb-2">Ingredients</label>
             {ingredients.length > 0 ? (
               ingredients.map((ingredient, index) => (
                 <div key={index} className="space-y-2 mb-4">
                   <input
                     type="text"
                     value={ingredient.name}
-                    onChange={(e) =>
-                      handleIngredientChange(index, "name", e.target.value)
-                    }
+                    onChange={(e) => handleIngredientChange(index, "name", e.target.value)}
                     placeholder="Ingredient Name"
-                    className="border p-2 rounded w-full mb-2"
+                    className="border p-2 rounded w-full"
                     required
                   />
                   <input
                     type="text"
                     value={ingredient.quantity}
-                    onChange={(e) =>
-                      handleIngredientChange(index, "quantity", e.target.value)
-                    }
+                    onChange={(e) => handleIngredientChange(index, "quantity", e.target.value)}
                     placeholder="Quantity"
-                    className="border p-2 rounded w-full mb-2"
+                    className="border p-2 rounded w-full"
                     required
                   />
                   <input
                     type="text"
                     value={ingredient.unit}
-                    onChange={(e) =>
-                      handleIngredientChange(index, "unit", e.target.value)
-                    }
+                    onChange={(e) => handleIngredientChange(index, "unit", e.target.value)}
                     placeholder="Unit"
                     className="border p-2 rounded w-full"
                     required
@@ -144,11 +121,8 @@ const RecipeEditPage = () => {
             )}
           </div>
 
-          {/* Instructions */}
           <div className="flex flex-col">
-            <label htmlFor="instructions" className="font-semibold mb-2">
-              Instructions
-            </label>
+            <label htmlFor="instructions" className="font-semibold mb-2">Instructions</label>
             <textarea
               id="instructions"
               value={instructions}
@@ -156,35 +130,26 @@ const RecipeEditPage = () => {
               className="border p-2 rounded w-full"
               rows="5"
               required
-            ></textarea>
+            />
           </div>
 
-          {/* Meal Plan */}
           <div className="flex flex-col">
-            <label htmlFor="mealPlan" className="font-semibold mb-2">
-              Meal Plan
-            </label>
-            <select name="mealPlan" id="mealPlan">
-              {mealPlan.map((plan) => (
-                <option value={plan.id} key={plan.id}>
-                  {plan.mealPlan}
-                </option>
+            <label htmlFor="mealPlan" className="font-semibold mb-2">Meal Plan</label>
+            <select
+              id="mealPlan"
+              value={selectedMealPlan}
+              onChange={(e) => setSelectedMealPlan(e.target.value)}
+              className="border p-2 rounded w-full"
+            >
+              <option value="">Select a meal plan</option>
+              {mealPlans.map((plan) => (
+                <option value={plan._id} key={plan._id}>{plan.name}</option>
               ))}
             </select>
-            {/* <input
-              type="text"
-              id="mealPlan"
-              value={mealPlan}
-              onChange={(e) => setMealPlan(e.target.value)}
-              className="border p-2 rounded w-full"
-            /> */}
           </div>
 
-          {/* Serving Size */}
           <div className="flex flex-col">
-            <label htmlFor="servingSize" className="font-semibold mb-2">
-              Serving Size
-            </label>
+            <label htmlFor="servingSize" className="font-semibold mb-2">Serving Size</label>
             <input
               type="number"
               id="servingSize"
@@ -195,7 +160,6 @@ const RecipeEditPage = () => {
             />
           </div>
 
-          {/* Submit Button */}
           <div className="flex justify-end">
             <button
               type="submit"

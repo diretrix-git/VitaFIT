@@ -9,13 +9,15 @@ const WorkoutCardComponent = ({ workoutData }) => {
     setSelectedType(event.target.value);
   };
 
+  const workouts = Array.isArray(workoutData) ? workoutData : workoutData.data ?? [];
+
   const uniqueWorkoutTypes = Array.from(
-    new Set(workoutData.data.map((item) => item.type.name))
+    new Set(workouts.map((item) => item.type?.name).filter(Boolean))
   );
 
   const filteredWorkouts = selectedType
-    ? workoutData.data.filter((item) => item.type.name === selectedType)
-    : workoutData.data;
+    ? workouts.filter((item) => item.type?.name === selectedType)
+    : workouts;
 
   return (
     <div className="p-4 min-h-screen bg-black">

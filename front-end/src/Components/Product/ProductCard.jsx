@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import axiosInstance from "../../config/axiosConfig";
+import React from "react";
 
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { motion } from "framer-motion"; // Import Framer Motion
@@ -13,22 +12,12 @@ const ProductCard = ({ datas, userRole, handleEdit, handleDelete }) => {
       return item.imgUrl;
     }
   };
-  const [category, setCategory] = useState([]);
-  // console.log(category)
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axiosInstance.get("/category");
-        console.log(response);
-        const categories = response.data.categories.name;
-        setCategory(categories);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-    fetchCategories();
-  }, []);
+  const getCategoryName = (category) => {
+    if (!category) return "N/A";
+    if (typeof category === "string") return category;
+    return category.name || "N/A";
+  };
 
   return (
     <div className="flex flex-wrap justify-around items-center my-2 gap-2">
@@ -67,8 +56,7 @@ const ProductCard = ({ datas, userRole, handleEdit, handleDelete }) => {
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">{item.name}</div>
             <p className="text-gray-700 text-base mb-2">
-              <strong>Category:</strong> {item.category}
-              {category}
+              <strong>Category:</strong> {getCategoryName(item.category)}
             </p>
             <p className="text-gray-700 text-base mb-2">
               <strong>Brand:</strong> {item.brand}

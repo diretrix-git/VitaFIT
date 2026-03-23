@@ -120,7 +120,6 @@ const AddWorkout = () => {
     data.append("type", formData.type);
     data.append("plan", formData.plan);
     data.append("difficulty", formData.difficulty);
-    data.append("workoutImage", formData.workoutImage);
 
     exercises.forEach((exercise, index) => {
       data.append(`exercises[${index}][name]`, exercise.name);
@@ -145,18 +144,13 @@ const AddWorkout = () => {
       );
     });
 
-    console.log(data);
-
     try {
       const response = await axiosInstance.post("/workout/create", data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: { "Content-Type": "multipart/form-data" },
       });
-      console.log("responseed", response);
+      // console.log("response", response);
       toast.success(response.data.data.message);
     } catch (error) {
-      console.error("Error adding workout:", error);
       toast.error(error.response?.data?.msg || "An error occurred");
     }
   };
@@ -166,13 +160,10 @@ const AddWorkout = () => {
     const fetchWorkoutTypes = async () => {
       try {
         const response = await axiosInstance.get("/workout-type");
-        console.log(response);
         setWorkoutTypes(response.data);
+        // console.log("workout types", response.data);
         if (response.data.length > 0) {
-          setFormData((prevFormData) => ({
-            ...prevFormData,
-            type: response.data[0].name,
-          }));
+          setFormData((prev) => ({ ...prev, type: response.data[0]._id }));
         }
       } catch (error) {
         console.error("Error fetching workout types:", error);
@@ -181,8 +172,7 @@ const AddWorkout = () => {
     fetchWorkoutTypes();
   }, []);
 
-  console.log(formData);
-
+  // console.log("formData", formData);
   return (
     <>
       <ToastContainer />

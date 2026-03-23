@@ -1,37 +1,32 @@
 import React, { useEffect, useState } from "react";
 import CardComponent from "../card/CardComponent";
-// import ProductList from "../ProductCard/ProductList";
-import axios from "axios";
-
-const domain = "http://localhost:5000";
+import axiosInstance from "../../config/axiosConfig";
 
 const MealPlanComponent = () => {
+  const [mealplan, setMealplan] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-
-  const [mealplan, setmealplan] = useState([]);
-//   console.log(mealplan)
-  const fetchmealplan = async () => {
+  const fetchMealplan = async () => {
     try {
-      const response = await axios.get(`${domain}/api/mealplan`);
-      console.log("response", response);
-      setmealplan(response.data.data.mealPlans);
+      const response = await axiosInstance.get("/mealplan");
+      setMealplan(response.data.data.mealPlans);
     } catch (error) {
-      console.error("Error fetching data", error);
+      console.error("Error fetching meal plans", error);
+      setError("Failed to load meal plans.");
+    } finally {
+      setLoading(false);
     }
   };
+
   useEffect(() => {
-    fetchmealplan();
+    fetchMealplan();
   }, []);
 
-  return (
-    <>
-      {mealplan.length === 0 ? (
-        <h1>Loading</h1>
-      ) : (
-        <CardComponent datas={mealplan} />
-      )}
-    </>
-  );
+  if (loading) return <h1>Loading...</h1>;
+  if (error) return <h1>{error}</h1>;
+
+  return <CardComponent datas={mealplan} />;
 };
 
 export default MealPlanComponent;

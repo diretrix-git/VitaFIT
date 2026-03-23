@@ -10,13 +10,11 @@ const CardComponent = ({ datas }) => {
     }
   };
 
-  console.log(datas);
-
   return (
     <div className="flex flex-wrap justify-around items-center my-2 gap-2">
       {datas.map((item) => {
         return (
-          <div className="max-w-sm rounded-lg  overflow-hidden shadow-lg ">
+          <div key={item._id} className="max-w-sm rounded-lg  overflow-hidden shadow-lg ">
             <img
               className="w-full h-64 object-cover p-5 bg-cover rounded "
               src={`${imgAddress(item)}`}
