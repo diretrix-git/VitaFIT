@@ -37,21 +37,20 @@ const RecipeDetailPage = () => {
   };
   // console.log(recipeDetails)
 
-  useEffect(() => {
-    fetchRecipeDetails();
-  }, []);
-
   const fetchRecipeDetails = async () => {
     try {
       const response = await axiosInstance.get(`/recipes/${id}`);
       const recipeData = response.data.data.recipe;
       setRecipeDetails(recipeData);
-      // setLoading(false);
     } catch (error) {
       // console.error("Error fetching data", error);
-      // setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchRecipeDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   // if (loading) return <h1>Loading...</h1>;
   if (!recipeDetails) return <h1>Recipe not found</h1>;

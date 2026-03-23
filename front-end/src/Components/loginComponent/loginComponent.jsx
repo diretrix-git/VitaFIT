@@ -4,7 +4,7 @@ import axiosInstance from "../../config/axiosConfig";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "../../features/authSlice";
 
 const LoginComponent = () => {
@@ -15,7 +15,6 @@ const LoginComponent = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const authState = useSelector((state) => state.auth);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
