@@ -1,9 +1,10 @@
 # VitaFit
 
-![Project Status](https://img.shields.io/badge/status-active-success.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-VitaFit is a comprehensive fitness hub website designed to provide users with workout plans, nutrition guides, and an online store for fitness-related products. The platform aims to create a seamless and engaging experience for fitness enthusiasts, helping them achieve their health goals with curated content and personalized resources.
+VitaFit is a MERN fitness application with workout and meal-plan content, recipes, profiles, product management, and order endpoints. It is an earlier full-stack project with security and test gaps, not a verified production service.
+
+This README describes the default `vitaFit` branch at [`d7207371811a0fbd670db9fa2480376aa0398553`](https://github.com/diretrix-git/VitaFIT/tree/d7207371811a0fbd670db9fa2480376aa0398553). The older `main` branch contains only the initial README. The React/CRA/Redux frontend and Express/Mongoose backend are represented by the [frontend manifest](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/front-end/package.json#L5-L35), [backend manifest](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/back-end/package.json#L2-L18), and [registered API routes](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/back-end/app.js#L29-L39). No install, application execution, deployment check, or fresh test run was performed for this documentation update.
 
 ## 📋 Table of Contents
 
@@ -13,8 +14,8 @@ VitaFit is a comprehensive fitness hub website designed to provide users with wo
 - [Installation](#installation)
 - [Running the Application](#running-the-application)
 - [Deployment](#deployment)
-- [API Documentation](#api-documentation)
-- [Security](#security)
+- [Security and Known Gaps](#security-and-known-gaps)
+- [Validation and Asset Scope](#validation-and-asset-scope)
 - [Folder Structure](#folder-structure)
 - [Future Enhancements](#future-enhancements)
 - [Contributing](#contributing)
@@ -24,8 +25,8 @@ VitaFit is a comprehensive fitness hub website designed to provide users with wo
 ## ✨ Features
 
 - **User Authentication**
-  - Secure login/signup system with split-panel UI
-  - Role-based access (admin and user)
+  - Login/signup source with split-panel UI; see the response privacy gap below
+  - JWT and role middleware on protected routes, including admin, user, and subscribedUser roles
   - JWT-based session management
 
 - **Workout Plans**
@@ -44,7 +45,7 @@ VitaFit is a comprehensive fitness hub website designed to provide users with wo
 - **Responsive Design**
   - Mobile-first approach
   - Hamburger menu for mobile navigation
-  - Adaptive layouts for all screen sizes
+  - Responsive layout styles; device coverage has not been freshly verified
 
 - **Modern UI/UX**
   - Clean, dark-themed interface
@@ -63,17 +64,16 @@ VitaFit is a comprehensive fitness hub website designed to provide users with wo
 
 ### Backend
 
-- Node.js 16.x or higher
+- Node.js
 - Express.js 4.x
-- MongoDB 5.x
+- MongoDB through Mongoose 8.x
 - JWT for authentication
 - Multer for file uploads
 
 ## 📋 Prerequisites
 
-- Node.js 16.x or higher
-- npm 7.x or higher
-- MongoDB 5.x
+- Node.js and npm compatible with the checked-in manifests
+- A local or hosted MongoDB instance
 - Git
 
 ## 🚀 Installation
@@ -81,8 +81,8 @@ VitaFit is a comprehensive fitness hub website designed to provide users with wo
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/diretrix-git/VitaFIT.git
-cd vitafit
+git clone --branch vitaFit https://github.com/diretrix-git/VitaFIT.git
+cd VitaFIT
 ```
 
 2. **Install dependencies**
@@ -104,10 +104,10 @@ Create a `.env` file in the `back-end` directory:
 ```plaintext
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/finalProject
-JWT_SECRET=your_jwt_secret_here
-JWT_EXPIRE=30d
-NODE_ENV=development
+JWT_SECRET=replace_with_a_unique_local_secret
 ```
+
+`MONGO_URI` is read by the [database connector](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/back-end/src/config/db.js#L1-L17). `PORT=5000` matches the frontend's [hardcoded Axios base URL](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/front-end/src/config/axiosConfig.js#L1-L8); the backend otherwise defaults to 3000. JWT login expiry is currently hardcoded to one day, not controlled by `JWT_EXPIRE`. [Login source](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/back-end/src/controllers/userControllers.js#L69-L85).
 
 ## 🚀 Running the Application
 
@@ -132,7 +132,7 @@ npm run build
 
 ## ☁️ Deployment
 
-The frontend is deployed on **Vercel**.
+The existing deployment notes target **Vercel** for the frontend. Current deployment availability has not been verified.
 
 ### Vercel Setup
 
@@ -142,23 +142,22 @@ When deploying via Vercel, set the following environment variable in your projec
 |-----|-------|
 | `CI` | `false` |
 
-This prevents Vercel from treating ESLint warnings as build errors.
+The existing `CI=false` setting suppresses warning-as-error behavior in the build. Review the warnings rather than treating this setting as validation of the application.
 
-The backend should be deployed separately (e.g., Railway, Render, or any Node.js host). Update the `REACT_APP_API_URL` or axios base URL in the frontend config to point to your deployed backend.
+Deploy the backend separately if needed. Update the hardcoded Axios `baseURL` in `front-end/src/config/axiosConfig.js` to the backend URL. `REACT_APP_API_URL` is not read by this config. Update the localhost CORS origin in `back-end/app.js` for the intended frontend. [Axios config](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/front-end/src/config/axiosConfig.js#L1-L8), [CORS configuration](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/back-end/app.js#L15-L21).
 
-## 🔒 Security
+## 🔒 Security and Known Gaps
 
-### Authentication Flow
+- **Implemented mechanisms:** bcrypt password hashing, JWT verification, and role middleware exist. These are specific source features, not a guarantee that every endpoint is secure. [User model](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/back-end/src/models/userModels.js#L4-L44), [JWT middleware](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/back-end/src/middleware/authMiddleware.js#L5-L25), [role middleware](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/back-end/src/middleware/authorizationMiddleware.js#L3-L24).
+- **Response privacy:** registration returns the saved user document and login returns the queried user document. The schema does not exclude `password` from serialization, so these responses can expose the password hash. Return explicit safe response fields and add regression tests before using real accounts. [Registration/login responses](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/back-end/src/controllers/userControllers.js#L26-L85), [schema](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/back-end/src/models/userModels.js#L4-L46).
+- **Authorization verification:** protected order/profile routes use authentication and role middleware, but per-user resource ownership still needs focused tests. Do not infer ownership isolation solely from role checks. [Order routes](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/back-end/src/routes/orderRoutes.js#L13-L23), [profile routes](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/back-end/src/routes/profileRoutes.js#L19-L54).
+- **Uploads:** Multer stores files on disk using a MIME allowlist. Only the exercise upload configuration sets an explicit size limit; the other shown upload configurations do not. MIME metadata alone is not content validation. Add content/size validation and access/retention rules. `/uploads` is served as static content. [Upload middleware](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/back-end/src/middleware/uploadMiddleware.js#L19-L108), [static serving](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/back-end/app.js#L26-L27).
 
-1. JWT-based authentication
-2. Password hashing using bcrypt
-3. Role-based access control (RBAC) — admin and user roles
+## Validation and Asset Scope
 
-### API Security
+No application test suite was found in the inspected source tree. The backend `test` command is a placeholder that exits with an error; the frontend declares the CRA test runner, which by itself does not establish test coverage. [Backend scripts](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/back-end/package.json#L15-L18), [frontend scripts](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/front-end/package.json#L31-L35). The `test3` component is not evidence of a test suite. Build and runtime compatibility remain unverified by this documentation review.
 
-- CORS configuration for approved domains
-- XSS protection headers
-- Input validation on all routes
+The tracked tree contains `back-end/back.zip`, media, and uploaded profile/product/recipe/workout assets. Archive contents, asset ownership, and consent for uploaded personal images were not verified. Review them before redistribution or portfolio reuse, and use synthetic data for demonstrations. The source description here excludes archive contents. Source originality and sole authorship have not been independently verified. The existing MIT license and attribution below are retained; they do not establish rights to every uploaded asset. [Inspected tree](https://github.com/diretrix-git/VitaFIT/tree/d7207371811a0fbd670db9fa2480376aa0398553/back-end), [existing license](https://github.com/diretrix-git/VitaFIT/blob/d7207371811a0fbd670db9fa2480376aa0398553/LICENSE).
 
 ## 📁 Folder Structure
 
